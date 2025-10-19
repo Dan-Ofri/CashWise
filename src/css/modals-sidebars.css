@@ -1,0 +1,530 @@
+/* 🎨 Profile Modal & Mentor Sidebar - CashWise v7.0 */
+
+/* ===================================
+   Profile Modal - חלון קופץ
+   =================================== */
+
+.profile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.profile-modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.profile-modal {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+/* כותרת Modal */
+.profile-modal-header {
+    background: var(--gradient-primary-h);
+    color: white;
+    padding: 24px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white; /* 🎨 וידוא שהטקסט והאייקונים לבנים */
+}
+
+.profile-modal-title i {
+    color: white; /* 🎨 וידוא אייקון לבן */
+}
+
+.profile-modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: none;
+}
+
+.profile-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* תוכן Modal */
+.profile-modal-content {
+    padding: 24px;
+}
+
+/* סטטיסטיקות - גריד */
+.profile-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.profile-stat-card {
+    background: var(--gradient-bg-soft);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.profile-stat-label {
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-bottom: 8px;
+}
+
+.profile-stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-500);
+}
+
+/* חלוקה לשני חלקים */
+.profile-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.profile-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.profile-section h3 {
+    font-size: 18px;
+    margin: 0 0 16px 0;
+    color: var(--primary-500);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* גרף */
+.profile-chart-container {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+/* Scrollbar */
+.profile-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.profile-modal::-webkit-scrollbar-track {
+    background: var(--gray-100);
+}
+
+.profile-modal::-webkit-scrollbar-thumb {
+    background: var(--primary-500);
+    border-radius: 10px;
+}
+
+/* ===================================
+   Mentor Sidebar - צ'אט נגרר
+   =================================== */
+
+.mentor-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+}
+
+.mentor-sidebar-overlay.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.mentor-sidebar {
+    position: fixed;
+    top: 0;
+    left: -400px; /* מוסתר בהתחלה */
+    width: 400px;
+    height: 100%;
+    background: white;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.3s ease;
+}
+
+.mentor-sidebar.active {
+    left: 0; /* נכנס למסך */
+}
+
+/* כותרת Sidebar */
+.mentor-sidebar-header {
+    background: var(--gradient-primary-h);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mentor-sidebar-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white; /* 🎨 וידוא שהטקסט והאייקונים לבנים */
+}
+
+.mentor-sidebar-title i {
+    color: white; /* 🎨 וידוא אייקון לבן */
+}
+
+.mentor-sidebar-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: none;
+}
+
+.mentor-sidebar-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* תוכן הצ'אט */
+.mentor-chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: var(--gray-100);
+}
+
+.mentor-message {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.mentor-message.user {
+    flex-direction: row-reverse;
+}
+
+.mentor-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--gradient-primary-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    color: white; /* 🎨 אייקון לבן */
+}
+
+.mentor-avatar i {
+    color: white; /* 🎨 וידוא אייקון לבן */
+}
+
+.mentor-message.user .mentor-avatar {
+    background: var(--gradient-success-light);
+    color: white; /* 🎨 אייקון לבן גם באווטר המשתמש */
+}
+
+.mentor-message.user .mentor-avatar i {
+    color: white; /* 🎨 וידוא אייקון לבן */
+}
+
+.mentor-bubble {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.mentor-message.ai .mentor-bubble {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px 16px 16px 4px;
+}
+
+.mentor-message.user .mentor-bubble {
+    background: var(--gradient-primary-h);
+    color: white;
+    border-radius: 16px 16px 4px 16px;
+}
+
+.mentor-timestamp {
+    font-size: 11px;
+    color: var(--gray-500);
+    margin-top: 4px;
+}
+
+/* אזור הקלדה */
+.mentor-input-area {
+    padding: 16px;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 12px;
+}
+
+.mentor-input {
+    flex: 1;
+    border: 1px solid #e0e0e0;
+    border-radius: 24px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+}
+
+.mentor-input:focus {
+    border-color: var(--primary-500);
+}
+
+.mentor-send-button {
+    background: var(--gradient-primary-h);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: none;
+    flex-shrink: 0;
+}
+
+.mentor-send-button:hover {
+    opacity: 0.9;
+}
+
+.mentor-send-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Scrollbar לצ'אט */
+.mentor-chat-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mentor-chat-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.mentor-chat-container::-webkit-scrollbar-thumb {
+    background: #64748b; /* 🎨 */
+    border-radius: 10px;
+}
+
+/* ===================================
+   אנימציות
+   =================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+
+@media (max-width: 1024px) {
+    .profile-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .profile-two-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-modal {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .profile-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .mentor-sidebar {
+        width: 100%;
+        left: -100%;
+    }
+    
+    .mentor-sidebar.active {
+        left: 0;
+    }
+    
+    .mentor-bubble {
+        max-width: 80%;
+    }
+}
+
+/* ===================================
+   כפתורי הצף - עדכון למצב Modal/Sidebar
+   =================================== */
+
+/* וידוא שה-FAB נגיש תמיד */
+.floating-buttons {
+    z-index: 999; /* מתחת ל-modals אבל מעל תוכן רגיל */
+}
+
+/* כאשר modal/sidebar פתוח, FAB נשאר נראה אבל עם opacity נמוך */
+.profile-modal-overlay.active ~ .floating-buttons,
+.mentor-sidebar-overlay.active ~ .floating-buttons {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ===================================
+   Simulation Modals - מודלים לסימולטור
+   =================================== */
+
+.sim-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.sim-modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.sim-modal {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+/* כותרת Sim Modal */
+.sim-modal-header {
+    background: var(--gradient-success);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sim-modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.sim-modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 28px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.sim-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* תוכן Sim Modal */
+.sim-modal-content {
+    padding: 0;
+}

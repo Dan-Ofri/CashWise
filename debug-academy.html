@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>🔧 Academy Debug Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .result {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+            text-align: left;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .success {
+            background: rgba(46, 213, 115, 0.3);
+            border-left: 4px solid #2ed573;
+        }
+        .error {
+            background: rgba(255, 71, 87, 0.3);
+            border-left: 4px solid #ff4757;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 כלי בדיקה לאקדמיה</h1>
+        
+        <p style="font-size: 18px; margin-bottom: 30px;">
+            השתמש בכלי זה כדי לבדוק ולתקן את מצב האקדמיה
+        </p>
+        
+        <div>
+            <button onclick="checkState()">📊 בדוק מצב נוכחי</button>
+            <button onclick="resetLessons()">🔄 אפס שיעורים (עם שיעור ראשון פתוח)</button>
+            <button onclick="clearAll()">🗑️ מחק הכל מ-localStorage</button>
+            <button onclick="openAcademy()">🎓 פתח אקדמיה</button>
+        </div>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function showResult(message, type = 'success') {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result ' + type;
+            resultDiv.textContent = message;
+        }
+
+        function checkState() {
+            const lessonsState = localStorage.getItem('lessons-state');
+            const gameState = localStorage.getItem('game-state');
+            
+            let result = '=== מצב localStorage ===\n\n';
+            
+            if (lessonsState) {
+                result += '✅ lessons-state נמצא:\n';
+                try {
+                    const parsed = JSON.parse(lessonsState);
+                    result += JSON.stringify(parsed, null, 2);
+                    result += '\n\n';
+                    
+                    // ספירת שיעורים פתוחים
+                    const unlocked = Object.values(parsed).filter(l => l.unlocked).length;
+                    result += `🔓 שיעורים פתוחים: ${unlocked}/4\n`;
+                } catch (e) {
+                    result += '❌ שגיאה בפענוח: ' + e.message + '\n';
+                }
+            } else {
+                result += '❌ lessons-state לא קיים!\n';
+            }
+            
+            if (gameState) {
+                result += '\n✅ game-state נמצא\n';
+            } else {
+                result += '\n❌ game-state לא קיים\n';
+            }
+            
+            showResult(result, 'success');
+        }
+
+        function resetLessons() {
+            const lessonsState = {
+                investments: {
+                    id: 'investments',
+                    unlocked: true,
+                    completed: false,
+                    unlockedAt: new Date().toISOString(),
+                    completedAt: null,
+                    unlockedReason: 'initial-unlock'
+                },
+                emergencyFund: {
+                    id: 'emergencyFund',
+                    unlocked: false,
+                    completed: false,
+                    unlockedAt: null,
+                    completedAt: null,
+                    unlockedReason: null
+                },
+                insurance: {
+                    id: 'insurance',
+                    unlocked: false,
+                    completed: false,
+                    unlockedAt: null,
+                    completedAt: null,
+                    unlockedReason: null
+                },
+                debtManagement: {
+                    id: 'debtManagement',
+                    unlocked: false,
+                    completed: false,
+                    unlockedAt: null,
+                    completedAt: null,
+                    unlockedReason: null
+                }
+            };
+            
+            localStorage.setItem('lessons-state', JSON.stringify(lessonsState));
+            
+            showResult(`✅ איפוס הושלם!\n\nשיעור "השקעות" פתוח כעת.\n\n${JSON.stringify(lessonsState, null, 2)}`, 'success');
+        }
+
+        function clearAll() {
+            localStorage.clear();
+            showResult('🗑️ כל ה-localStorage נוקה!\n\nרענן את הדף (F5) כדי ליצור מצב חדש.', 'success');
+        }
+
+        function openAcademy() {
+            window.location.href = './index.html#academy';
+        }
+
+        // בדיקה אוטומטית בטעינה
+        window.onload = function() {
+            showResult('👋 כלי הבדיקה מוכן!\n\nלחץ על "בדוק מצב נוכחי" כדי לראות מה יש ב-localStorage.', 'success');
+        };
+    </script>
+</body>
+</html>

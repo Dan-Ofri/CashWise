@@ -1,0 +1,13 @@
+{
+  "name": "cashwise",
+  "version": "7.0.0",
+  "description": "CashWise - Interactive Financial Education Platform",
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes http-server -p 3000 -o",
+    "dev": "npx --yes http-server -p 3000 -o -c-1"
+  },
+  "keywords": ["finance", "education", "hebrew"],
+  "author": "CashWise Team",
+  "license": "MIT"
+}

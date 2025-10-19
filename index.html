@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="description" content="CashWise - למידה פיננסית חכמה. פלטפורמה אינטראקטיבית ללמידת ניהול כספים אישיים.">
+    <meta name="theme-color" content="#1e293b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#667eea" media="(prefers-color-scheme: light)">
+    <title>CashWise v7.1 - למידה פיננסית חכמה 💰</title>
+    
+    <!-- 💎 CashWise v7.0 - Organized CSS -->
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="src/css/main.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/themes.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/components.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/utilities.css?v=2025-10-19">
+    
+    <!-- Module Styles -->
+    <link rel="stylesheet" href="src/css/floating-academy.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/minimal-ui.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/simulation-compact.css?v=2025-10-19-CRITICAL">
+    <link rel="stylesheet" href="src/css/modals-sidebars.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/stage-d-financial.css?v=2025-10-18">
+    <link rel="stylesheet" href="src/css/lesson-player.css?v=2025-10-18">
+    
+    <!-- Layout Override - Must be last! -->
+    <link rel="stylesheet" href="src/css/fullscreen-layout.css?v=2025-10-19-FINAL">
+    
+    <!-- Responsive Design System - Advanced -->
+    <link rel="stylesheet" href="src/css/responsive.css?v=2025-10-19-RESPONSIVE">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Preload Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 🔥 CRITICAL CSS FIX v7.1 - INLINE - UPDATED 2025-10-19 -->
+    <!-- ✅ CSS Cleanup Complete - All styles moved to modular files:
+         • html/body/section → fullscreen-layout.css
+         • #simulation, #academy, #profile, #mentor → fullscreen-layout.css + simulation-compact.css
+         • .box animations override → components.css
+         • .fab & .floating-academy-button → floating-academy.css
+         • .sim-* elements → simulation-compact.css
+         • .minimal-header → main.css (already exists)
+    -->
+</head>
+<body>
+
+<!-- Header מינימליסטי -->
+<header class="minimal-header">
+    <!-- Logo נקי -->
+    <a href="#" class="logo-minimal" onclick="showSection('simulation'); return false;">
+        CashWise
+    </a>
+    
+    <!-- XP Bar קטן -->
+    <div class="xp-bar-minimal">
+        <span id="user-level">רמה 1</span>
+        <div class="xp-bar-small">
+            <div id="xp-fill" class="xp-fill"></div>
+        </div>
+        <span id="xp-text">0/100 XP</span>
+    </div>
+</header>
+
+<!-- כפתורים צפים -->
+<div class="floating-buttons">
+    <button class="fab" onclick="openProfileModal()" title="פרופיל פיננסי">
+        <i class="fas fa-chart-line"></i>
+    </button>
+    <button class="fab" onclick="openMentorSidebar()" title="מנטור פיננסי">
+        <i class="fas fa-robot"></i>
+    </button>
+</div>
+
+<!-- מסך פתיחה -->
+<section id="opening" class="active">
+    <!-- Hero Section -->
+    <div class="box" style="text-align: center; padding: var(--space-12) var(--space-8);">
+        <div class="flex flex-col items-center gap-6">
+            <div class="hero-emoji"><i class="fas fa-coins" style="font-size: 80px; color: #667eea;"></i></div>
+            <h1 class="hero-title">
+                ברוך הבא ל-CashWise
+            </h1>
+            <p class="hero-subtitle">
+                המקום שבו כסף הופך לחוויה, וחוויה הופכת לידע.<br>
+                פלטפורמה אינטראקטיבית ללמידה וניהול פיננסי אישי, המשלבת למידה מעשית עם סימולציה מציאותית.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Feature Cards -->
+    <div class="grid grid-3" style="margin-top: var(--space-8);">
+        <div class="card feature-card">
+            <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>אקדמיית הכסף</h3>
+            <p style="color: var(--primary-600); margin-bottom: var(--space-6);">
+                למד על תקציב, חיסכון, השקעות ופנסיה בצורה מעשית ומהנה
+            </p>
+            <button class="btn-primary" onclick="showSection('academy')">התחל ללמוד</button>
+        </div>
+        
+        <div class="card feature-card">
+            <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
+            <h3>סימולטור החיים</h3>
+            <p style="color: var(--primary-600); margin-bottom: var(--space-6);">
+                תרגל החלטות פיננסיות בתרחישים מציאותיים ומאתגרים
+            </p>
+            <button class="btn-primary" onclick="showSection('simulation')">נסה סימולציה</button>
+        </div>
+        
+        <div class="card feature-card">
+            <div class="feature-icon"><i class="fas fa-robot"></i></div>
+            <h3>מנטור פיננסי AI</h3>
+            <p style="color: var(--primary-600); margin-bottom: var(--space-6);">
+                קבל ייעוץ פיננסי מותאם אישית ותשובות לכל שאלה
+            </p>
+            <button class="btn-primary" onclick="showSection('mentor')">דבר עם המנטור</button>
+        </div>
+    </div>
+    
+    <!-- Stats Section -->
+    <div class="box" style="margin-top: var(--space-12); background: linear-gradient(135deg, var(--navy-900), var(--navy-700)); color: white; overflow: hidden; position: relative;">
+        <h2 style="text-align: center; color: white; margin-bottom: var(--space-8); font-weight: 900;">למה CashWise?</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">100%</div>
+                <p class="stat-label">בחינם לחלוטין</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">24/7</div>
+                <p class="stat-label">זמין תמיד</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">🇮🇱</div>
+                <p class="stat-label">מותאם לישראל</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- אקדמיית הכסף - רשימת שיעורים -->
+<section id="academy">
+    <div class="box">
+        <!-- כותרת -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2vh;">
+            <h2 style="margin: 0; font-size: 28px; color: #2c3e50;"><i class="fas fa-graduation-cap"></i> אקדמיית הכסף</h2>
+            <button onclick="showSection('simulation')" style="background: none; border: none; font-size: 24px; cursor: pointer; opacity: 0.6; transition: opacity 0.2s;" title="חזור לסימולטור">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- רשימת שיעורים (יוצג דינמית) -->
+        <div id="academy-lessons-list" style="display: flex; flex-direction: column; gap: 16px;">
+            <!-- תוכן נטען דינמית דרך JS -->
+        </div>
+    </div>
+</section>
+
+<!-- סימולטור החיים -->
+<section id="simulation">
+    <div class="box">
+        <h2><i class="fas fa-gamepad"></i> סימולטור החיים</h2>
+        
+        <!-- תוכן הסימולציה ייטען כאן דינמית -->
+        <div id="scenario-content"></div>
+    </div>
+</section>
+<!-- כפתור צף לאקדמיה - שמאל תחתון -->
+<div id="floating-academy-btn" class="floating-academy-button" onclick="showSection('academy')"
+     title="למד באקדמיית הכסף">
+    <i class="fas fa-graduation-cap"></i>
+</div>
+
+
+<!-- פרופיל פיננסי -->
+<section id="profile">
+    <div class="box">
+        <h2><i class="fas fa-chart-line"></i> הפרופיל הפיננסי שלך</h2>
+        
+        <div class="profile-stats">
+            <div class="stat-box">
+                <div class="stat-label">רמה נוכחית</div>
+                <div class="stat-value" id="profile-level">1</div>
+            </div>
+            
+            <div class="stat-box">
+                <div class="stat-label">ניסיון כולל</div>
+                <div class="stat-value" id="profile-xp">0 XP</div>
+            </div>
+            
+            <div class="stat-box">
+                <div class="stat-label">שיעורים הושלמו</div>
+                <div class="stat-value" id="profile-lessons">0/3</div>
+            </div>
+            
+            <div class="stat-box">
+                <div class="stat-label">הישגים</div>
+                <div class="stat-value" id="profile-achievements">0/8</div>
+            </div>
+        </div>
+        
+        <h3><i class="fas fa-trophy"></i> ההישגים שלך</h3>
+        <div id="achievements-list" class="achievements-grid"></div>
+        
+        <div class="box" style="margin-top:20px; background:#f7fbff;">
+            <h3>👤 פרופיל פיננסי</h3>
+            <div class="tip-box info">מלא את הפרטים שלך כדי לקבל ניתוח מותאם מהמנטור והמלצות מדויקות יותר.</div>
+            <label>💼 הכנסה חודשית נטו (₪):</label>
+            <input type="number" id="pf-income" placeholder="למשל: 8,500">
+            <label><i class="fas fa-bullseye"></i> יעד חיסכון חודשי (% מהכנסה):</label>
+            <input type="number" id="pf-savingRate" placeholder="למשל: 20">
+            <label>⚖️ רמת סיכון:</label>
+            <select id="pf-risk">
+                <option value="low">נמוכה</option>
+                <option value="medium" selected>בינונית</option>
+                <option value="high">גבוהה</option>
+            </select>
+            <label>⏳ אופק השקעה (שנים):</label>
+            <input type="number" id="pf-horizon" placeholder="למשל: 10">
+            <label>📉 חובות בריבית גבוהה (₪/חודש):</label>
+            <input type="number" id="pf-debtMonthly" placeholder="למשל: 1,200">
+            <label><i class="fas fa-trophy"></i> יעד פיננסי ראשי:</label>
+            <input type="text" id="pf-mainGoal" placeholder="למשל: דירה / חופש כלכלי / קרן חירום">
+            <div class="tip-box" style="margin-top:12px;">
+                הנתונים נשמרים אוטומטית במכשיר שלך (localStorage). ניתן לייצא/לייבא למטה.
+            </div>
+
+            <button class="btn-primary" style="margin-top:12px;" onclick="calculateRecommendedPlan()">🧭 חשב תכנית חיסכון מומלצת</button>
+            <div id="pf-plan" style="margin-top:12px;"></div>
+        </div>
+
+        <h3><i class="fas fa-chart-area"></i> גרף ההתקדמות שלך</h3>
+        <div style="background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: 20px auto;">
+            <canvas id="progressChart"></canvas>
+        </div>
+
+        <div class="box" style="margin-top:20px; background:#fff7e6;">
+            <h3>🗓️ משימות יומיות</h3>
+            <div class="tip-box warn">מלא משימות יומיות כדי לצבור עוד XP ולשפר הרגלים פיננסיים.</div>
+            <div id="daily-missions"></div>
+        </div>
+
+        <h3>🛠️ ניהול נתונים</h3>
+        <div class="tip-box warn" style="padding: 16px;">
+            <p style="margin: 0 0 12px 0; font-weight: 600;">
+                <i class="fas fa-exclamation-triangle"></i> 
+                איפוס מלא של המשחק
+            </p>
+            <p style="margin: 0 0 16px 0; font-size: 14px; opacity: 0.9;">
+                פעולה זו תמחק את כל ההתקדמות שלך ותחזיר אותך למצב ההתחלתי.
+                שימושי לבדיקות או התחלה מחדש.
+            </p>
+            <button class="btn-secondary" onclick="resetGameData()" style="width: 100%; font-size: 16px;">
+                🔄 אפס את כל המשחק
+            </button>
+        </div>
+        
+        <h3>💰 גרף רמות XP</h3>
+        <div style="background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: 20px auto;">
+            <canvas id="xpChart"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- מנטור פיננסי -->
+<section id="mentor">
+    <div class="box">
+        <h2>🤖 שיחה עם המנטור הפיננסי</h2>
+        <p>שאל אותי כל שאלה פיננסית - אני כאן לעזור!</p>
+        
+        <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 15px 0;">
+            <strong>💬 נושאים שאני יכול לעזור בהם:</strong><br>
+            חיסכון • השקעות • תקציב • ניהול חובות • תכנון פנסיוני • משכנתא
+        </div>
+        
+        <label>❓ מה תרצה לשאול?</label>
+        <input type="text" id="mentor-question" placeholder="לדוגמה: איך לחסוך לקרן חירום?">
+        
+        <button class="btn-primary" onclick="simulateMentor()">📨 שאל את המנטור</button>
+        <div id="mentor-response"></div>
+    </div>
+    
+    <div class="box" style="background: #f3e5f5;">
+        <h3><i class="fas fa-question-circle"></i> שאלות נפוצות:</h3>
+        <ul>
+            <li><strong>כמה צריך לחסוך בחודש?</strong> - מומלץ לפחות 20% מההכנסה</li>
+            <li><strong>מה זה קרן חירום?</strong> - חיסכון של 3-6 חודשי הוצאות למקרי חירום</li>
+            <li><strong>איך מתחילים להשקיע?</strong> - מתחילים עם קרנות מדד בעלות נמוכה</li>
+            <li><strong>האם כדאי לפרוע חובות לפני חיסכון?</strong> - חובות בריבית גבוהה (אשראי) כן!</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Modal רשימת שיעורים -->
+<div id="lesson-list-modal" class="modal" style="display: none;">
+    <div class="modal-overlay" onclick="closeLessonListModal()"></div>
+    <div class="modal-content lesson-list-modal">
+        <div class="modal-header">
+            <h2><i class="fas fa-book-open"></i> השיעורים שלי</h2>
+            <button class="close-modal" onclick="closeLessonListModal()">✖</button>
+        </div>
+        <div class="modal-body" id="lesson-list-container">
+            <!-- רשימת שיעורים תיטען כאן דינמית -->
+        </div>
+    </div>
+</div>
+
+<!-- 🚀 CashWise v7.0 - Modular Architecture -->
+<!-- 🚀 CashWise v7.0 - ES6 Modules Entry Point -->
+<script type="module" src="src/js/core/app.js"></script>
+
+</body>
+</html>

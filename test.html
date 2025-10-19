@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>CashWise - Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>🧪 CashWise - Test Page</h1>
+    
+    <div class="test-box">
+        <h2>1. JavaScript Module Loading</h2>
+        <div id="module-test">Testing...</div>
+        <script type="module">
+            import { showSection } from './src/js/core/router.js';
+            document.getElementById('module-test').innerHTML = 
+                '<span class="success">✅ ES6 Modules working!</span>';
+            console.log('✅ Module loaded:', typeof showSection);
+        </script>
+    </div>
+    
+    <div class="test-box">
+        <h2>2. Global Functions Test</h2>
+        <button onclick="testShowSection()">Test showSection()</button>
+        <div id="global-test"></div>
+        <script>
+            function testShowSection() {
+                const result = document.getElementById('global-test');
+                if (typeof window.showSection === 'function') {
+                    result.innerHTML = '<span class="success">✅ showSection() is available globally</span>';
+                    console.log('✅ Global function works');
+                } else {
+                    result.innerHTML = '<span class="error">❌ showSection() NOT available</span>';
+                    console.error('❌ Global function missing');
+                }
+            }
+        </script>
+    </div>
+    
+    <div class="test-box">
+        <h2>3. CSS Loading Test</h2>
+        <div id="css-test" style="width: 100px; height: 100px; background: #2c3e50; color: white; display: flex; align-items: center; justify-content: center;">
+            CSS OK
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>4. Navigation to Main App</h2>
+        <a href="index.html" style="display: inline-block; padding: 10px 20px; background: #0ea5e9; color: white; text-decoration: none; border-radius: 6px;">
+            Go to Main App →
+        </a>
+    </div>
+    
+    <div class="test-box">
+        <h2>5. Console Output</h2>
+        <p>Open DevTools (F12) and check the console for messages</p>
+    </div>
+    
+    <script>
+        console.log('🧪 Test page loaded successfully');
+        console.log('Location:', window.location.href);
+        console.log('Protocol:', window.location.protocol);
+    </script>
+</body>
+</html>

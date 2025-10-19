@@ -1,0 +1,490 @@
+/**
+ * ===========================================
+ * 🎨 Lesson Player Styles
+ * ===========================================
+ * עיצוב מסך השיעורים - אקדמי ואינטראקטיבי
+ */
+
+/* Background אקדמי */
+#academy-content {
+    background: var(--gradient-primary-h);
+    min-height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Container מרכזי */
+.lesson-player {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ========== Header ========== */
+.lesson-header {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.lesson-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #5e35b1;
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+.lesson-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lesson-progress-bar {
+    flex: 1;
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.lesson-progress-fill {
+    height: 100%;
+    background: var(--gradient-success-h);
+    transition: width 0.5s ease;
+    border-radius: 100px;
+}
+
+.lesson-progress-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #5e35b1;
+    min-width: 50px;
+    text-align: left;
+}
+
+/* ========== Content Card ========== */
+.lesson-content {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lesson-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.step-icon {
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.step-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin: 0;
+}
+
+.step-body {
+    flex: 1;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.step-paragraph {
+    margin: 0 0 16px 0;
+}
+
+/* ========== Key Points ========== */
+.key-points {
+    background: #e3f2fd;
+    padding: 20px;
+    border-right: 4px solid #2196f3;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.key-points h3 {
+    margin: 0 0 12px 0;
+    color: #1976d2;
+    font-size: 18px;
+}
+
+.key-points ul {
+    margin: 0;
+    padding-right: 20px;
+    list-style: none;
+}
+
+.key-points li {
+    margin: 8px 0;
+    padding-right: 24px;
+    position: relative;
+}
+
+.key-points li::before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    color: #43a047;
+    font-weight: bold;
+}
+
+/* ========== Visualization ========== */
+.chart-container {
+    margin: 24px 0;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.example-box {
+    background: #fff3e0;
+    padding: 20px;
+    border-right: 4px solid #ff9800;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.example-box h4 {
+    margin: 0 0 12px 0;
+    color: #f57c00;
+}
+
+/* ========== Practice ========== */
+.practice-area {
+    background: #f5f5f5;
+    padding: 24px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.calculator label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.calculator input {
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+.calculator input:focus {
+    outline: none;
+    border-color: #5e35b1;
+}
+
+.result-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #43a047;
+    margin-top: 16px;
+}
+
+.result-amount {
+    font-size: 32px;
+    font-weight: bold;
+    color: #43a047;
+    margin: 8px 0;
+}
+
+.result-profit {
+    font-size: 18px;
+    color: #666;
+}
+
+/* ========== Quiz ========== */
+.quiz-question {
+    text-align: center;
+}
+
+.question-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.quiz-option {
+    padding: 16px 24px;
+    font-size: 16px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: right;
+}
+
+.quiz-option:hover {
+    background: #f5f5f5;
+    border-color: #5e35b1;
+    transform: translateY(-2px);
+}
+
+.quiz-option:active {
+    transform: translateY(0);
+}
+
+.quiz-feedback {
+    margin-top: 24px;
+    padding: 16px;
+    border-radius: 8px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feedback-correct {
+    background: #e8f5e9;
+    color: #2e7d32;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.feedback-wrong {
+    background: #ffebee;
+    color: #c62828;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.feedback-icon {
+    font-size: 24px;
+}
+
+.feedback-text {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ========== Completion ========== */
+.lesson-completion {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.completion-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: bounce 1s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.completion-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #43a047;
+    margin: 0 0 8px 0;
+}
+
+.completion-subtitle {
+    font-size: 20px;
+    color: #666;
+    margin: 0 0 32px 0;
+}
+
+.completion-summary {
+    background: #f5f5f5;
+    padding: 24px;
+    border-radius: 12px;
+    margin: 32px 0;
+    text-align: right;
+}
+
+.completion-summary h3 {
+    margin: 0 0 16px 0;
+    color: #333;
+}
+
+.completion-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.completion-summary li {
+    margin: 12px 0;
+    padding-right: 28px;
+    position: relative;
+}
+
+.completion-summary li::before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    color: #43a047;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.completion-rewards {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 32px 0;
+    flex-wrap: wrap;
+}
+
+.reward {
+    background: var(--gradient-gold);
+    padding: 16px 32px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.reward-icon {
+    font-size: 28px;
+}
+
+.reward-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ========== Navigation ========== */
+.lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.lesson-btn {
+    padding: 16px 32px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lesson-btn-prev {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.lesson-btn-prev:hover {
+    background: #bdbdbd;
+    transform: translateX(4px);
+}
+
+.lesson-btn-next {
+    background: var(--gradient-primary-h);
+    color: white;
+}
+
+.lesson-btn-next i {
+    color: white; /* 🎨 וידוא אייקון לבן */
+}
+
+.lesson-btn-next:hover {
+    transform: translateX(-4px);
+    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.4); /* 🎨 */
+}
+
+.lesson-btn-finish {
+    background: var(--gradient-success-h);
+    color: white;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.lesson-btn-finish:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(67, 160, 71, 0.4);
+}
+
+.lesson-btn:active {
+    transform: scale(0.98);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .lesson-content {
+        padding: 24px;
+    }
+    
+    .step-icon {
+        font-size: 48px;
+    }
+    
+    .step-title {
+        font-size: 20px;
+    }
+    
+    .step-body {
+        font-size: 16px;
+    }
+    
+    .lesson-btn {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+    
+    .completion-icon {
+        font-size: 60px;
+    }
+    
+    .completion-title {
+        font-size: 24px;
+    }
+}

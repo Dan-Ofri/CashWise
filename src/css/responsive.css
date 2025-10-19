@@ -1,0 +1,578 @@
+/* ============================================
+   📱 CashWise - Responsive Design System
+   ============================================
+   
+   Purpose: Advanced responsive layouts for all devices
+   Version: 7.0
+   Created: October 19, 2025
+   
+   Breakpoints:
+   - Mobile:       < 480px  (iPhone SE, small phones)
+   - Mobile L:     480-767px (iPhone, standard phones)
+   - Tablet:       768-1023px (iPad, tablets)
+   - Laptop:       1024-1439px (laptops, small desktops)
+   - Desktop:      1440px+ (large screens, 4K)
+   
+   ============================================ */
+
+/* ============================================
+   🎯 Mobile First Variables
+   ============================================ */
+
+:root {
+    /* Responsive spacing */
+    --container-padding-mobile: 16px;
+    --container-padding-tablet: 24px;
+    --container-padding-desktop: 40px;
+    
+    /* Font sizes - fluid typography */
+    --fs-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --fs-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+    --fs-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+    --fs-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+    --fs-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --fs-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --fs-3xl: clamp(2rem, 1.7rem + 1.5vw, 3rem);
+    
+    /* Responsive gaps */
+    --gap-sm: clamp(8px, 1vw, 12px);
+    --gap-md: clamp(12px, 2vw, 20px);
+    --gap-lg: clamp(20px, 3vw, 32px);
+}
+
+/* ============================================
+   📱 MOBILE SMALL (< 480px)
+   ============================================ */
+
+@media (max-width: 479px) {
+    /* Header compact */
+    .minimal-header {
+        height: 60px !important;
+        padding: 0 12px !important;
+    }
+    
+    .logo-minimal {
+        font-size: 18px !important;
+    }
+    
+    .xp-bar-minimal {
+        font-size: 11px !important;
+        gap: 8px !important;
+    }
+    
+    .xp-bar-small {
+        width: 80px !important;
+    }
+    
+    /* Sections */
+    section {
+        top: 60px !important;
+        height: calc(100vh - 60px) !important;
+        padding: 12px !important;
+    }
+    
+    /* Floating buttons - smaller */
+    .floating-academy-button,
+    .fab {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 22px !important;
+        bottom: 12px !important;
+        left: 12px !important;
+    }
+    
+    .floating-buttons {
+        bottom: 72px !important;
+        left: 12px !important;
+        gap: 8px !important;
+    }
+    
+    /* Modals - full screen on small devices */
+    .modal-content,
+    .sidebar-content {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Grids - single column */
+    .lesson-grid,
+    .stats-grid,
+    .profile-two-columns {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    
+    /* Cards compact */
+    .box,
+    .lesson-card,
+    .achievement-card {
+        padding: 16px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    /* Buttons full width */
+    .btn-primary,
+    .btn-secondary,
+    .btn-success {
+        width: 100% !important;
+        padding: 14px !important;
+        font-size: 15px !important;
+    }
+    
+    /* Typography */
+    h1 { font-size: 24px !important; }
+    h2 { font-size: 20px !important; }
+    h3 { font-size: 18px !important; }
+    p { font-size: 14px !important; line-height: 1.5 !important; }
+}
+
+/* ============================================
+   📱 MOBILE LARGE (480px - 767px)
+   ============================================ */
+
+@media (min-width: 480px) and (max-width: 767px) {
+    /* Header */
+    .minimal-header {
+        height: 70px !important;
+        padding: 0 16px !important;
+    }
+    
+    .logo-minimal {
+        font-size: 20px !important;
+    }
+    
+    /* Sections */
+    section {
+        top: 70px !important;
+        height: calc(100vh - 70px) !important;
+        padding: 16px !important;
+    }
+    
+    /* Floating buttons */
+    .floating-academy-button,
+    .fab {
+        width: 52px !important;
+        height: 52px !important;
+        font-size: 24px !important;
+    }
+    
+    /* Modals - mostly full screen */
+    .modal-content {
+        width: 95% !important;
+        max-width: 500px !important;
+        border-radius: 12px !important;
+    }
+    
+    .sidebar-content {
+        width: 90% !important;
+        max-width: 400px !important;
+    }
+    
+    /* Grids - mostly single column */
+    .lesson-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    /* Cards */
+    .box {
+        padding: 20px !important;
+    }
+    
+    /* Typography */
+    h1 { font-size: 28px !important; }
+    h2 { font-size: 22px !important; }
+    h3 { font-size: 19px !important; }
+}
+
+/* ============================================
+   📱 TABLET (768px - 1023px)
+   ============================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Header */
+    .minimal-header {
+        height: 80px !important;
+        padding: 0 24px !important;
+    }
+    
+    /* Sections */
+    section {
+        top: 80px !important;
+        height: calc(100vh - 80px) !important;
+        padding: 24px !important;
+    }
+    
+    /* Floating buttons */
+    .floating-academy-button,
+    .fab {
+        width: 56px !important;
+        height: 56px !important;
+    }
+    
+    /* Modals */
+    .modal-content {
+        width: 85% !important;
+        max-width: 700px !important;
+    }
+    
+    .sidebar-content {
+        width: 400px !important;
+    }
+    
+    /* Grids - 2 columns */
+    .lesson-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+    }
+    
+    .profile-two-columns {
+        grid-template-columns: 1fr 1fr !important;
+    }
+    
+    /* Cards */
+    .box {
+        padding: 24px !important;
+    }
+    
+    /* Typography */
+    h1 { font-size: 32px !important; }
+    h2 { font-size: 26px !important; }
+    h3 { font-size: 22px !important; }
+}
+
+/* ============================================
+   💻 LAPTOP (1024px - 1439px)
+   ============================================ */
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    /* Sections */
+    section {
+        padding: 32px !important;
+    }
+    
+    /* Modals */
+    .modal-content {
+        width: 70% !important;
+        max-width: 900px !important;
+    }
+    
+    /* Grids - 3 columns for lessons */
+    .lesson-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 24px !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+/* ============================================
+   🖥️ DESKTOP (1440px+)
+   ============================================ */
+
+@media (min-width: 1440px) {
+    /* Max container width */
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    /* Sections */
+    section {
+        padding: 40px !important;
+    }
+    
+    /* Modals */
+    .modal-content {
+        width: 60% !important;
+        max-width: 1100px !important;
+    }
+    
+    /* Grids - 4 columns for lessons */
+    .lesson-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 28px !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}
+
+/* ============================================
+   🔄 LANDSCAPE ORIENTATION
+   ============================================ */
+
+@media (max-height: 600px) and (orientation: landscape) {
+    /* Header smaller in landscape */
+    .minimal-header {
+        height: 50px !important;
+    }
+    
+    section {
+        top: 50px !important;
+        height: calc(100vh - 50px) !important;
+    }
+    
+    /* Floating buttons smaller */
+    .floating-academy-button,
+    .fab {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 18px !important;
+        bottom: 8px !important;
+        left: 8px !important;
+    }
+    
+    .floating-buttons {
+        bottom: 56px !important;
+        left: 8px !important;
+        gap: 6px !important;
+    }
+    
+    /* Modals scroll */
+    .modal-content {
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+}
+
+/* ============================================
+   ♿ ACCESSIBILITY - Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================
+   🌙 DARK MODE SUPPORT
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --text-primary: #f8fafc;
+        --text-secondary: #cbd5e1;
+    }
+}
+
+/* ============================================
+   🎨 RESPONSIVE UTILITIES
+   ============================================ */
+
+/* Hide on mobile */
+@media (max-width: 767px) {
+    .hide-mobile { display: none !important; }
+}
+
+/* Hide on tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hide-tablet { display: none !important; }
+}
+
+/* Hide on desktop */
+@media (min-width: 1024px) {
+    .hide-desktop { display: none !important; }
+}
+
+/* Show only on mobile */
+@media (min-width: 768px) {
+    .show-mobile-only { display: none !important; }
+}
+
+/* Show only on tablet+ */
+@media (max-width: 767px) {
+    .show-tablet-up { display: none !important; }
+}
+
+/* Show only on desktop */
+@media (max-width: 1023px) {
+    .show-desktop-only { display: none !important; }
+}
+
+/* ============================================
+   📊 RESPONSIVE SIMULATION
+   ============================================ */
+
+@media (max-width: 767px) {
+    /* Simulation - mobile optimized */
+    #simulation .sim-header {
+        flex-direction: column !important;
+        gap: 12px !important;
+        padding: 12px !important;
+    }
+    
+    .sim-stats {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+    
+    .sim-stat-item {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    .sim-actions {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    
+    .sim-actions button {
+        width: 100% !important;
+    }
+    
+    /* Timeline horizontal scroll on mobile */
+    .sim-timeline {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+}
+
+/* ============================================
+   🎓 RESPONSIVE ACADEMY
+   ============================================ */
+
+@media (max-width: 767px) {
+    /* Academy - single column lessons */
+    #academy-lessons-list {
+        gap: 12px !important;
+    }
+    
+    .lesson-item {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+    
+    .lesson-icon {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 32px !important;
+    }
+    
+    .lesson-info {
+        padding: 12px !important;
+    }
+    
+    /* Empty state - adjust */
+    #academy-lessons-list > div {
+        padding: 20px !important;
+    }
+    
+    #academy-lessons-list h2 {
+        font-size: 22px !important;
+    }
+    
+    #academy-lessons-list .grid-cols-3 {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+}
+
+/* ============================================
+   👤 RESPONSIVE PROFILE MODAL
+   ============================================ */
+
+@media (max-width: 767px) {
+    .profile-stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+    }
+    
+    .profile-stat-card {
+        padding: 12px !important;
+    }
+    
+    .profile-stat-value {
+        font-size: 20px !important;
+    }
+    
+    .profile-two-columns {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .profile-chart-container {
+        height: 200px !important;
+    }
+}
+
+/* ============================================
+   📱 TOUCH OPTIMIZATION
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    button,
+    .btn,
+    .fab,
+    .floating-academy-button,
+    a {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+    
+    /* Remove hover effects on touch */
+    .box:hover,
+    .lesson-card:hover {
+        transform: none !important;
+    }
+    
+    /* Better tap highlight */
+    * {
+        -webkit-tap-highlight-color: rgba(14, 165, 233, 0.2);
+    }
+}
+
+/* ============================================
+   🖨️ PRINT STYLES
+   ============================================ */
+
+@media print {
+    /* Hide interactive elements */
+    .minimal-header,
+    .floating-academy-button,
+    .floating-buttons,
+    .fab,
+    button,
+    .modal,
+    .sidebar {
+        display: none !important;
+    }
+    
+    /* Full width content */
+    section {
+        position: static !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+    
+    /* Black text on white */
+    * {
+        color: black !important;
+        background: white !important;
+    }
+}

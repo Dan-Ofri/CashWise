@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>🎨 CSS Debug - Academy</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1e293b;
+            color: white;
+            padding: 40px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .result {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+            text-align: left;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+        .success {
+            background: rgba(46, 213, 115, 0.2);
+            border-right: 4px solid #2ed573;
+        }
+        .error {
+            background: rgba(255, 71, 87, 0.2);
+            border-right: 4px solid #ff4757;
+        }
+        .warning {
+            background: rgba(255, 184, 0, 0.2);
+            border-right: 4px solid #ffb800;
+        }
+        .test-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .test-box h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 CSS Debug Tool - Academy</h1>
+        
+        <div class="test-box">
+            <h3>בדיקות אוטומטיות</h3>
+            <button onclick="checkCSS()">🔍 בדוק CSS של Academy</button>
+            <button onclick="checkSpecificity()">📐 בדוק CSS Specificity</button>
+            <button onclick="checkVisibility()">👁️ בדוק Visibility</button>
+            <button onclick="checkAll()">🎯 הפעל הכל</button>
+        </div>
+        
+        <div class="test-box">
+            <h3>תיקונים מהירים</h3>
+            <button onclick="forceDisplay()">⚡ אלץ Display: Flex</button>
+            <button onclick="openAcademy()">🎓 פתח אקדמיה</button>
+            <button onclick="addLessons()">📚 הוסף שיעורים</button>
+        </div>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function showResult(message, type = 'success') {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result ' + type;
+            resultDiv.textContent = message;
+        }
+
+        function checkCSS() {
+            let report = '=== CSS Analysis ===\n\n';
+            
+            const academy = window.parent.document.getElementById('academy');
+            if (!academy) {
+                showResult('❌ #academy not found! Open this from localhost:8000/index.html', 'error');
+                return;
+            }
+            
+            const computed = window.parent.getComputedStyle(academy);
+            const box = window.parent.document.querySelector('#academy .box');
+            const boxComputed = box ? window.parent.getComputedStyle(box) : null;
+            
+            report += '📊 #academy Computed Styles:\n';
+            report += `  display: ${computed.display}\n`;
+            report += `  visibility: ${computed.visibility}\n`;
+            report += `  opacity: ${computed.opacity}\n`;
+            report += `  position: ${computed.position}\n`;
+            report += `  width: ${computed.width}\n`;
+            report += `  height: ${computed.height}\n`;
+            report += `  background: ${computed.background.substring(0, 50)}...\n`;
+            report += `  flex-direction: ${computed.flexDirection}\n`;
+            report += `  classes: ${Array.from(academy.classList).join(', ') || 'none'}\n`;
+            
+            if (computed.display !== 'flex') {
+                report += '\n❌ PROBLEM: display is not flex!\n';
+                report += '   Expected: flex\n';
+                report += `   Got: ${computed.display}\n`;
+            } else {
+                report += '\n✅ display: flex is correct!\n';
+            }
+            
+            if (box && boxComputed) {
+                report += '\n📦 #academy .box:\n';
+                report += `  flex: ${boxComputed.flex}\n`;
+                report += `  min-height: ${boxComputed.minHeight}\n`;
+                report += `  width: ${boxComputed.width}\n`;
+                report += `  height: ${boxComputed.height}\n`;
+                report += `  background: ${boxComputed.background.substring(0, 50)}...\n`;
+                
+                if (boxComputed.minHeight !== '400px') {
+                    report += '\n⚠️ WARNING: min-height is not 400px\n';
+                }
+            }
+            
+            const type = computed.display === 'flex' ? 'success' : 'error';
+            showResult(report, type);
+        }
+
+        function checkSpecificity() {
+            let report = '=== CSS Specificity Analysis ===\n\n';
+            
+            const academy = window.parent.document.getElementById('academy');
+            if (!academy) {
+                showResult('❌ Open this from localhost:8000/index.html', 'error');
+                return;
+            }
+            
+            report += 'Checking which rules apply to #academy:\n\n';
+            
+            const rules = [
+                { selector: 'section', specificity: '0,0,0,1', display: 'none' },
+                { selector: 'section.active', specificity: '0,0,1,1', display: 'block' },
+                { selector: '#academy', specificity: '0,1,0,0', display: 'flex !important' },
+                { selector: '#academy.active', specificity: '0,1,0,1', display: 'flex !important' }
+            ];
+            
+            report += 'CSS Rules (from least to most specific):\n\n';
+            rules.forEach((rule, i) => {
+                const applies = i === 0 || (i === 1 && academy.classList.contains('active')) || 
+                               (i === 2) || (i === 3 && academy.classList.contains('active'));
+                const icon = applies ? '✅' : '⚪';
+                report += `${icon} ${rule.selector}\n`;
+                report += `   Specificity: ${rule.specificity}\n`;
+                report += `   display: ${rule.display}\n`;
+                report += `   Applies: ${applies}\n\n`;
+            });
+            
+            const hasActive = academy.classList.contains('active');
+            report += `Current state: #academy${hasActive ? '.active' : ''}\n`;
+            report += `Expected winner: #academy.active (0,1,0,1)\n`;
+            
+            const computed = window.parent.getComputedStyle(academy).display;
+            report += `\nActual computed display: ${computed}\n`;
+            
+            if (computed === 'flex') {
+                report += '\n✅ SUCCESS! #academy.active wins!\n';
+                showResult(report, 'success');
+            } else {
+                report += '\n❌ PROBLEM! Wrong display value\n';
+                report += 'Possible causes:\n';
+                report += '1. Missing "active" class\n';
+                report += '2. CSS not loaded\n';
+                report += '3. Another rule overriding\n';
+                showResult(report, 'error');
+            }
+        }
+
+        function checkVisibility() {
+            let report = '=== Visibility Check ===\n\n';
+            
+            const academy = window.parent.document.getElementById('academy');
+            const box = window.parent.document.querySelector('#academy .box');
+            const list = window.parent.document.getElementById('academy-lessons-list');
+            const items = window.parent.document.querySelectorAll('#academy-lessons-list .lesson-item');
+            
+            if (!academy) {
+                showResult('❌ Open from localhost:8000/index.html', 'error');
+                return;
+            }
+            
+            report += `#academy: ${academy ? '✅ exists' : '❌ missing'}\n`;
+            report += `  classList: ${Array.from(academy.classList).join(', ')}\n`;
+            report += `  display: ${window.parent.getComputedStyle(academy).display}\n\n`;
+            
+            report += `#academy .box: ${box ? '✅ exists' : '❌ missing'}\n`;
+            if (box) {
+                const boxStyles = window.parent.getComputedStyle(box);
+                report += `  width: ${boxStyles.width}\n`;
+                report += `  height: ${boxStyles.height}\n`;
+                report += `  min-height: ${boxStyles.minHeight}\n\n`;
+            }
+            
+            report += `#academy-lessons-list: ${list ? '✅ exists' : '❌ missing'}\n`;
+            if (list) {
+                report += `  children: ${list.childElementCount}\n`;
+                report += `  display: ${window.parent.getComputedStyle(list).display}\n\n`;
+            }
+            
+            report += `Lesson items: ${items.length}\n`;
+            items.forEach((item, i) => {
+                const styles = window.parent.getComputedStyle(item);
+                report += `  ${i + 1}. display: ${styles.display}, opacity: ${styles.opacity}\n`;
+            });
+            
+            const allGood = academy && box && list && items.length > 0;
+            showResult(report, allGood ? 'success' : 'warning');
+        }
+
+        function forceDisplay() {
+            const academy = window.parent.document.getElementById('academy');
+            if (!academy) {
+                showResult('❌ Open from localhost:8000/index.html', 'error');
+                return;
+            }
+            
+            academy.style.display = 'flex';
+            academy.style.flexDirection = 'column';
+            academy.classList.add('active');
+            
+            showResult('✅ Forced display: flex on #academy\nTry opening the academy now!', 'success');
+        }
+
+        function openAcademy() {
+            if (window.parent.showSection) {
+                window.parent.showSection('academy');
+                setTimeout(() => {
+                    checkAll();
+                }, 500);
+            } else {
+                showResult('❌ showSection() not available', 'error');
+            }
+        }
+
+        function addLessons() {
+            const state = {
+                investments: { id: 'investments', unlocked: true, completed: false, unlockedAt: new Date().toISOString(), completedAt: null, unlockedReason: 'debug' },
+                emergencyFund: { id: 'emergencyFund', unlocked: false, completed: false, unlockedAt: null, completedAt: null, unlockedReason: null },
+                insurance: { id: 'insurance', unlocked: false, completed: false, unlockedAt: null, completedAt: null, unlockedReason: null },
+                debtManagement: { id: 'debtManagement', unlocked: false, completed: false, unlockedAt: null, completedAt: null, unlockedReason: null }
+            };
+            
+            localStorage.setItem('lessons-state', JSON.stringify(state));
+            showResult('✅ Lessons state set with 1 unlocked lesson\nReload the page to see changes', 'success');
+        }
+
+        function checkAll() {
+            let report = '=== COMPREHENSIVE CHECK ===\n\n';
+            
+            const academy = window.parent.document.getElementById('academy');
+            if (!academy) {
+                showResult('❌ Open this page as an iframe in index.html\nOr run from: http://localhost:8000/css-debug-academy.html', 'error');
+                return;
+            }
+            
+            const computed = window.parent.getComputedStyle(academy);
+            const box = window.parent.document.querySelector('#academy .box');
+            const list = window.parent.document.getElementById('academy-lessons-list');
+            const items = window.parent.document.querySelectorAll('#academy-lessons-list .lesson-item');
+            
+            const tests = [
+                { name: '#academy exists', pass: !!academy },
+                { name: '#academy has .active class', pass: academy.classList.contains('active') },
+                { name: '#academy display is flex', pass: computed.display === 'flex' },
+                { name: '#academy .box exists', pass: !!box },
+                { name: '#academy .box min-height is 400px', pass: box && window.parent.getComputedStyle(box).minHeight === '400px' },
+                { name: '#academy-lessons-list exists', pass: !!list },
+                { name: 'Lesson items exist', pass: items.length > 0 },
+                { name: 'At least 1 unlocked lesson', pass: items.length > 0 }
+            ];
+            
+            let passed = 0;
+            tests.forEach(test => {
+                const icon = test.pass ? '✅' : '❌';
+                report += `${icon} ${test.name}\n`;
+                if (test.pass) passed++;
+            });
+            
+            report += `\nScore: ${passed}/${tests.length}\n\n`;
+            
+            if (passed === tests.length) {
+                report += '🎉 ALL TESTS PASSED!\n';
+                report += 'The academy should be working now.';
+                showResult(report, 'success');
+            } else {
+                report += '⚠️ SOME TESTS FAILED\n\n';
+                report += 'Issues found:\n';
+                if (computed.display !== 'flex') {
+                    report += '1. CSS conflict: #academy display is not flex\n';
+                    report += '   → Check fullscreen-layout.css line 38-42\n';
+                }
+                if (!academy.classList.contains('active')) {
+                    report += '2. Missing "active" class\n';
+                    report += '   → Router not setting active class?\n';
+                }
+                if (items.length === 0) {
+                    report += '3. No lesson items rendered\n';
+                    report += '   → Check localStorage lessons-state\n';
+                }
+                showResult(report, 'warning');
+            }
+        }
+
+        // Auto-run on load if in iframe
+        window.onload = function() {
+            if (window.parent !== window) {
+                setTimeout(() => {
+                    showResult('👋 Debug tool ready!\n\nClick "הפעל הכל" to run all tests.', 'success');
+                }, 500);
+            } else {
+                showResult('⚠️ This tool works best when opened from index.html\n\nOr open: http://localhost:8000', 'warning');
+            }
+        };
+    </script>
+</body>
+</html>

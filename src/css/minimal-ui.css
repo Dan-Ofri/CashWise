@@ -1,0 +1,196 @@
+/* 🎨 Minimal Header & Floating Buttons - CashWise v7.0 */
+
+/* ===================================
+   Header מינימליסטי
+   =================================== */
+
+.minimal-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10vh; /* 10% מגובה המסך */
+    background: var(--gradient-primary-h); /* 🎨 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 1000; /* גבוה יותר */
+    margin: 0; /* ללא margin */
+}
+
+.logo-minimal {
+    font-size: 24px;
+    font-weight: 700;
+    color: white !important; /* חשוב! מונע שינוי צבע */
+    text-decoration: none !important; /* חשוב! מונע קו תחתון */
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: none !important; /* מונע כל אנימציות */
+}
+
+.logo-minimal:hover,
+.logo-minimal:active,
+.logo-minimal:focus,
+.logo-minimal:visited {
+    color: white !important;
+    text-decoration: none !important;
+    background: none !important;
+    outline: none !important;
+}
+
+/* לוגו סטטי - ללא שינויים בהובר */
+
+/* XP Bar קטן */
+.xp-bar-minimal {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.xp-bar-small {
+    width: 120px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.xp-bar-small .xp-fill {
+    height: 100%;
+    background: var(--gradient-success-h);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+/* התאמה למסך גוף */
+body {
+    padding-top: 10vh; /* גובה ה-header */
+}
+
+/* ===================================
+   כפתורים צפים (FAB)
+   =================================== */
+
+.floating-buttons {
+    position: fixed;
+    bottom: 90px; /* מיקום קבוע מעל כפתור האקדמיה (20px + 60px + 10px) */
+    left: 20px; /* מיקום קבוע - תמיד באותו מקום */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 999;
+}
+
+.fab {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gradient-primary-h); /* 🎨 */
+    color: white; /* 🎨 אייקון לבן */
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.4); /* 🎨 זהה לאקדמיה */
+    transition: all 0.3s ease;
+    position: relative;
+    /* pulseGlow יתווסף דרך nth-child */
+}
+
+/* אנימציית pulseGlow - זהה לכפתור האקדמיה */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 4px 16px rgba(30, 41, 59, 0.4); /* 🎨 צל מותאם */
+    }
+    50% {
+        box-shadow: 0 6px 24px rgba(30, 41, 59, 0.7); /* 🎨 צל מותאם */
+    }
+}
+
+.fab:hover {
+    transform: scale(1.15);
+    box-shadow: 0 6px 24px rgba(30, 41, 59, 0.6); /* 🎨 צל מותאם */
+}
+
+.fab:active {
+    transform: scale(1.05);
+}
+
+/* אנימציית כניסה */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.floating-buttons .fab:nth-child(1) {
+    animation: fadeInUp 0.4s ease 0.1s both, pulseGlow 2s ease-in-out 0.7s infinite;
+}
+
+.floating-buttons .fab:nth-child(2) {
+    animation: fadeInUp 0.4s ease 0.2s both, pulseGlow 2s ease-in-out 0.7s infinite;
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+
+@media (max-width: 768px) {
+    .minimal-header {
+        height: 50px;
+        padding: 0 16px;
+    }
+    
+    .logo-minimal {
+        font-size: 20px;
+    }
+    
+    .xp-bar-minimal {
+        font-size: 11px;
+        gap: 8px;
+    }
+    
+    .xp-bar-small {
+        width: 80px;
+        height: 6px;
+    }
+    
+    body {
+        padding-top: 50px;
+    }
+    
+    .floating-buttons {
+        bottom: 70px;
+        left: 16px;
+        gap: 10px;
+    }
+    
+    .fab {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+}
+
+/* ===================================
+   הסתרת nav ישן (אם קיים)
+   =================================== */
+
+nav {
+    display: none !important;
+}
+
+/* הערה: כפתור האקדמיה מוגדר ב-floating-academy.css */
+

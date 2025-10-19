@@ -1,0 +1,594 @@
+/* 🎮 סימולטור קומפקטי - ללא גלילה - CashWise v7.0 */
+
+/* ===================================
+   סימולטור - תצוגה קומפקטית
+   =================================== */
+
+#simulation {
+    overflow: hidden !important;
+    padding: 1.5vh 1.5vw !important; /* padding מסביב - זהה לאקדמיה */
+    margin: 0 !important;
+    background: #2c3e50 !important; /* רקע כהה כמו אקדמיה */
+    height: 90vh !important; /* גובה מדויק */
+}
+
+#simulation .box {
+    height: 100% !important; /* 100% מה-section */
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 2vh 2vw !important; /* padding פנימי */
+    box-sizing: border-box !important;
+    position: relative !important;
+    margin: 0 !important;
+    background: #f5f7fa !important;
+    border-radius: 12px !important; /* פינות מעוגלות */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; /* הצללה */
+}
+
+/* כותרת קומפקטית מאוד */
+#simulation h2 {
+    font-size: 18px; /* גדול יותר */
+    margin: 0 0 8px 0;
+    padding: 0;
+    font-weight: 700;
+}
+
+#simulation > .box > p {
+    font-size: 12px;
+    margin: 0 0 8px 0;
+    color: var(--gray-600);
+}
+
+/* תוכן הסימולציה - שתי עמודות */
+#scenario-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    overflow: hidden;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* עמודה ימנית - מצב נוכחי */
+.sim-column-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto; /* גלילה אנכית */
+    overflow-x: hidden;
+    max-height: 100%;
+}
+
+/* עמודה שמאלית - פעולות ואירועים */
+.sim-column-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: visible;
+    min-height: 0;
+}
+
+/* כרטיס מצב - קומפקטי מאוד */
+.sim-status-card {
+    background: var(--gradient-primary-h);
+    border-radius: 8px;
+    padding: 12px; /* padding גדול יותר */
+    color: white;
+    box-shadow: 0 3px 10px rgba(30, 41, 59, 0.3); /* 🎨 */
+    overflow: visible; /* אין חיתוך תוכן */
+}
+
+.sim-status-card i {
+    color: white; /* 🎨 וידוא כל האייקונים לבנים */
+}
+
+.sim-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sim-status-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.sim-status-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* פרטים פיננסיים - גריד קומפקטי */
+.sim-financial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.sim-financial-item {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.sim-financial-label {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.sim-financial-value {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* כרטיס פעולות - קומפקטי מאוד */
+.sim-actions-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 200px;
+}
+
+.sim-actions-card h3 {
+    font-size: 16px;
+    margin: 0 0 12px 0;
+    color: var(--primary-500);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* פעולות - רשימה קומפקטית */
+.sim-actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: visible; /* אין גלילה */
+}
+
+.sim-action-button {
+    background: var(--gradient-primary-h);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.3);
+}
+
+.sim-action-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.4);
+}
+
+.sim-action-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.sim-action-button i {
+    color: white; /* 🎨 וידוא אייקונים לבנים */
+}
+
+/* Hover הוסר - כפתורים סטטיים */
+
+.sim-action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* כרטיס אירועים - קומפקטי */
+.sim-events-card {
+    background: var(--gradient-bg-info);
+    border-radius: 12px;
+    padding: 16px;
+    border-right: 4px solid #2196f3;
+    overflow: visible;
+    flex: 0;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+}
+
+.sim-events-card h3 {
+    font-size: 15px;
+    margin: 0 0 10px 0;
+    color: var(--info-color);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sim-event-item {
+    background: white;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.sim-event-item:last-child {
+    margin-bottom: 0;
+}
+
+/* סרגל התקדמות - קומפקטי */
+.sim-progress-bar {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    height: 6px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.sim-progress-fill {
+    height: 100%;
+    background: var(--gradient-success-h);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+/* Scrollbar מותאם אישית */
+.sim-actions-list::-webkit-scrollbar,
+.sim-events-card::-webkit-scrollbar,
+.sim-column-right::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sim-actions-list::-webkit-scrollbar-track,
+.sim-events-card::-webkit-scrollbar-track,
+.sim-column-right::-webkit-scrollbar-track {
+    background: rgba(100, 116, 139, 0.1);
+    border-radius: 10px;
+}
+
+.sim-actions-list::-webkit-scrollbar-thumb,
+.sim-events-card::-webkit-scrollbar-thumb,
+.sim-column-right::-webkit-scrollbar-thumb {
+    background: var(--primary-500);
+    border-radius: 10px;
+}
+
+.sim-column-right::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-600);
+}
+
+/* ===================================
+   Responsive - מסכים קטנים
+   =================================== */
+
+@media (max-width: 1024px) {
+    #scenario-content {
+        grid-template-columns: 1fr; /* עמודה אחת */
+        gap: 12px;
+    }
+    
+    .sim-financial-grid {
+        grid-template-columns: repeat(4, 1fr); /* כל הפרטים בשורה אחת */
+    }
+    
+    .sim-events-card {
+        max-height: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    #simulation .box {
+        padding: 12px;
+    }
+    
+    .sim-status-card {
+        padding: 12px;
+    }
+    
+    .sim-financial-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 עמודות */
+    }
+    
+    .sim-financial-value {
+        font-size: 16px;
+    }
+    
+    .sim-action-button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+/* ===================================
+   אנימציות - הוסרו לפי בקשה
+   =================================== */
+
+/* אנימציות כניסה הוסרו - כרטיסים סטטיים */
+
+/* הסתרת כפתור צף באקדמיה אם הוא מופיע */
+#simulation #floating-academy-btn {
+    bottom: 20px !important; /* מיקום מותאם */
+}
+
+/* ===================================
+   כפתורים צפים בסימולטור
+   =================================== */
+
+.sim-floating-btn {
+    position: absolute; /* שינוי ל-absolute כדי להיות בתוך הקונטיינר */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif; /* תמיכה באימוג'ים */
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    z-index: 10; /* נמוך יותר מכפתור האקדמיה */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+}
+
+.sim-floating-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.sim-floating-btn:active {
+    transform: scale(1.05);
+}
+
+/* הגדלת ה-z-index של הקונטיינר */
+#simulation {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================================
+   שורות מידע פיננסי - קומפקטיות
+   =================================== */
+
+.sim-finance-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+    font-size: 12px;
+}
+
+.sim-finance-row.highlight {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px;
+    border-radius: 6px;
+    margin: 2px 0;
+}
+
+.sim-finance-row.major {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px;
+    border-radius: 6px;
+    margin: 2px 0;
+    font-weight: 600;
+}
+
+.sim-finance-icon {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.sim-finance-label {
+    flex: 1;
+    font-size: 11px;
+    opacity: 0.9;
+}
+
+.sim-finance-value {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.sim-finance-value.positive {
+    color: #a8e6a1;
+}
+
+.sim-finance-value.negative {
+    color: #ffb3b3;
+}
+
+.sim-finance-value.accent {
+    color: #ffd700;
+}
+
+.sim-finance-value.total {
+    color: #fff;
+    font-size: 14px;
+}
+
+/* שדות עתידיים - מוכנים להפעלה */
+.sim-finance-row.future-field {
+    opacity: 0.5;
+}
+
+/* שורת מידע דמות */
+.sim-character-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.sim-info-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sim-info-icon {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.sim-info-text {
+    font-size: 11px;
+    opacity: 0.95;
+}
+
+.sim-info-divider {
+    opacity: 0.4;
+    font-size: 11px;
+}
+
+/* מפריד */
+.sim-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 6px 0;
+}
+
+/* תצוגת מידע פיננסי */
+.sim-financial-display {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* יעד תמציתי */
+.sim-goal-compact {
+    margin-top: 8px;
+}
+
+/* ===================================
+   כפתורים זמניים - פינה שמאלית עליונה
+   =================================== */
+
+.sim-temp-buttons {
+    position: absolute;
+    top: 12px; /* מיקום קבוע - קטן וקרוב לפינה */
+    left: 12px; /* מיקום קבוע - קטן וקרוב לפינה */
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.sim-temp-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+    line-height: 1;
+}
+
+.sim-temp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.sim-temp-btn:active {
+    transform: translateY(0);
+}
+
+/* גודל emoji קטן יותר */
+.sim-temp-btn span {
+    font-size: 16px;
+}
+
+/* כפתור יעד - ירוק */
+#sim-goal-btn {
+    background: var(--gradient-success);
+}
+
+/* כפתור טיפים - צהוב */
+#sim-tips-btn {
+    background: var(--gradient-warning-h);
+}
+
+/* ===================================
+   כפתורים צפים - פינה שמאלית עליונה
+   =================================== */
+
+.sim-floating-buttons {
+    position: absolute;
+    top: 20px; /* קצת יותר מלמעלה */
+    left: 20px; /* קצת יותר משמאל */
+    display: flex;
+    gap: 10px;
+    z-index: 1000; /* גבוה מאוד כדי להיות מעל הכל */
+}
+
+.sim-float-btn {
+    width: 44px; /* קטן יותר: 48 → 44 */
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* קטן יותר: 20 → 18 */
+    color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sim-float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.sim-float-btn:active {
+    transform: scale(1.05);
+}
+
+/* כפתור המטרה - כחול */
+.sim-float-goal {
+    background: var(--gradient-info-h);
+}
+
+.sim-float-goal:hover {
+    background: var(--gradient-info-h);
+    filter: brightness(0.9);
+}
+
+/* כפתור טיפים - ירוק */
+.sim-float-tips {
+    background: var(--gradient-success-h);
+}
+
+.sim-float-tips:hover {
+    background: var(--gradient-success-h);
+    filter: brightness(0.9);
+}
+

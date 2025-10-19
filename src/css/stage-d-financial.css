@@ -1,0 +1,177 @@
+/* 💎 Stage D - תצוגה פיננסית מחודשת - CashWise v7.0 */
+
+/* ===================================
+   כרטיס סטטוס - עיצוב מחודש
+   =================================== */
+
+/* שורת פרטי דמות - אופקית מובנית */
+.sim-character-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 0;
+}
+
+.sim-info-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sim-info-icon {
+    font-size: 18px;
+}
+
+.sim-info-text {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.sim-info-divider {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* קו הפרדה */
+.sim-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 12px 0;
+}
+
+/* תצוגה פיננסית מובנית */
+.sim-financial-display {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sim-finance-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: none;
+}
+
+.sim-finance-row.highlight {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.sim-finance-row.major {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sim-finance-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.sim-finance-label {
+    font-size: 14px;
+    opacity: 0.9;
+    flex-shrink: 0;
+}
+
+.sim-finance-value {
+    font-size: 17px;
+    font-weight: 700;
+    margin-right: auto;
+}
+
+.sim-finance-value.positive {
+    color: #4caf50;
+}
+
+.sim-finance-value.negative {
+    color: #ff9800;
+}
+
+.sim-finance-value.accent {
+    color: #8bc34a;
+}
+
+.sim-finance-value.total {
+    color: #ffd700;
+    font-size: 19px;
+}
+
+.sim-finance-badge {
+    background: rgba(139, 195, 74, 0.3);
+    color: #8bc34a;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* סרגל התקדמות שנה */
+.sim-year-progress {
+    margin-top: 16px;
+}
+
+.sim-progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 6px;
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .sim-character-info {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .sim-info-icon {
+        font-size: 16px;
+    }
+    
+    .sim-info-text {
+        font-size: 14px;
+    }
+    
+    .sim-finance-row {
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    .sim-finance-label {
+        font-size: 13px;
+    }
+    
+    .sim-finance-value {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sim-character-info {
+        font-size: 13px;
+    }
+    
+    .sim-finance-icon {
+        font-size: 18px;
+    }
+    
+    .sim-finance-label {
+        font-size: 12px;
+    }
+    
+    .sim-finance-value {
+        font-size: 14px;
+    }
+    
+    .sim-finance-value.total {
+        font-size: 16px;
+    }
+}
