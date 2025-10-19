@@ -95,14 +95,14 @@
 }
 
 .sim-status-name {
-    font-size: 18px;
+    font-size: var(--font-md);
     font-weight: 700;
 }
 
 .sim-status-meta {
     display: flex;
     gap: 12px;
-    font-size: 13px;
+    font-size: var(--font-sm);
     opacity: 0.9;
 }
 
@@ -121,13 +121,13 @@
 }
 
 .sim-financial-label {
-    font-size: 11px;
+    font-size: var(--font-xs);
     opacity: 0.8;
     margin-bottom: 4px;
 }
 
 .sim-financial-value {
-    font-size: 18px;
+    font-size: var(--font-md);
     font-weight: 700;
 }
 
@@ -145,7 +145,7 @@
 }
 
 .sim-actions-card h3 {
-    font-size: 16px;
+    font-size: var(--font-base);
     margin: 0 0 12px 0;
     color: var(--primary-500);
     font-weight: 700;
@@ -168,7 +168,7 @@
     border: none;
     border-radius: var(--radius-sm);
     padding: 14px 16px;
-    font-size: 15px;
+    font-size: var(--font-sm); /* Will keep as-is - specific size */
     font-weight: 700;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -213,7 +213,7 @@
 }
 
 .sim-events-card h3 {
-    font-size: 15px;
+    font-size: var(--font-sm);
     margin: 0 0 10px 0;
     color: var(--info-color);
     font-weight: 700;
@@ -227,7 +227,7 @@
     border-radius: var(--radius-sm);
     padding: 10px 12px;
     margin-bottom: 0;
-    font-size: 13px;
+    font-size: var(--font-sm);
     line-height: 1.4;
     box-shadow: var(--shadow-xs);
 }
@@ -310,12 +310,12 @@
     }
     
     .sim-financial-value {
-        font-size: 16px;
+        font-size: var(--font-base);
     }
     
     .sim-action-button {
         padding: 8px 12px;
-        font-size: 13px;
+        font-size: var(--font-sm);
     }
 }
 
@@ -341,7 +341,7 @@
     border-radius: 50%;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size: var(--font-lg);
     font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif; /* תמיכה באימוג'ים */
     cursor: pointer;
     box-shadow: var(--shadow-md);
@@ -378,7 +378,7 @@
     align-items: center;
     gap: 6px;
     padding: 4px 0;
-    font-size: 12px;
+    font-size: var(--font-2xs);
 }
 
 .sim-finance-row.highlight {
@@ -397,19 +397,19 @@
 }
 
 .sim-finance-icon {
-    font-size: 14px;
+    font-size: var(--font-sm);
     line-height: 1;
 }
 
 .sim-finance-label {
     flex: 1;
-    font-size: 11px;
+    font-size: var(--font-xs);
     opacity: 0.9;
 }
 
 .sim-finance-value {
     font-weight: 600;
-    font-size: 12px;
+    font-size: var(--font-2xs);
 }
 
 .sim-finance-value.positive {
@@ -426,7 +426,7 @@
 
 .sim-finance-value.total {
     color: #fff;
-    font-size: 14px;
+    font-size: var(--font-sm);
 }
 
 /* שדות עתידיים - מוכנים להפעלה */
@@ -439,7 +439,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 12px;
+    font-size: var(--font-2xs);
     margin-bottom: 6px;
 }
 
@@ -450,18 +450,18 @@
 }
 
 .sim-info-icon {
-    font-size: 14px;
+    font-size: var(--font-sm);
     line-height: 1;
 }
 
 .sim-info-text {
-    font-size: 11px;
+    font-size: var(--font-xs);
     opacity: 0.95;
 }
 
 .sim-info-divider {
     opacity: 0.4;
-    font-size: 11px;
+    font-size: var(--font-xs);
 }
 
 /* מפריד */
@@ -522,7 +522,7 @@
 
 /* גודל emoji קטן יותר */
 .sim-temp-btn span {
-    font-size: 16px;
+    font-size: var(--font-base);
 }
 
 /* כפתור יעד - ירוק */
@@ -554,7 +554,7 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    font-size: 18px; /* קטן יותר: 20 → 18 */
+    font-size: var(--font-md); /* קטן יותר: 20 → 18 */
     color: white;
     box-shadow: var(--shadow-md);
     transition: all 0.3s ease;

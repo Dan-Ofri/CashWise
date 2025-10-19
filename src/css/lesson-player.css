@@ -31,7 +31,7 @@
 }
 
 .lesson-title {
-    font-size: 28px;
+    font-size: var(--font-2xl);
     font-weight: bold;
     color: #5e35b1;
     margin: 0 0 16px 0;
@@ -60,7 +60,7 @@
 }
 
 .lesson-progress-text {
-    font-size: 16px;
+    font-size: var(--font-base);
     font-weight: 600;
     color: #5e35b1;
     min-width: 50px;
@@ -86,13 +86,13 @@
 }
 
 .step-icon {
-    font-size: 64px;
+    font-size: var(--font-5xl);
     text-align: center;
     margin-bottom: 8px;
 }
 
 .step-title {
-    font-size: 24px;
+    font-size: var(--font-xl);
     font-weight: 600;
     color: #333;
     text-align: center;
@@ -101,7 +101,7 @@
 
 .step-body {
     flex: 1;
-    font-size: 18px;
+    font-size: var(--font-md);
     line-height: 1.8;
     color: #555;
 }
@@ -122,7 +122,7 @@
 .key-points h3 {
     margin: 0 0 12px 0;
     color: #1976d2;
-    font-size: 18px;
+    font-size: var(--font-md);
 }
 
 .key-points ul {
@@ -188,7 +188,7 @@
 
 .calculator input {
     padding: 12px;
-    font-size: 16px;
+    font-size: var(--font-base);
     border: 2px solid #ddd;
     border-radius: var(--radius-sm);
     transition: border-color 0.3s;
@@ -208,14 +208,14 @@
 }
 
 .result-amount {
-    font-size: 32px;
+    font-size: var(--font-3xl);
     font-weight: bold;
     color: #43a047;
     margin: 8px 0;
 }
 
 .result-profit {
-    font-size: 18px;
+    font-size: var(--font-md);
     color: #666;
 }
 
@@ -225,7 +225,7 @@
 }
 
 .question-text {
-    font-size: 20px;
+    font-size: var(--font-lg);
     font-weight: 600;
     color: #333;
     margin-bottom: 24px;
@@ -240,7 +240,7 @@
 
 .quiz-option {
     padding: 16px 24px;
-    font-size: 16px;
+    font-size: var(--font-base);
     background: white;
     border: 2px solid #ddd;
     border-radius: var(--radius-md);
@@ -296,11 +296,11 @@
 }
 
 .feedback-icon {
-    font-size: 24px;
+    font-size: var(--font-xl);
 }
 
 .feedback-text {
-    font-size: 16px;
+    font-size: var(--font-base);
     font-weight: 600;
 }
 
@@ -311,7 +311,7 @@
 }
 
 .completion-icon {
-    font-size: 80px;
+    font-size: var(--font-6xl);
     margin-bottom: 20px;
     animation: bounce 1s ease;
 }
@@ -322,14 +322,14 @@
 }
 
 .completion-title {
-    font-size: 32px;
+    font-size: var(--font-3xl);
     font-weight: bold;
     color: #43a047;
     margin: 0 0 8px 0;
 }
 
 .completion-subtitle {
-    font-size: 20px;
+    font-size: var(--font-lg);
     color: #666;
     margin: 0 0 32px 0;
 }
@@ -365,7 +365,7 @@
     right: 0;
     color: #43a047;
     font-weight: bold;
-    font-size: 18px;
+    font-size: var(--font-md);
 }
 
 .completion-rewards {
@@ -387,11 +387,11 @@
 }
 
 .reward-icon {
-    font-size: 28px;
+    font-size: var(--font-2xl);
 }
 
 .reward-text {
-    font-size: 18px;
+    font-size: var(--font-md);
     font-weight: 600;
     color: #333;
 }
@@ -406,7 +406,7 @@
 
 .lesson-btn {
     padding: 16px 32px;
-    font-size: 18px;
+    font-size: var(--font-md);
     font-weight: 600;
     border: none;
     border-radius: var(--radius-md);
@@ -464,27 +464,27 @@
     }
     
     .step-icon {
-        font-size: 48px;
+        font-size: var(--font-4xl);
     }
     
     .step-title {
-        font-size: 20px;
+        font-size: var(--font-lg);
     }
     
     .step-body {
-        font-size: 16px;
+        font-size: var(--font-base);
     }
     
     .lesson-btn {
         padding: 12px 24px;
-        font-size: 16px;
+        font-size: var(--font-base);
     }
     
     .completion-icon {
-        font-size: 60px;
+        font-size: var(--font-5xl);
     }
     
     .completion-title {
-        font-size: 24px;
+        font-size: var(--font-xl);
     }
 }

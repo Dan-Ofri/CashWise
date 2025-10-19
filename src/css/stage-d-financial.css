@@ -20,17 +20,17 @@
 }
 
 .sim-info-icon {
-    font-size: 18px;
+    font-size: var(--font-md);
 }
 
 .sim-info-text {
-    font-size: 15px;
+    font-size: var(--font-sm);
     font-weight: 600;
 }
 
 .sim-info-divider {
     color: rgba(255, 255, 255, 0.4);
-    font-size: 18px;
+    font-size: var(--font-md);
     font-weight: 300;
 }
 
@@ -69,18 +69,18 @@
 }
 
 .sim-finance-icon {
-    font-size: 20px;
+    font-size: var(--font-lg);
     flex-shrink: 0;
 }
 
 .sim-finance-label {
-    font-size: 14px;
+    font-size: var(--font-sm);
     opacity: 0.9;
     flex-shrink: 0;
 }
 
 .sim-finance-value {
-    font-size: 17px;
+    font-size: var(--font-base);
     font-weight: 700;
     margin-right: auto;
 }
@@ -99,7 +99,7 @@
 
 .sim-finance-value.total {
     color: var(--gold-bright);
-    font-size: 19px;
+    font-size: var(--font-md);
 }
 
 .sim-finance-badge {
@@ -107,7 +107,7 @@
     color: var(--success-bright);
     padding: 4px 10px;
     border-radius: var(--radius-md);
-    font-size: 12px;
+    font-size: var(--font-2xs);
     font-weight: 600;
 }
 
@@ -120,7 +120,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
+    font-size: var(--font-sm);
     margin-bottom: 6px;
     opacity: 0.9;
 }
@@ -133,11 +133,11 @@
     }
     
     .sim-info-icon {
-        font-size: 16px;
+        font-size: var(--font-base);
     }
     
     .sim-info-text {
-        font-size: 14px;
+        font-size: var(--font-sm);
     }
     
     .sim-finance-row {
@@ -146,32 +146,32 @@
     }
     
     .sim-finance-label {
-        font-size: 13px;
+        font-size: var(--font-sm);
     }
     
     .sim-finance-value {
-        font-size: 15px;
+        font-size: var(--font-sm);
     }
 }
 
 @media (max-width: 768px) {
     .sim-character-info {
-        font-size: 13px;
+        font-size: var(--font-sm);
     }
     
     .sim-finance-icon {
-        font-size: 18px;
+        font-size: var(--font-md);
     }
     
     .sim-finance-label {
-        font-size: 12px;
+        font-size: var(--font-2xs);
     }
     
     .sim-finance-value {
-        font-size: 14px;
+        font-size: var(--font-sm);
     }
     
     .sim-finance-value.total {
-        font-size: 16px;
+        font-size: var(--font-base);
     }
 }
