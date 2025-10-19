@@ -13,6 +13,12 @@
 
 import { addXP } from '../core/state.js';
 import { showNotification, showSuccess } from '../utils/notifications.js';
+import { 
+    XP_REWARDS, 
+    LESSON_CONSTANTS,
+    MATH_CONSTANTS,
+    UI_TIMING 
+} from '../config/index.js';
 
 /**
  * הגדרת כל השיעורים במערכת
@@ -176,7 +182,7 @@ export function unlockLesson(lessonId, reason = 'simulator-trigger') {
     // הודעה למשתמש
     const lesson = LESSONS_DEFINITION[lessonId];
     showSuccess(`🎓 שיעור חדש נפתח: ${lesson.title}!`);
-    addXP(10, 'פתיחת שיעור חדש');
+    addXP(XP_REWARDS.UNLOCK_LESSON, 'פתיחת שיעור חדש');
     
     console.log(`✅ Lesson ${lessonId} unlocked successfully`);
     return true;
@@ -308,7 +314,7 @@ export function getTotalLessonsCount() {
 export function getLessonsProgress() {
     const total = getTotalLessonsCount();
     const completed = getCompletedLessonsCount();
-    return total > 0 ? Math.round((completed / total) * 100) : 0;
+    return total > MATH_CONSTANTS.ZERO ? Math.round((completed / total) * MATH_CONSTANTS.PERCENT_TO_DECIMAL) : MATH_CONSTANTS.ZERO;
 }
 
 /**
@@ -323,7 +329,7 @@ export function attemptOpenLockedLesson(lessonId) {
     showNotification(
         `🔒 ${lesson.title} עדיין נעול.\nהמשך לשחק בסימולטור כדי לפתוח שיעור זה!`,
         'warning',
-        4000
+        UI_TIMING.LOCKED_LESSON_NOTIFICATION
     );
 }
 

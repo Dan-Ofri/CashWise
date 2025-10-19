@@ -8,6 +8,13 @@
 import { getUserProfile, saveUserProfile, getUserIncome, loadGameState, ACHIEVEMENTS, fullGameReset } from '../core/state.js';
 import { createProgressChart, createXPChart, updateChartData } from '../components/charts.js';
 import { showSuccess } from '../utils/notifications.js';
+import { 
+    SIMULATION_CONFIG, 
+    FINANCIAL_RULES, 
+    LESSON_CONSTANTS,
+    MATH_CONSTANTS,
+    UI_TIMING 
+} from '../config/index.js';
 
 /**
  * טעינת נתוני פרופיל לטופס
@@ -75,7 +82,7 @@ export function setupProfileAutosave() {
  */
 export function calculateRecommendedPlan() {
     const profile = getUserProfile();
-    const income = getUserIncome(6000);
+    const income = getUserIncome(SIMULATION_CONFIG.DEFAULT_SALARY);
     const output = document.getElementById('pf-plan');
     
     if (!output) return;
@@ -87,11 +94,11 @@ export function calculateRecommendedPlan() {
     }
     
     // פרמטרים בסיסיים
-    const hasHighInterestDebt = (profile.debtMonthly || 0) > 0;
-    const targetEmergencyMonths = 3;
-    const emergencyTarget = Math.max(income * 0.5, 3000) * targetEmergencyMonths;
-    const suggestedSavingRate = profile.savingRate && profile.savingRate > 0 ? profile.savingRate / 100 : 0.2;
-    const baseMonthlySave = Math.max(Math.round(income * suggestedSavingRate), 500);
+    const hasHighInterestDebt = (profile.debtMonthly || MATH_CONSTANTS.ZERO) > MATH_CONSTANTS.ZERO;
+    const targetEmergencyMonths = FINANCIAL_RULES.EMERGENCY_FUND_MONTHS_DEFAULT;
+    const emergencyTarget = Math.max(income * FINANCIAL_RULES.MIN_INCOME_MULTIPLIER, FINANCIAL_RULES.MIN_MONTHLY_INCOME) * targetEmergencyMonths;
+    const suggestedSavingRate = profile.savingRate && profile.savingRate > MATH_CONSTANTS.ZERO ? profile.savingRate / MATH_CONSTANTS.PERCENT_TO_DECIMAL : FINANCIAL_RULES.DEFAULT_SAVING_RATE;
+    const baseMonthlySave = Math.max(Math.round(income * suggestedSavingRate), FINANCIAL_RULES.MIN_MONTHLY_SAVE);
     
     // בניית המלצות
     const steps = [];
@@ -100,11 +107,11 @@ export function calculateRecommendedPlan() {
         steps.push('📉 שלב 1: תעדף פירעון חוב בריבית גבוהה לפני השקעות. שקול מיקוח ריבית/איחוד חובות.');
     }
     
-    steps.push(`🛡️ שלב ${hasHighInterestDebt ? 2 : 1}: בנה קרן חירום של ${targetEmergencyMonths} חודשים (~${emergencyTarget.toLocaleString()}₪).`);
-    steps.push(`💰 חסוך לפחות ${Math.round(suggestedSavingRate * 100)}% מההכנסה (~${baseMonthlySave.toLocaleString()}₪/חודש).`);
+    steps.push(`🛡️ שלב ${hasHighInterestDebt ? MATH_CONSTANTS.TWO : MATH_CONSTANTS.ONE}: בנה קרן חירום של ${targetEmergencyMonths} חודשים (~${emergencyTarget.toLocaleString()}₪).`);
+    steps.push(`💰 חסוך לפחות ${Math.round(suggestedSavingRate * MATH_CONSTANTS.PERCENT_TO_DECIMAL)}% מההכנסה (~${baseMonthlySave.toLocaleString()}₪/חודש).`);
     steps.push('📊 לאחר חירום: הפנה את העודף להשקעות מדדיות בעלות נמוכה בהתאם לרמת הסיכון שלך.');
     
-    if (profile.horizon >= 10 && profile.risk === 'high') {
+    if (profile.horizon >= FINANCIAL_RULES.LONG_TERM_HORIZON_YEARS && profile.risk === 'high') {
         steps.push('🚀 אופק 10+ ורמת סיכון גבוהה: הגדל רכיב מנייתי (לדוגמה 80/20).');
     }
     
@@ -113,8 +120,8 @@ export function calculateRecommendedPlan() {
     }
     
     // הערכת זמן להשגת יעד
-    const monthlyToEmergency = Math.max(baseMonthlySave - (profile.debtMonthly || 0), 0);
-    const monthsToGoal = monthlyToEmergency > 0 ? Math.ceil(emergencyTarget / monthlyToEmergency) : Infinity;
+    const monthlyToEmergency = Math.max(baseMonthlySave - (profile.debtMonthly || MATH_CONSTANTS.ZERO), MATH_CONSTANTS.ZERO);
+    const monthsToGoal = monthlyToEmergency > MATH_CONSTANTS.ZERO ? Math.ceil(emergencyTarget / monthlyToEmergency) : Infinity;
     
     // הצגת התוכנית
     const html = `
@@ -141,8 +148,8 @@ export function updateProfileDisplay() {
     const elements = {
         'profile-level': state.level,
         'profile-xp': `${state.xp} XP`,
-        'profile-lessons': `${state.lessonsCompleted.filter(l => !l.startsWith('scenario-')).length}/4`,
-        'profile-achievements': `${state.achievements.length}/9`
+        'profile-lessons': `${state.lessonsCompleted.filter(l => !l.startsWith('scenario-')).length}/${LESSON_CONSTANTS.TOTAL_LESSONS}`,
+        'profile-achievements': `${state.achievements.length}/${LESSON_CONSTANTS.TOTAL_ACHIEVEMENTS}`
     };
     
     Object.entries(elements).forEach(([id, value]) => {
@@ -166,7 +173,7 @@ export function updateProfileCharts() {
     const lessonsCount = state.lessonsCompleted.filter(l => !l.startsWith('scenario-')).length;
     const scenariosCount = state.lessonsCompleted.filter(l => l.startsWith('scenario-')).length;
     
-    createProgressChart('progressChart', lessonsCount, 4, scenariosCount);
+    createProgressChart('progressChart', lessonsCount, LESSON_CONSTANTS.TOTAL_LESSONS, scenariosCount);
     
     // גרף XP
     createXPChart('xpChart', state.level, state.xp);
@@ -233,7 +240,7 @@ export function resetGameData() {
     // טעינה מחדש של הדף אחרי רגע
     setTimeout(() => {
         location.reload();
-    }, 1500);
+    }, UI_TIMING.PAGE_RELOAD_DELAY);
 }
 
 // חשיפה מיידית ל-window (לפני initProfile)
