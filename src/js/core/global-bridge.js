@@ -16,6 +16,7 @@ import { openGoalModal, closeGoalModal, openTipsModal, closeTipsModal } from '..
 import { attemptOpenLockedLesson } from '../modules/lessons.js';
 import { advanceMonth, resetSimulation, goToInvestmentLesson, dismissTrigger } from '../modules/simulation.js';
 import { resetGameData } from '../modules/profile.js';
+import { XP_CONFIG } from '../config/index.js';
 
 // חשיפה גלובלית של פונקציות ניווט
 window.showSection = showSection;
@@ -65,13 +66,13 @@ window.updateXPBar = function() {
     const userLevel = document.getElementById('user-level');
     
     if (xpFill) {
-        const currentXP = state.xp % 100;
+        const currentXP = state.xp % XP_CONFIG.XP_PER_LEVEL;
         const percentage = currentXP;
         xpFill.style.width = percentage + '%';
     }
     
     if (xpText) {
-        xpText.textContent = `${state.xp % 100}/100 XP`;
+        xpText.textContent = `${state.xp % XP_CONFIG.XP_PER_LEVEL}/${XP_CONFIG.XP_PER_LEVEL} XP`;
     }
     
     if (userLevel) {

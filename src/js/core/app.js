@@ -17,6 +17,9 @@ import { initUIEffects } from '../utils/ui-effects.js';
 import { showNotification } from '../utils/notifications.js';
 import { initResponsive } from '../utils/responsive.js';
 
+// ===== Config Imports =====
+import { XP_CONFIG, UI_TIMING } from '../config/index.js';
+
 // ===== Modules Imports =====
 import { initProfile } from '../modules/profile.js';
 import { initAcademy } from '../modules/academy.js';
@@ -94,8 +97,8 @@ function initializeApp() {
         // הודעת ברוך הבא (רק בפעם הראשונה)
         if (!localStorage.getItem('visited-before')) {
             setTimeout(() => {
-                showNotification('🎉 ברוך הבא ל-CashWise! התחל את המסע הפיננסי שלך.', 'success', 5000);
-            }, 1000);
+                showNotification('🎉 ברוך הבא ל-CashWise! התחל את המסע הפיננסי שלך.', 'success', UI_TIMING.WELCOME_MESSAGE_DURATION);
+            }, UI_TIMING.WELCOME_MESSAGE_DELAY);
             localStorage.setItem('visited-before', 'true');
             localStorage.setItem('first-visit', new Date().toISOString());
         }
@@ -116,13 +119,13 @@ function updateXPBar() {
     const levelBadge = document.getElementById('level-badge');
     
     if (xpFill) {
-        const currentXP = state.xp % 100;
+        const currentXP = state.xp % XP_CONFIG.XP_PER_LEVEL;
         const percentage = currentXP;
         xpFill.style.width = percentage + '%';
     }
     
     if (xpText) {
-        xpText.textContent = `${state.xp % 100}/100 XP`;
+        xpText.textContent = `${state.xp % XP_CONFIG.XP_PER_LEVEL}/${XP_CONFIG.XP_PER_LEVEL} XP`;
     }
     
     if (levelBadge) {
