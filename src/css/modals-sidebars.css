@@ -26,7 +26,7 @@
 
 .profile-modal {
     background: white;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     width: 90%;
     max-width: 800px;
     max-height: 85vh;
@@ -41,7 +41,7 @@
     background: var(--gradient-primary-h);
     color: white;
     padding: 24px;
-    border-radius: 20px 20px 0 0;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -95,7 +95,7 @@
 
 .profile-stat-card {
     background: var(--gradient-bg-soft);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 16px;
     text-align: center;
 }
@@ -122,7 +122,7 @@
 
 .profile-section {
     background: #f8f9fa;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 20px;
 }
 
@@ -138,7 +138,7 @@
 /* גרף */
 .profile-chart-container {
     background: white;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 16px;
     margin-top: 16px;
 }
@@ -154,7 +154,7 @@
 
 .profile-modal::-webkit-scrollbar-thumb {
     background: var(--primary-500);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
 }
 
 /* ===================================
@@ -286,7 +286,7 @@
 .mentor-bubble {
     max-width: 70%;
     padding: 12px 16px;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     line-height: 1.5;
     font-size: 14px;
 }
@@ -294,13 +294,13 @@
 .mentor-message.ai .mentor-bubble {
     background: white;
     border: 1px solid #e0e0e0;
-    border-radius: 16px 16px 16px 4px;
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-sm);
 }
 
 .mentor-message.user .mentor-bubble {
     background: var(--gradient-primary-h);
     color: white;
-    border-radius: 16px 16px 4px 16px;
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-lg);
 }
 
 .mentor-timestamp {
@@ -321,7 +321,7 @@
 .mentor-input {
     flex: 1;
     border: 1px solid #e0e0e0;
-    border-radius: 24px;
+    border-radius: var(--radius-xl);
     padding: 12px 20px;
     font-size: 14px;
     font-family: inherit;
@@ -476,7 +476,7 @@
 
 .sim-modal {
     background: white;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     width: 90%;
     max-width: 500px;
     max-height: 85vh;
@@ -491,7 +491,7 @@
     background: var(--gradient-success);
     color: white;
     padding: 20px 24px;
-    border-radius: 20px 20px 0 0;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;

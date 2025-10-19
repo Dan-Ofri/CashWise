@@ -117,7 +117,7 @@
 .modal-content {
     position: relative;
     background: white;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
     max-width: 600px;
     width: 90%;
@@ -139,7 +139,7 @@
     padding: 20px 24px;
     background: var(--gradient-primary-h); /* 🎨 */
     color: white;
-    border-radius: 16px 16px 0 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .modal-header h2 {
@@ -188,7 +188,7 @@
     align-items: center;
     gap: 16px;
     padding: 18px;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     margin-bottom: 14px;
     background: #f8f9fa;
     border: 2px solid #e9ecef;
@@ -284,7 +284,7 @@
     background: var(--gradient-primary-h); /* 🎨 */
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
@@ -353,14 +353,14 @@
     margin-top: 16px;
     padding: 12px;
     background: #f8f9fa;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
 }
 
 .empty-lessons .lessons-preview {
     margin-top: 24px;
     padding: 20px;
     background: var(--gradient-bg-soft);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     text-align: right;
 }
 
@@ -384,7 +384,7 @@
     padding: 12px;
     margin-bottom: 8px;
     background: white;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 

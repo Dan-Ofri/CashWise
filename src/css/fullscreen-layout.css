@@ -60,7 +60,7 @@ section.active {
     width: 100% !important; /* רוחב מלא */
     min-height: 400px !important; /* ✅ מינימום גובה ברור */
     background: #f5f7fa !important; /* רקע בהיר לכרטיסייה */
-    border-radius: 12px !important; /* פינות מעוגלות */
+    border-radius: var(--radius-md) !important; /* פינות מעוגלות */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; /* צל חזק יותר */
     transition: none !important; /* ביטול אנימציות */
     overflow-y: auto !important; /* גלילה פנימית אם צריך */
@@ -184,7 +184,7 @@ body.modal-open {
 
 ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
 }
 
 ::-webkit-scrollbar-thumb:hover {

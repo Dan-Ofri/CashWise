@@ -164,7 +164,7 @@
     .modal-content {
         width: 95% !important;
         max-width: 500px !important;
-        border-radius: 12px !important;
+        border-radius: var(--radius-md) !important;
     }
     
     .sidebar-content {

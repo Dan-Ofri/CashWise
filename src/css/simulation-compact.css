@@ -22,7 +22,7 @@
     position: relative !important;
     margin: 0 !important;
     background: #f5f7fa !important;
-    border-radius: 12px !important; /* פינות מעוגלות */
+    border-radius: var(--radius-md) !important; /* פינות מעוגלות */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; /* הצללה */
 }
 
@@ -74,7 +74,7 @@
 /* כרטיס מצב - קומפקטי מאוד */
 .sim-status-card {
     background: var(--gradient-primary-h);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     padding: 12px; /* padding גדול יותר */
     color: white;
     box-shadow: 0 3px 10px rgba(30, 41, 59, 0.3); /* 🎨 */
@@ -115,7 +115,7 @@
 
 .sim-financial-item {
     background: rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     padding: 10px;
     backdrop-filter: blur(10px);
 }
@@ -134,7 +134,7 @@
 /* כרטיס פעולות - קומפקטי מאוד */
 .sim-actions-card {
     background: white;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow: visible;
@@ -166,7 +166,7 @@
     background: var(--gradient-primary-h);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     padding: 14px 16px;
     font-size: 15px;
     font-weight: 700;
@@ -203,7 +203,7 @@
 /* כרטיס אירועים - קומפקטי */
 .sim-events-card {
     background: var(--gradient-bg-info);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 16px;
     border-right: 4px solid #2196f3;
     overflow: visible;
@@ -224,7 +224,7 @@
 
 .sim-event-item {
     background: white;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     padding: 10px 12px;
     margin-bottom: 0;
     font-size: 13px;
@@ -239,7 +239,7 @@
 /* סרגל התקדמות - קומפקטי */
 .sim-progress-bar {
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     height: 6px;
     overflow: hidden;
     margin-top: 8px;
@@ -248,7 +248,7 @@
 .sim-progress-fill {
     height: 100%;
     background: var(--gradient-success-h);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     transition: width 0.5s ease;
 }
 
@@ -263,14 +263,14 @@
 .sim-events-card::-webkit-scrollbar-track,
 .sim-column-right::-webkit-scrollbar-track {
     background: rgba(100, 116, 139, 0.1);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
 }
 
 .sim-actions-list::-webkit-scrollbar-thumb,
 .sim-events-card::-webkit-scrollbar-thumb,
 .sim-column-right::-webkit-scrollbar-thumb {
     background: var(--primary-500);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
 }
 
 .sim-column-right::-webkit-scrollbar-thumb:hover {
@@ -384,14 +384,14 @@
 .sim-finance-row.highlight {
     background: rgba(255, 255, 255, 0.1);
     padding: 6px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     margin: 2px 0;
 }
 
 .sim-finance-row.major {
     background: rgba(255, 255, 255, 0.15);
     padding: 6px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     margin: 2px 0;
     font-weight: 600;
 }

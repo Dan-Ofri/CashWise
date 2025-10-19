@@ -56,14 +56,14 @@
     width: 120px;
     height: 8px;
     background: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     overflow: hidden;
 }
 
 .xp-bar-small .xp-fill {
     height: 100%;
     background: var(--gradient-success-h);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     transition: width 0.5s ease;
 }
 
