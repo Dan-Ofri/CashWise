@@ -531,9 +531,9 @@ export const Z_INDEX = {
 // ===== אחרים =====
 
 /**
- * ערכים שימושיים נוספים
+ * קבועים הקשורים לשיעורים והישגים
  */
-export const MISC = {
+export const LESSON_CONSTANTS = {
     /** מספר הישגים כולל */
     TOTAL_ACHIEVEMENTS: 9,
     
@@ -542,6 +542,15 @@ export const MISC = {
     
     /** מספר תסריטי סימולציה */
     TOTAL_SCENARIOS: 1,
+    
+    /** מינימום שיעורים להישג "כולם יחד" */
+    MIN_LESSONS_FOR_ALL_ACHIEVEMENT: 4
+};
+
+/**
+ * ערכים שימושיים נוספים
+ */
+export const MISC = {
     
     /** עיכוב אוטומטי לאנימציית קלט */
     INPUT_ANIMATION_DELAY: 500,
@@ -619,6 +628,7 @@ export default {
     VALIDATION,
     BREAKPOINTS,
     Z_INDEX,
+    LESSON_CONSTANTS,
     MISC,
     EXAMPLE_VALUES
 };
