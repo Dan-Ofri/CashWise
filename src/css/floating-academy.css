@@ -15,7 +15,7 @@
     color: white;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.4);
+    box-shadow: var(--shadow-dark-md);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,7 +42,7 @@
 
 .floating-academy-button:hover {
     transform: scale(1.15);
-    box-shadow: 0 6px 24px rgba(30, 41, 59, 0.6);
+    box-shadow: var(--shadow-dark-lg);
 }
 
 .floating-academy-button:active {
@@ -58,7 +58,7 @@
 /* כפתור עם שיעורים פתוחים - הדגשה חזותית */
 .floating-academy-button.has-unlocked {
     background: var(--gradient-gold); /* 🎨 */
-    box-shadow: 0 4px 20px rgba(251, 191, 36, 0.5);
+    box-shadow: var(--shadow-gold-bright);
 }
 
 .floating-academy-button.has-unlocked:hover {
@@ -69,18 +69,18 @@
 .floating-academy-button:not(.has-unlocked) {
     opacity: 0.9;
     background: var(--gradient-primary-h); /* 🎨 */
-    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.4);
+    box-shadow: var(--shadow-dark-md);
 }
 
 .floating-academy-button:not(.has-unlocked):hover {
     opacity: 1;
-    box-shadow: 0 6px 24px rgba(30, 41, 59, 0.6);
+    box-shadow: var(--shadow-dark-lg);
 }
 
 /* אנימציה לכפתור */
 @keyframes pulseGlow {
     0%, 100% {
-        box-shadow: 0 4px 16px rgba(30, 41, 59, 0.4); /* 🎨 צל מותאם */
+        box-shadow: var(--shadow-dark-md); /* 🎨 צל מותאם */
     }
     50% {
         box-shadow: 0 4px 24px rgba(30, 41, 59, 0.7); /* 🎨 צל מותאם */
@@ -118,7 +118,7 @@
     position: relative;
     background: white;
     border-radius: var(--radius-lg);
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-xl);
     max-width: 600px;
     width: 90%;
     max-height: 80vh;
@@ -197,7 +197,7 @@
 
 .lesson-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
 }
 
 /* שיעור הושלם */
@@ -290,7 +290,7 @@
     font-weight: 600;
     transition: all 0.3s ease;
     white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.3); /* 🎨 */
+    box-shadow: var(--shadow-dark-sm); /* 🎨 */
 }
 
 .btn-review i,
@@ -303,7 +303,7 @@
     background: var(--gradient-primary-h); /* 🎨 */
     filter: brightness(0.85);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.4); /* 🎨 */
+    box-shadow: var(--shadow-dark-md); /* 🎨 */
 }
 
 .btn-review:active,
@@ -385,7 +385,7 @@
     margin-bottom: 8px;
     background: white;
     border-radius: var(--radius-sm);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-xs);
 }
 
 .empty-lessons .lessons-preview li .icon {

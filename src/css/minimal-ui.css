@@ -11,7 +11,7 @@
     right: 0;
     height: 10vh; /* 10% מגובה המסך */
     background: var(--gradient-primary-h); /* 🎨 */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -98,7 +98,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.4); /* 🎨 זהה לאקדמיה */
+    box-shadow: var(--shadow-dark-md); /* 🎨 זהה לאקדמיה */
     transition: all 0.3s ease;
     position: relative;
     /* pulseGlow יתווסף דרך nth-child */
@@ -107,7 +107,7 @@ body {
 /* אנימציית pulseGlow - זהה לכפתור האקדמיה */
 @keyframes pulseGlow {
     0%, 100% {
-        box-shadow: 0 4px 16px rgba(30, 41, 59, 0.4); /* 🎨 צל מותאם */
+        box-shadow: var(--shadow-dark-md); /* 🎨 צל מותאם */
     }
     50% {
         box-shadow: 0 6px 24px rgba(30, 41, 59, 0.7); /* 🎨 צל מותאם */
@@ -116,7 +116,7 @@ body {
 
 .fab:hover {
     transform: scale(1.15);
-    box-shadow: 0 6px 24px rgba(30, 41, 59, 0.6); /* 🎨 צל מותאם */
+    box-shadow: var(--shadow-dark-lg); /* 🎨 צל מותאם */
 }
 
 .fab:active {

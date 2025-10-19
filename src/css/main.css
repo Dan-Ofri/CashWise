@@ -130,13 +130,30 @@
     --radius-xl: 24px;
     --radius-full: 9999px;
     
-    /* ✨ Shadows */
-    --shadow-sm: 0 2px 4px rgba(10, 37, 64, 0.06);
-    --shadow-md: 0 4px 16px rgba(10, 37, 64, 0.1);
-    --shadow-lg: 0 12px 40px rgba(10, 37, 64, 0.15);
-    --shadow-xl: 0 20px 60px rgba(10, 37, 64, 0.2);
+    /* ✨ Shadows - Complete System */
+    /* Usage: 
+       --shadow-xs: Ultra light (tooltips, subtle lifts)
+       --shadow-sm: Light (cards, buttons)
+       --shadow-md: Medium (modals, dropdowns)
+       --shadow-lg: Large (hero cards, floating elements)
+       --shadow-xl: Extra large (modals, dialogs)
+       --shadow-2xl: Huge (premium modals)
+       --shadow-gold: Special accent shadows
+    */
+    --shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 6px 24px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 10px 40px rgba(0, 0, 0, 0.25);
+    --shadow-2xl: 0 20px 60px rgba(0, 0, 0, 0.3);
     --shadow-gold: 0 8px 32px rgba(212, 175, 55, 0.3);
     --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+    
+    /* Dark Shadow Variants (for specific use cases) */
+    --shadow-dark-sm: 0 2px 8px rgba(30, 41, 59, 0.3);
+    --shadow-dark-md: 0 4px 16px rgba(30, 41, 59, 0.4);
+    --shadow-dark-lg: 0 6px 24px rgba(30, 41, 59, 0.6);
+    --shadow-gold-bright: 0 4px 20px rgba(251, 191, 36, 0.5);
     
     /* ⏱️ Transitions */
     --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
