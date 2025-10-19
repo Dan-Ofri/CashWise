@@ -7,19 +7,28 @@
 
 import { saveToStorage, loadFromStorage, STORAGE_KEYS } from '../utils/storage.js';
 import { showSuccess } from '../utils/notifications.js';
+import { 
+    ACHIEVEMENT_XP, 
+    LEVEL_MILESTONES, 
+    XP_CONFIG, 
+    XP_REWARDS,
+    UI_TIMING,
+    MATH_CONSTANTS,
+    SIMULATION_CONFIG
+} from '../config/index.js';
 
 // ===== הגדרות קבועות =====
 
 export const ACHIEVEMENTS = [
-    { id: 'first-budget', icon: '📝', title: 'תקציבן ראשון', desc: 'השלמת שיעור התקציב', xp: 50 },
-    { id: 'compound-master', icon: '📈', title: 'מומחה ריבית', desc: 'חישוב ריבית דריבית', xp: 50 },
-    { id: 'emergency-ready', icon: '🆘', title: 'מוכן לחירום', desc: 'תכנון קרן חירום', xp: 50 },
-    { id: 'investor', icon: '💎', title: 'משקיע חכם', desc: 'חישוב השקעה עם מיסוי ואינפלציה', xp: 50 },
-    { id: 'simulation-done', icon: '🎮', title: 'סימולטור הצלחה', desc: 'השלמת סימולציה', xp: 100 },
-    { id: 'ask-mentor', icon: '💬', title: 'שואל חכם', desc: 'שאלת המנטור', xp: 30 },
-    { id: 'level-5', icon: '⭐', title: 'רמה 5', desc: 'הגעה לרמה 5', xp: 0 },
-    { id: 'all-lessons', icon: '🎓', title: 'בוגר אקדמיה', desc: 'סיום כל השיעורים', xp: 200 },
-    { id: 'money-master', icon: '💰', title: 'מאסטר כסף', desc: 'הגעה לרמה 10', xp: 0 }
+    { id: 'first-budget', icon: '📝', title: 'תקציבן ראשון', desc: 'השלמת שיעור התקציב', xp: ACHIEVEMENT_XP.FIRST_BUDGET },
+    { id: 'compound-master', icon: '📈', title: 'מומחה ריבית', desc: 'חישוב ריבית דריבית', xp: ACHIEVEMENT_XP.COMPOUND_MASTER },
+    { id: 'emergency-ready', icon: '🆘', title: 'מוכן לחירום', desc: 'תכנון קרן חירום', xp: ACHIEVEMENT_XP.EMERGENCY_READY },
+    { id: 'investor', icon: '💎', title: 'משקיע חכם', desc: 'חישוב השקעה עם מיסוי ואינפלציה', xp: ACHIEVEMENT_XP.INVESTOR },
+    { id: 'simulation-done', icon: '🎮', title: 'סימולטור הצלחה', desc: 'השלמת סימולציה', xp: ACHIEVEMENT_XP.SIMULATION_DONE },
+    { id: 'ask-mentor', icon: '💬', title: 'שואל חכם', desc: 'שאלת המנטור', xp: ACHIEVEMENT_XP.ASK_MENTOR },
+    { id: 'level-5', icon: '⭐', title: 'רמה 5', desc: 'הגעה לרמה 5', xp: ACHIEVEMENT_XP.LEVEL_5 },
+    { id: 'all-lessons', icon: '🎓', title: 'בוגר אקדמיה', desc: 'סיום כל השיעורים', xp: ACHIEVEMENT_XP.ALL_LESSONS },
+    { id: 'money-master', icon: '💰', title: 'מאסטר כסף', desc: 'הגעה לרמה 10', xp: ACHIEVEMENT_XP.MONEY_MASTER }
 ];
 
 // ===== מבנה המצב המרכזי =====
@@ -31,8 +40,8 @@ let gameState = null;
  */
 function initGameState() {
     return {
-        xp: 0,
-        level: 1,
+        xp: MATH_CONSTANTS.ZERO,
+        level: MATH_CONSTANTS.ONE,
         achievements: [],
         lessonsCompleted: [],
         actionsCompleted: [],
@@ -73,7 +82,7 @@ export function saveGameState(state = null) {
  */
 export function getUserXP() {
     const state = loadGameState();
-    return state.xp || 0;
+    return state.xp || MATH_CONSTANTS.ZERO;
 }
 
 /**
@@ -81,7 +90,7 @@ export function getUserXP() {
  */
 export function getUserLevel() {
     const state = loadGameState();
-    return state.level || 1;
+    return state.level || MATH_CONSTANTS.ONE;
 }
 
 /**
@@ -98,15 +107,15 @@ export function addXP(amount, reason = '') {
     state.xp += amount;
     
     // חישוב רמה חדשה
-    const newLevel = Math.floor(state.xp / 100) + 1;
+    const newLevel = Math.floor(state.xp / XP_CONFIG.XP_PER_LEVEL) + MATH_CONSTANTS.ONE;
     const leveledUp = newLevel > oldLevel;
     
     if (leveledUp) {
         state.level = newLevel;
         
         // בדיקת הישגי רמות
-        if (newLevel === 5) checkAchievement('level-5');
-        if (newLevel === 10) checkAchievement('money-master');
+        if (newLevel === LEVEL_MILESTONES.LEVEL_5) checkAchievement('level-5');
+        if (newLevel === LEVEL_MILESTONES.LEVEL_10) checkAchievement('money-master');
         
         showSuccess(`🎉 עלית לרמה ${newLevel}!`);
     }
@@ -156,8 +165,9 @@ export function checkAchievement(achievementId) {
     
     // בדיקת הישג "כל השיעורים"
     const lessonCount = state.lessonsCompleted.filter(l => !l.startsWith('scenario-')).length;
-    if (lessonCount >= 4 && !state.achievements.includes('all-lessons')) {
-        setTimeout(() => checkAchievement('all-lessons'), 1000);
+    const totalLessons = 4; // TODO: להעביר ל-MISC.TOTAL_LESSONS
+    if (lessonCount >= totalLessons && !state.achievements.includes('all-lessons')) {
+        setTimeout(() => checkAchievement('all-lessons'), UI_TIMING.ACHIEVEMENT_CHECK_DELAY);
     }
     
     return true;
@@ -177,7 +187,7 @@ export function markLessonComplete(lessonId) {
     saveGameState(state);
     
     // הוספת XP בסיסי
-    addXP(30, `השלמת שיעור: ${lessonId}`);
+    addXP(XP_REWARDS.COMPLETE_LESSON, `השלמת שיעור: ${lessonId}`);
     
     return true;
 }
@@ -235,7 +245,7 @@ export function mentorActionDone(actionId) {
 /**
  * סימון פעולת מנטור כבוצעה
  */
-export function markMentorActionDone(actionId, xp = 20) {
+export function markMentorActionDone(actionId, xp = XP_REWARDS.COMPLETE_LESSON) {
     const state = loadGameState();
     
     if (state.actionsCompleted.includes(actionId)) {
@@ -278,9 +288,9 @@ export function updateUserProfile(updates) {
 /**
  * קבלת הכנסה מהפרופיל
  */
-export function getUserIncome(defaultIncome = 6000) {
+export function getUserIncome(defaultIncome = SIMULATION_CONFIG.DEFAULT_SALARY) {
     const profile = getUserProfile();
-    return profile.income && profile.income > 0 ? profile.income : defaultIncome;
+    return profile.income && profile.income > MATH_CONSTANTS.ZERO ? profile.income : defaultIncome;
 }
 
 // ===== סימולציה =====
@@ -360,8 +370,8 @@ export function onStateChange(event, callback) {
     return () => {
         const listeners = stateListeners.get(event);
         const index = listeners.indexOf(callback);
-        if (index > -1) {
-            listeners.splice(index, 1);
+        if (index > MATH_CONSTANTS.ZERO - MATH_CONSTANTS.ONE) { // -1
+            listeners.splice(index, MATH_CONSTANTS.ONE);
         }
     };
 }

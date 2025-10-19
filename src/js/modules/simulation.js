@@ -27,6 +27,13 @@ import { showSection } from '../core/router.js';
 import { unlockLesson, completeLesson } from './lessons.js';
 import { renderFinancialUI } from './financial-display.js';
 import { openLesson } from './lesson-player.js';
+import { 
+    SIMULATION_CONFIG, 
+    XP_REWARDS, 
+    FINANCIAL_RULES, 
+    MATH_CONSTANTS,
+    UI_TIMING
+} from '../config/index.js';
 
 /**
  * דמות סימולציה גלובלית - MVP
@@ -42,14 +49,14 @@ export function startSimulation() {
     // דמות קבועה פשוטה
     simCharacter = {
         name: 'דני',
-        age: 25,
-        month: 0,
-        monthsSinceStart: 0, // ספירת חודשים מתחילת הסימולציה
-        salary: 6000,
-        expenses: 4500,
-        savings: 0,
-        bankInterest: 0.02, // 2% ריבית שנתית בבנק
-        goalAmount: 50000, // יעד: 50,000 ₪
+        age: SIMULATION_CONFIG.STARTING_AGE,
+        month: MATH_CONSTANTS.ZERO,
+        monthsSinceStart: MATH_CONSTANTS.ZERO, // ספירת חודשים מתחילת הסימולציה
+        salary: SIMULATION_CONFIG.DEFAULT_SALARY,
+        expenses: SIMULATION_CONFIG.DEFAULT_EXPENSES,
+        savings: MATH_CONSTANTS.ZERO,
+        bankInterest: SIMULATION_CONFIG.BANK_INTEREST_RATE, // 2% ריבית שנתית בבנק
+        goalAmount: SIMULATION_CONFIG.DEFAULT_GOAL_AMOUNT, // יעד: 50,000 ₪
         status: 'ongoing',
         history: []
     };
@@ -58,7 +65,7 @@ export function startSimulation() {
     renderSimulationUI();
     
     showSuccess('✅ הסימולציה החלה! התחל לחסוך כסף...');
-    addXP(10, 'התחלת סימולציה');
+    addXP(XP_REWARDS.START_SIMULATION, 'התחלת סימולציה');
 }
 
 /**
@@ -78,8 +85,8 @@ export function advanceMonth() {
     simCharacter.month++;
     simCharacter.monthsSinceStart++;
     
-    if (simCharacter.month >= 12) {
-        simCharacter.month = 0;
+    if (simCharacter.month >= FINANCIAL_RULES.MONTHS_PER_YEAR) {
+        simCharacter.month = MATH_CONSTANTS.ZERO;
         simCharacter.age++;
         
         // ריבית שנתית מהבנק
@@ -96,7 +103,8 @@ export function advanceMonth() {
     });
     
     // בדיקת טריגר אחרי 6 חודשים
-    if (simCharacter.monthsSinceStart === 6 && !localStorage.getItem('trigger-shown')) {
+    const triggerMonth = 6;
+    if (simCharacter.monthsSinceStart === triggerMonth && !localStorage.getItem('trigger-shown')) {
         showInvestmentTrigger();
         localStorage.setItem('trigger-shown', 'true');
     }
@@ -105,7 +113,7 @@ export function advanceMonth() {
     if (simCharacter.savings >= simCharacter.goalAmount && simCharacter.status === 'ongoing') {
         simCharacter.status = 'success';
         showSuccess('🎉 מזל טוב! הגעת ליעד של ' + formatCurrency(simCharacter.goalAmount) + '!');
-        addXP(100, 'השגת יעד הסימולציה!');
+        addXP(XP_REWARDS.GOAL_ACHIEVED, 'השגת יעד הסימולציה!');
         
         // שמירת ההצלחה - פתיחת שיעור investments
         localStorage.setItem('simulation-completed', 'true');
@@ -114,13 +122,13 @@ export function advanceMonth() {
         // הצגת מודאל ניצחון
         setTimeout(() => {
             showVictoryModal();
-        }, 500);
+        }, UI_TIMING.SHORT_DELAY);
     }
     
     saveSimulation(simCharacter);
     renderSimulationUI();
     
-    addXP(5, 'התקדמת חודש');
+    addXP(XP_REWARDS.MONTH_PROGRESS, 'התקדמת חודש');
 }
 
 /**
@@ -173,7 +181,7 @@ export function goToInvestmentLesson() {
     // פתיחת lesson-player!
     openLesson('compound-interest');
     
-    addXP(15, 'עבר ללמידה מתוך הסימולטור');
+    addXP(XP_REWARDS.LEARN_FROM_SIM, 'עבר ללמידה מתוך הסימולטור');
 }
 
 /**
@@ -292,7 +300,7 @@ export function updateSimulationMode(mode) {
     localStorage.setItem('simulation-mode', mode);
     
     const modeText = mode === 'fast' ? 'מהיר <i class="fas fa-bolt"></i>' : 'מציאותי <i class="fas fa-bullseye"></i>';
-    showNotification(`מצב סימולציה שונה ל: ${modeText}`, 'info', 3000);
+    showNotification(`מצב סימולציה שונה ל: ${modeText}`, 'info', UI_TIMING.NOTIFICATION_INFO);
     
     if (simCharacter && simCharacter.age) {
         renderSimulationUI();
@@ -330,7 +338,7 @@ function showVictoryModal() {
     setTimeout(() => {
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
-    }, 50);
+    }, UI_TIMING.SIM_SHORT_DELAY);
 }
 
 /**
