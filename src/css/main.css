@@ -150,25 +150,31 @@
     --font-mono: 'Courier New', monospace;
     
     /* Font Sizes - Usage Guide */
-    /* --text-xs: 12px   - Meta data, small labels */
-    /* --text-sm: 14px   - Secondary text, captions */
-    /* --text-base: 16px - Body text (default) */
-    /* --text-lg: 18px   - Emphasized text, large body */
-    /* --text-xl: 20px   - Small headings, h4 */
-    /* --text-2xl: 24px  - Medium headings, h3 */
-    /* --text-3xl: 30px  - Large headings, h2 */
-    /* --text-4xl: 36px  - Main headings, h1 */
-    /* --text-5xl: 48px  - Display headings, hero */
+    /* --font-2xs: 10px  - Tiny labels */
+    /* --font-xs: 11px   - Very small text */
+    /* --font-sm: 13px   - Small text */
+    /* --font-base: 16px - Body text (default) */
+    /* --font-md: 18px   - Medium text */
+    /* --font-lg: 20px   - Large text */
+    /* --font-xl: 24px   - Extra large, h4 */
+    /* --font-2xl: 28px  - h3 */
+    /* --font-3xl: 32px  - h2 */
+    /* --font-4xl: 48px  - h1 */
+    /* --font-5xl: 64px  - Hero text */
+    /* --font-6xl: 80px  - Giant display */
     
-    --text-xs: 0.75rem;      /* 12px */
-    --text-sm: 0.875rem;     /* 14px */
-    --text-base: 1rem;       /* 16px */
-    --text-lg: 1.125rem;     /* 18px */
-    --text-xl: 1.25rem;      /* 20px */
-    --text-2xl: 1.5rem;      /* 24px */
-    --text-3xl: 1.875rem;    /* 30px */
-    --text-4xl: 2.25rem;     /* 36px */
-    --text-5xl: 3rem;        /* 48px */
+    --font-2xs: 0.625rem;    /* 10px */
+    --font-xs: 0.6875rem;    /* 11px */
+    --font-sm: 0.8125rem;    /* 13px */
+    --font-base: 1rem;       /* 16px */
+    --font-md: 1.125rem;     /* 18px */
+    --font-lg: 1.25rem;      /* 20px */
+    --font-xl: 1.5rem;       /* 24px */
+    --font-2xl: 1.75rem;     /* 28px */
+    --font-3xl: 2rem;        /* 32px */
+    --font-4xl: 3rem;        /* 48px */
+    --font-5xl: 4rem;        /* 64px */
+    --font-6xl: 5rem;        /* 80px */
     
     /* Line Heights */
     --leading-none: 1;
