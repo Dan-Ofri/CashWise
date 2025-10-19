@@ -28,14 +28,14 @@
 
 /* כותרת קומפקטית מאוד */
 #simulation h2 {
-    font-size: 18px; /* גדול יותר */
+    font-size: var(--font-md); /* גדול יותר */
     margin: 0 0 8px 0;
     padding: 0;
     font-weight: 700;
 }
 
 #simulation > .box > p {
-    font-size: 12px;
+    font-size: var(--font-2xs);
     margin: 0 0 8px 0;
     color: var(--gray-600);
 }
@@ -413,15 +413,15 @@
 }
 
 .sim-finance-value.positive {
-    color: #a8e6a1;
+    color: var(--success-pastel);
 }
 
 .sim-finance-value.negative {
-    color: #ffb3b3;
+    color: var(--danger-pastel);
 }
 
 .sim-finance-value.accent {
-    color: #ffd700;
+    color: var(--gold-bright);
 }
 
 .sim-finance-value.total {

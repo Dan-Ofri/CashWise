@@ -67,6 +67,44 @@
     --info-light: #7DD3FC;
     --info-dark: #0369A1;
     
+    /* Extended Semantic Colors - Complete Palette */
+    --success-medium: #4caf50;
+    --success-bright: #8bc34a;
+    --success-pastel: #a8e6a1;
+    
+    --warning-medium: #ff9800;
+    
+    --info-medium: #2196f3;
+    
+    --danger-pastel: #ffb3b3;
+    
+    /* Neutral Extended */
+    --slate-900: #0f172a;
+    --slate-800: #1e293b;
+    --slate-700: #334155;
+    --slate-600: #475569;
+    --slate-500: #64748b;
+    --slate-400: #94a3b8;
+    --slate-300: #cbd5e1;
+    --slate-200: #e2e8f0;
+    --slate-100: #f1f5f9;
+    --slate-50: #f8fafc;
+    
+    /* UI Specific Colors */
+    --text-dark: #2c3e50;
+    --text-muted: #7f8c8d;
+    --text-light: #95a5a6;
+    --text-success: #2e7d32;
+    
+    --border-light: #ddd;
+    --border-medium: #e9ecef;
+    
+    --gold-bright: #ffd700;
+    
+    /* Background Colors */
+    --bg-light-gray: #f8f9fa;
+    --bg-very-light: #f5f5f5;
+    
     /* 🌈 Gradients - Unified System */
     
     /* Main Gradients (Most Common) */

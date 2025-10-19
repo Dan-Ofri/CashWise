@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
+    font-size: var(--font-2xl);
     font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
     line-height: 1;
     transition: all 0.3s ease;
@@ -144,7 +144,7 @@
 
 .modal-header h2 {
     margin: 0;
-    font-size: 22px;
+    font-size: var(--font-xl);
     font-weight: 700;
     color: white; /* 🎨 וידוא טקסט לבן */
 }
@@ -164,7 +164,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: var(--font-lg);
     transition: all 0.3s ease;
 }
 
@@ -203,18 +203,18 @@
 /* שיעור הושלם */
 .lesson-item.completed {
     background: var(--gradient-bg-success);
-    border-color: #4caf50;
+    border-color: var(--success-medium);
 }
 
 .lesson-item.completed .lesson-icon {
-    font-size: 36px;
+    font-size: var(--font-4xl);
     animation: bounce 1s ease;
 }
 
 /* שיעור פתוח אבל לא הושלם */
 .lesson-item.unlocked {
     background: var(--gradient-bg-info);
-    border-color: #2196f3;
+    border-color: var(--info-medium);
 }
 
 .lesson-item.unlocked .lesson-icon {
@@ -223,8 +223,8 @@
 
 /* שיעור נעול */
 .lesson-item.locked {
-    background: #f5f5f5;
-    border-color: #ddd;
+    background: var(--bg-very-light);
+    border-color: var(--border-light);
     opacity: 1; /* ✅ שינוי: היה 0.7 - גרם לטשטוש */
     cursor: not-allowed;
 }
@@ -235,13 +235,13 @@
 }
 
 .lesson-item.locked .lesson-icon {
-    font-size: 32px;
+    font-size: var(--font-3xl);
     opacity: 0.6; /* ✅ שינוי: היה 0.5 - עכשיו יותר ברור */
 }
 
 .lesson-icon {
     flex-shrink: 0;
-    font-size: 32px;
+    font-size: var(--font-3xl);
     line-height: 1;
 }
 
@@ -254,27 +254,27 @@
     margin: 0 0 6px 0;
     font-size: 17px;
     font-weight: 700;
-    color: #2c3e50;
+    color: var(--text-dark);
 }
 
 .lesson-info p {
     margin: 0;
-    font-size: 13px;
-    color: #7f8c8d;
+    font-size: var(--font-sm);
+    color: var(--text-muted);
     line-height: 1.4;
 }
 
 .lesson-item.completed .lesson-info p {
-    color: #2e7d32;
+    color: var(--text-success);
     font-weight: 600;
 }
 
 .lesson-item.locked .lesson-info h3 {
-    color: #7f8c8d; /* ✅ שינוי: היה #95a5a6 - עכשיו יותר כהה וברור */
+    color: var(--text-muted); /* ✅ שינוי: היה #95a5a6 - עכשיו יותר כהה וברור */
 }
 
 .lesson-item.locked .lesson-info p {
-    color: #95a5a6; /* ✅ שינוי: היה #bdc3c7 - עכשיו יותר כהה וברור */
+    color: var(--text-light); /* ✅ שינוי: היה #bdc3c7 - עכשיו יותר כהה וברור */
 }
 
 /* כפתורים בשיעור */
@@ -286,7 +286,7 @@
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    font-size: 14px;
+    font-size: var(--font-sm);
     font-weight: 600;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -327,32 +327,32 @@
 }
 
 .empty-lessons .icon {
-    font-size: 64px;
+    font-size: var(--font-5xl);
     margin-bottom: 16px;
     opacity: 0.8;
 }
 
 .empty-lessons h3 {
     margin: 0 0 12px 0;
-    font-size: 22px;
-    color: #2c3e50;
+    font-size: var(--font-xl);
+    color: var(--text-dark);
     font-weight: 600;
 }
 
 .empty-lessons p {
     margin: 8px 0;
     font-size: 15px;
-    color: #7f8c8d;
+    color: var(--text-muted);
     line-height: 1.6;
 }
 
 .empty-lessons p.hint {
-    font-size: 14px;
-    color: #95a5a6;
+    font-size: var(--font-sm);
+    color: var(--text-light);
     font-style: italic;
     margin-top: 16px;
     padding: 12px;
-    background: #f8f9fa;
+    background: var(--bg-light-gray);
     border-radius: var(--radius-sm);
 }
 
@@ -366,8 +366,8 @@
 
 .empty-lessons .lessons-preview h4 {
     margin: 0 0 16px 0;
-    font-size: 16px;
-    color: #34495e;
+    font-size: var(--font-base);
+    color: var(--text-dark);
     font-weight: 600;
 }
 
@@ -389,7 +389,7 @@
 }
 
 .empty-lessons .lessons-preview li .icon {
-    font-size: 24px;
+    font-size: var(--font-xl);
     margin-left: 12px;
     opacity: 0.3;
 }
@@ -398,13 +398,13 @@
     flex: 1;
     text-align: right;
     font-size: 15px;
-    color: #2c3e50;
+    color: var(--text-dark);
     font-weight: 500;
 }
 
 .empty-lessons .lessons-preview li .status {
-    font-size: 13px;
-    color: #95a5a6;
+    font-size: var(--font-sm);
+    color: var(--text-light);
 }
 
 /* ===================================

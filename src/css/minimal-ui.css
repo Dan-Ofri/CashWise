@@ -21,7 +21,7 @@
 }
 
 .logo-minimal {
-    font-size: 24px;
+    font-size: var(--font-xl);
     font-weight: 700;
     color: white !important; /* חשוב! מונע שינוי צבע */
     text-decoration: none !important; /* חשוב! מונע קו תחתון */
@@ -48,7 +48,7 @@
     align-items: center;
     gap: 12px;
     color: white;
-    font-size: 13px;
+    font-size: var(--font-sm);
     font-weight: 600;
 }
 
@@ -94,7 +94,7 @@ body {
     color: white; /* 🎨 אייקון לבן */
     border: none;
     cursor: pointer;
-    font-size: 24px;
+    font-size: var(--font-xl);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,11 +154,11 @@ body {
     }
     
     .logo-minimal {
-        font-size: 20px;
+        font-size: var(--font-lg);
     }
     
     .xp-bar-minimal {
-        font-size: 11px;
+        font-size: var(--font-xs);
         gap: 8px;
     }
     
@@ -180,7 +180,7 @@ body {
     .fab {
         width: 48px;
         height: 48px;
-        font-size: 20px;
+        font-size: var(--font-lg);
     }
 }
 

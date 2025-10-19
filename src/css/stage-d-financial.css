@@ -86,25 +86,25 @@
 }
 
 .sim-finance-value.positive {
-    color: #4caf50;
+    color: var(--success-medium);
 }
 
 .sim-finance-value.negative {
-    color: #ff9800;
+    color: var(--warning-medium);
 }
 
 .sim-finance-value.accent {
-    color: #8bc34a;
+    color: var(--success-bright);
 }
 
 .sim-finance-value.total {
-    color: #ffd700;
+    color: var(--gold-bright);
     font-size: 19px;
 }
 
 .sim-finance-badge {
     background: rgba(139, 195, 74, 0.3);
-    color: #8bc34a;
+    color: var(--success-bright);
     padding: 4px 10px;
     border-radius: var(--radius-md);
     font-size: 12px;
