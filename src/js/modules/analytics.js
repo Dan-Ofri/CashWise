@@ -8,6 +8,12 @@
 import { getUserXP, getUserLevel, getUnlockedAchievements, getUserProfile } from '../core/state.js';
 import { createProgressChart, createXPChart, createBarChart, createDoughnutChart } from '../components/charts.js';
 import { formatCurrency } from '../utils/format.js';
+import { 
+    XP_CONFIG, 
+    LESSON_CONSTANTS,
+    MATH_CONSTANTS,
+    TIME_CALCULATIONS 
+} from '../config/index.js';
 
 /**
  * עדכון גרף התקדמות
@@ -15,8 +21,8 @@ import { formatCurrency } from '../utils/format.js';
 export function updateProgressChart() {
     const xp = getUserXP();
     const level = getUserLevel();
-    const nextLevelXP = level * 100;
-    const progress = (xp / nextLevelXP) * 100;
+    const nextLevelXP = level * XP_CONFIG.XP_PER_LEVEL;
+    const progress = (xp / nextLevelXP) * MATH_CONSTANTS.PERCENT_TO_DECIMAL;
     
     const canvas = document.getElementById('progress-chart');
     if (!canvas) return;
@@ -30,7 +36,7 @@ export function updateProgressChart() {
 export function updateXPChart() {
     const xp = getUserXP();
     const level = getUserLevel();
-    const nextLevelXP = level * 100;
+    const nextLevelXP = level * XP_CONFIG.XP_PER_LEVEL;
     
     const canvas = document.getElementById('xp-chart');
     if (!canvas) return;
@@ -43,7 +49,7 @@ export function updateXPChart() {
  */
 export function updateAchievementsChart() {
     const achievements = getUnlockedAchievements();
-    const total = 9; // מספר ההישגים הכולל (מ-state.js)
+    const total = LESSON_CONSTANTS.TOTAL_ACHIEVEMENTS;
     const unlocked = achievements.length;
     const locked = total - unlocked;
     
@@ -118,11 +124,11 @@ export function updateTextStats() {
     
     // הישגים
     const achievementsEl = document.getElementById('stat-achievements');
-    if (achievementsEl) achievementsEl.textContent = `${achievements.length}/9`;
+    if (achievementsEl) achievementsEl.textContent = `${achievements.length}/${LESSON_CONSTANTS.TOTAL_ACHIEVEMENTS}`;
     
     // הכנסה חודשית (אם אין פרופיל, הצג 0)
     const incomeEl = document.getElementById('stat-income');
-    if (incomeEl) incomeEl.textContent = formatCurrency(profile?.income || 0);
+    if (incomeEl) incomeEl.textContent = formatCurrency(profile?.income || MATH_CONSTANTS.ZERO);
     
     // יעד חיסכון (אם אין פרופיל, הצג 0%)
     const savingGoalEl = document.getElementById('stat-saving-goal');
@@ -130,8 +136,8 @@ export function updateTextStats() {
         if (!profile || !profile.income) {
             savingGoalEl.textContent = '0%';
         } else {
-            const savingRate = ((profile.savingsGoal || 0) / profile.income) * 100;
-            savingGoalEl.textContent = `${savingRate.toFixed(1)}%`;
+            const savingRate = ((profile.savingsGoal || MATH_CONSTANTS.ZERO) / profile.income) * MATH_CONSTANTS.PERCENT_TO_DECIMAL;
+            savingGoalEl.textContent = `${savingRate.toFixed(MATH_CONSTANTS.ONE)}%`;
         }
     }
     
@@ -139,7 +145,7 @@ export function updateTextStats() {
     const activeDaysEl = document.getElementById('stat-active-days');
     if (activeDaysEl) {
         const firstVisit = localStorage.getItem('first-visit') || new Date().toISOString();
-        const days = Math.floor((Date.now() - new Date(firstVisit).getTime()) / (1000 * 60 * 60 * 24)) + 1;
+        const days = Math.floor((Date.now() - new Date(firstVisit).getTime()) / TIME_CALCULATIONS.MILLISECONDS_PER_DAY) + MATH_CONSTANTS.ONE;
         activeDaysEl.textContent = days;
     }
 }

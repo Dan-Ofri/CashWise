@@ -6,6 +6,11 @@
  */
 
 import { formatCurrency, formatPercent } from '../utils/format.js';
+import { 
+    XP_CONFIG, 
+    CHART_CONFIG,
+    MATH_CONSTANTS 
+} from '../config/index.js';
 
 // אחסון instances של תרשימים
 const charts = {};
@@ -249,13 +254,13 @@ export function createProgressChart(canvasId, lessonsCompleted, totalLessons, sc
 /**
  * תרשים XP (עמודות)
  */
-export function createXPChart(canvasId, currentLevel, currentXP, maxLevels = 10) {
+export function createXPChart(canvasId, currentLevel, currentXP, maxLevels = CHART_CONFIG.DEFAULT_MAX_LEVELS) {
     const levels = [];
     const xpPerLevel = [];
     
-    for (let i = 1; i <= Math.max(maxLevels, currentLevel + 2); i++) {
+    for (let i = MATH_CONSTANTS.ONE; i <= Math.max(maxLevels, currentLevel + MATH_CONSTANTS.TWO); i++) {
         levels.push(`רמה ${i}`);
-        xpPerLevel.push(i < currentLevel ? 100 : (i === currentLevel ? currentXP % 100 : 0));
+        xpPerLevel.push(i < currentLevel ? XP_CONFIG.XP_PER_LEVEL : (i === currentLevel ? currentXP % XP_CONFIG.XP_PER_LEVEL : MATH_CONSTANTS.ZERO));
     }
     
     return createBarChart(canvasId, {
@@ -264,11 +269,11 @@ export function createXPChart(canvasId, currentLevel, currentXP, maxLevels = 10)
             label: 'XP',
             data: xpPerLevel,
             backgroundColor: levels.map((_, i) => 
-                i < currentLevel - 1 ? '#4CAF50' : 
-                i === currentLevel - 1 ? '#FFD700' : '#e0e0e0'
+                i < currentLevel - MATH_CONSTANTS.ONE ? '#4CAF50' : 
+                i === currentLevel - MATH_CONSTANTS.ONE ? '#FFD700' : '#e0e0e0'
             ),
             borderColor: '#fff',
-            borderWidth: 2
+            borderWidth: CHART_CONFIG.BORDER_WIDTH
         }]
     }, {
         title: 'מסלול העלייה לרמות',
@@ -276,7 +281,7 @@ export function createXPChart(canvasId, currentLevel, currentXP, maxLevels = 10)
         chartOptions: {
             scales: {
                 y: {
-                    max: 100,
+                    max: XP_CONFIG.XP_PER_LEVEL,
                     ticks: {
                         callback: (value) => value + ' XP'
                     }
@@ -290,8 +295,8 @@ export function createXPChart(canvasId, currentLevel, currentXP, maxLevels = 10)
  * תרשים היסטוריית עושר (קווי)
  */
 export function createNetWorthChart(canvasId, history) {
-    const labels = history.map((_, index) => `שנה ${index + 1}`);
-    const netWorthData = history.map(h => h.netWorth || 0);
+    const labels = history.map((_, index) => `שנה ${index + MATH_CONSTANTS.ONE}`);
+    const netWorthData = history.map(h => h.netWorth || MATH_CONSTANTS.ZERO);
     
     return createLineChart(canvasId, {
         labels,
