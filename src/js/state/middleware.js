@@ -24,7 +24,7 @@ import { showWarning, showError } from '../utils/notifications.js';
 /**
  * בדיקת תקינות ערכים פיננסיים
  */
-export function financialValidation(oldState, newState, options) {
+export function financialValidation(oldState, newState, options = {}) {
     // דלג בזמן טעינה מ-localStorage
     if (options.skipValidation) {
         return true;
@@ -68,7 +68,7 @@ export function financialValidation(oldState, newState, options) {
 /**
  * בדיקת מגבלות XP ורמות
  */
-export function xpValidation(oldState, newState, options) {
+export function xpValidation(oldState, newState, options = {}) {
     if (options.skipValidation) {
         return true;
     }
@@ -118,7 +118,7 @@ export function xpValidation(oldState, newState, options) {
 /**
  * בדיקת מבנה State
  */
-export function structureValidation(oldState, newState, options) {
+export function structureValidation(oldState, newState, options = {}) {
     if (options.skipValidation) {
         return true;
     }
@@ -153,7 +153,7 @@ export function structureValidation(oldState, newState, options) {
 /**
  * לוג מפורט של כל שינוי
  */
-export function detailedLogger(oldState, newState, options) {
+export function detailedLogger(oldState, newState, options = {}) {
     if (options.skipLogging || !window.CASHWISE_DEBUG) {
         return true;
     }
@@ -183,7 +183,7 @@ export function detailedLogger(oldState, newState, options) {
 /**
  * לוג פשוט
  */
-export function simpleLogger(oldState, newState, options) {
+export function simpleLogger(oldState, newState, options = {}) {
     if (options.skipLogging || !window.CASHWISE_DEBUG) {
         return true;
     }
@@ -233,7 +233,7 @@ function findChanges(oldState, newState, path = '') {
 /**
  * מדידת זמן ביצוע
  */
-export function performanceMonitor(oldState, newState, options) {
+export function performanceMonitor(oldState, newState, options = {}) {
     if (!window.CASHWISE_DEBUG) {
         return true;
     }
@@ -260,7 +260,7 @@ export function performanceMonitor(oldState, newState, options) {
 /**
  * אינטגרציה עם Redux DevTools
  */
-export function devTools(oldState, newState, options) {
+export function devTools(oldState, newState, options = {}) {
     if (!window.__REDUX_DEVTOOLS_EXTENSION__) {
         return true;
     }
@@ -277,7 +277,7 @@ export function devTools(oldState, newState, options) {
 /**
  * שמירת היסטוריה בזיכרון לדיבאג
  */
-export function memoryHistory(oldState, newState, options) {
+export function memoryHistory(oldState, newState, options = {}) {
     if (!window.CASHWISE_DEBUG) {
         return true;
     }
@@ -307,7 +307,7 @@ export function memoryHistory(oldState, newState, options) {
 /**
  * טריגר אוטומטי להישגים
  */
-export function achievementTriggers(oldState, newState, options) {
+export function achievementTriggers(oldState, newState, options = {}) {
     // דלג אם כבר באמצע בדיקת הישג
     if (options.skipAchievements) {
         return true;
