@@ -7,6 +7,14 @@
 
 import { getUserIncome } from '../core/state.js';
 import { markLessonComplete, checkAchievement, emitAppEvent } from '../core/state.js';
+
+// New State System
+import { 
+    completeLesson,
+    unlockAchievement,
+    getCompletedLessonsCount 
+} from '../state/index.js';
+
 import { formatCurrency, calculateCompoundInterest } from '../utils/format.js';
 import { validateInput, isPositiveNumber } from '../utils/validation.js';
 import { showSuccess, showError } from '../utils/notifications.js';

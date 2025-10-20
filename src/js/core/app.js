@@ -5,12 +5,23 @@
  * נקודת כניסה ראשית של האפליקציה המודולרית
  */
 
-// ===== Global Bridge (MUST BE FIRST!) =====
+// ===== State System Initialization (MUST BE FIRST!) =====
+import '../state-init.js';
+
+// ===== Global Bridge =====
 import './global-bridge.js';
 
 // ===== Core Imports =====
 import { initRouter, showSection } from './router.js';
 import { loadGameState, addXP, emitAppEvent } from './state.js';
+
+// ===== New State System =====
+import { 
+    subscribe, 
+    getUserXP, 
+    getUserLevel,
+    getLevelProgress 
+} from '../state/index.js';
 
 // ===== Utils Imports =====
 import { initUIEffects } from '../utils/ui-effects.js';
@@ -111,36 +122,61 @@ function initializeApp() {
 
 /**
  * עדכון פס ה-XP
+ * Updated to use new state system selectors
  */
 function updateXPBar() {
-    const state = loadGameState();
+    // Use new state system selectors
+    const xp = getUserXP();
+    const level = getUserLevel();
+    const progress = getLevelProgress();
+    
     const xpFill = document.getElementById('xp-fill');
     const xpText = document.getElementById('xp-text');
     const levelBadge = document.getElementById('level-badge');
     
     if (xpFill) {
-        const currentXP = state.xp % XP_CONFIG.XP_PER_LEVEL;
-        const percentage = currentXP;
+        const currentXP = xp % XP_CONFIG.XP_PER_LEVEL;
+        const percentage = progress * 100; // getLevelProgress returns 0-1
         xpFill.style.width = percentage + '%';
     }
     
     if (xpText) {
-        xpText.textContent = `${state.xp % XP_CONFIG.XP_PER_LEVEL}/${XP_CONFIG.XP_PER_LEVEL} XP`;
+        xpText.textContent = `${xp % XP_CONFIG.XP_PER_LEVEL}/${XP_CONFIG.XP_PER_LEVEL} XP`;
     }
     
     if (levelBadge) {
-        levelBadge.textContent = `רמה ${state.level}`;
+        levelBadge.textContent = `רמה ${level}`;
     }
 }
 
 /**
  * רישום event listeners גלובליים
+ * Updated to use new state system subscriptions
  */
 function registerGlobalListeners() {
-    // עדכון XP bar כשמשתנה המצב
+    // Subscribe to XP changes - REACTIVE UPDATE!
+    subscribe((newXP, oldXP) => {
+        console.log(`🎯 XP changed: ${oldXP} → ${newXP}`);
+        updateXPBar();
+    }, 'user.xp');
+    
+    // Subscribe to level changes
+    subscribe((newLevel, oldLevel) => {
+        console.log(`⭐ Level changed: ${oldLevel} → ${newLevel}`);
+        updateXPBar();
+        
+        // Show celebration for level up
+        if (newLevel > oldLevel) {
+            showNotification(`🎉 עלית לרמה ${newLevel}!`, 'success', 3000);
+        }
+    }, 'user.level');
+    
+    // Legacy event listener for backward compatibility
     document.addEventListener('xp:changed', () => {
         updateXPBar();
     });
+    
+    console.log('✅ Reactive state subscriptions registered');
 }
 
 /**

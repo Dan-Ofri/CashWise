@@ -21,6 +21,21 @@
  */
 
 import { saveSimulation, loadSimulation, clearSimulation, addXP } from '../core/state.js';
+
+// New State System
+import {
+    startSimulation as stateStartSimulation,
+    updateSimCharacter,
+    advanceMonth as stateAdvanceMonth,
+    endSimulation as stateEndSimulation,
+    addSimEvent,
+    subscribe,
+    isSimulationActive,
+    getCurrentMonth,
+    getCurrentSavings,
+    getSimCharacter
+} from '../state/index.js';
+
 import { formatCurrency } from '../utils/format.js';
 import { showSuccess, showNotification } from '../utils/notifications.js';
 import { showSection } from '../core/router.js';

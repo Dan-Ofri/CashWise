@@ -6,6 +6,16 @@
  */
 
 import { getUserProfile, getUserIncome, mentorActionDone, markMentorActionDone } from '../core/state.js';
+
+// New State System
+import {
+    subscribe,
+    isActionCompleted,
+    addCompletedAction,
+    getRecommendations,
+    getFinancialHealth
+} from '../state/index.js';
+
 import { showSuccess } from '../utils/notifications.js';
 import { 
     SIMULATION_CONFIG, 

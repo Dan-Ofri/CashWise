@@ -6,6 +6,17 @@
  */
 
 import { getUserProfile, saveUserProfile, getUserIncome, loadGameState, ACHIEVEMENTS, fullGameReset } from '../core/state.js';
+
+// New State System
+import {
+    subscribe,
+    getUserXP,
+    getUserLevel,
+    getUnlockedAchievements,
+    getCompletedLessonsCount,
+    getUserStatus
+} from '../state/index.js';
+
 import { createProgressChart, createXPChart, updateChartData } from '../components/charts.js';
 import { showSuccess } from '../utils/notifications.js';
 import { 
