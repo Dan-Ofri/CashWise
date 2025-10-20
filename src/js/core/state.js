@@ -1,8 +1,11 @@
 /**
  * ===========================================
- * 🗄️ State Management
+ * 🗄️ State Management (Legacy Wrapper)
  * ===========================================
- * ניהול מצב גלובלי של האפליקציה
+ * Wrapper layer for backward compatibility
+ * Uses new state management system under the hood
+ * 
+ * ⚠️ DEPRECATED: Use src/js/state/ directly for new code
  */
 
 import { saveToStorage, loadFromStorage, STORAGE_KEYS } from '../utils/storage.js';
@@ -16,6 +19,25 @@ import {
     MATH_CONSTANTS,
     SIMULATION_CONFIG
 } from '../config/index.js';
+
+// ===== NEW STATE SYSTEM =====
+import {
+    store,
+    getState,
+    subscribe,
+    // Actions
+    addXP as stateAddXP,
+    unlockAchievement as stateUnlockAchievement,
+    completeLesson as stateCompleteLesson,
+    addCompletedAction,
+    updateLastLogin,
+    // Selectors
+    getUserXP as stateGetUserXP,
+    getUserLevel as stateGetUserLevel,
+    isAchievementUnlocked,
+    isLessonCompleted as stateIsLessonCompleted,
+    getUnlockedAchievements as stateGetUnlockedAchievements
+} from '../state/index.js';
 
 // ===== הגדרות קבועות =====
 
@@ -31,12 +53,16 @@ export const ACHIEVEMENTS = [
     { id: 'money-master', icon: '💰', title: 'מאסטר כסף', desc: 'הגעה לרמה 10', xp: ACHIEVEMENT_XP.MONEY_MASTER }
 ];
 
-// ===== מבנה המצב המרכזי =====
+// ===== מבנה המצב המרכזי (Legacy) =====
 
+/**
+ * @deprecated Legacy variable - use getState() from ../state/index.js
+ */
 let gameState = null;
 
 /**
  * אתחול מצב המשחק
+ * @deprecated This function is kept for backward compatibility only
  */
 function initGameState() {
     return {
@@ -51,46 +77,49 @@ function initGameState() {
 
 /**
  * טעינת מצב המשחק
+ * @deprecated Use getState() from ../state/index.js
  */
 export function loadGameState() {
-    if (gameState) return gameState;
+    // Return state from new system
+    const state = getState();
     
-    const saved = loadFromStorage(STORAGE_KEYS.USER_LEVEL, null);
-    gameState = saved || initGameState();
+    // Convert to old format for backward compatibility
+    gameState = {
+        xp: state.user.xp,
+        level: state.user.level,
+        achievements: state.user.achievements,
+        lessonsCompleted: state.user.lessonsCompleted,
+        actionsCompleted: state.user.actionsCompleted,
+        lastLogin: state.user.lastLogin
+    };
     
     return gameState;
 }
 
 /**
  * שמירת מצב המשחק
+ * @deprecated State is automatically saved by the new system
  */
 export function saveGameState(state = null) {
-    if (state) {
-        gameState = state;
-    }
-    
-    if (!gameState) {
-        console.warn('No game state to save');
-        return false;
-    }
-    
-    return saveToStorage(STORAGE_KEYS.USER_LEVEL, gameState);
+    // New system auto-saves - this is a no-op for compatibility
+    console.warn('saveGameState is deprecated - new system auto-saves');
+    return true;
 }
 
 /**
  * קבלת XP הנוכחי
+ * @deprecated Use stateGetUserXP from ../state/index.js
  */
 export function getUserXP() {
-    const state = loadGameState();
-    return state.xp || MATH_CONSTANTS.ZERO;
+    return stateGetUserXP();
 }
 
 /**
  * קבלת רמה נוכחית
+ * @deprecated Use stateGetUserLevel from ../state/index.js
  */
 export function getUserLevel() {
-    const state = loadGameState();
-    return state.level || MATH_CONSTANTS.ONE;
+    return stateGetUserLevel();
 }
 
 /**
@@ -98,95 +127,50 @@ export function getUserLevel() {
  * @param {number} amount - כמות ה-XP להוספה
  * @param {string} reason - סיבת ההוספה (לתצוגה)
  * @returns {Object} - מידע על שינוי הרמה
+ * @deprecated Use stateAddXP from ../state/index.js
  */
 export function addXP(amount, reason = '') {
-    const state = loadGameState();
-    const oldXP = state.xp;
-    const oldLevel = state.level;
-    
-    state.xp += amount;
-    
-    // חישוב רמה חדשה
-    const newLevel = Math.floor(state.xp / XP_CONFIG.XP_PER_LEVEL) + MATH_CONSTANTS.ONE;
-    const leveledUp = newLevel > oldLevel;
-    
-    if (leveledUp) {
-        state.level = newLevel;
-        
-        // בדיקת הישגי רמות
-        if (newLevel === LEVEL_MILESTONES.LEVEL_5) checkAchievement('level-5');
-        if (newLevel === LEVEL_MILESTONES.LEVEL_10) checkAchievement('money-master');
-        
-        showSuccess(`🎉 עלית לרמה ${newLevel}!`);
-    }
-    
-    saveGameState(state);
-    
-    return {
-        oldXP,
-        newXP: state.xp,
-        oldLevel,
-        newLevel,
-        leveledUp,
-        reason
-    };
+    // Delegate to new state system
+    return stateAddXP(amount, reason);
 }
 
 /**
  * בדיקה ופתיחת הישג
+ * @deprecated Use stateUnlockAchievement from ../state/index.js
  */
 export function checkAchievement(achievementId) {
-    const state = loadGameState();
-    
-    // בדיקה אם ההישג כבר נפתח
-    if (state.achievements.includes(achievementId)) {
+    // Check if already unlocked
+    if (isAchievementUnlocked(achievementId)) {
         return false;
     }
     
-    // מציאת ההישג
+    // Find achievement
     const achievement = ACHIEVEMENTS.find(a => a.id === achievementId);
     if (!achievement) {
         console.warn(`Achievement ${achievementId} not found`);
         return false;
     }
     
-    // פתיחת ההישג
-    state.achievements.push(achievementId);
-    
-    // הוספת XP אם יש
-    if (achievement.xp > 0) {
-        state.xp += achievement.xp;
-    }
-    
-    saveGameState(state);
-    
-    // הצגת הודעה
-    showSuccess(`🏆 הישג חדש: ${achievement.title}! +${achievement.xp} XP`);
-    
-    // בדיקת הישג "כל השיעורים"
-    const lessonCount = state.lessonsCompleted.filter(l => !l.startsWith('scenario-')).length;
-    const totalLessons = 4; // TODO: להעביר ל-MISC.TOTAL_LESSONS
-    if (lessonCount >= totalLessons && !state.achievements.includes('all-lessons')) {
-        setTimeout(() => checkAchievement('all-lessons'), UI_TIMING.ACHIEVEMENT_CHECK_DELAY);
-    }
+    // Unlock via new state system
+    stateUnlockAchievement(achievementId)(getState());
     
     return true;
 }
 
 /**
  * סימון שיעור כהושלם
+ * @deprecated Use stateCompleteLesson from ../state/index.js
  */
 export function markLessonComplete(lessonId) {
-    const state = loadGameState();
-    
-    if (state.lessonsCompleted.includes(lessonId)) {
-        return false; // כבר הושלם
+    // Check if already completed
+    if (stateIsLessonCompleted(lessonId)) {
+        return false;
     }
     
-    state.lessonsCompleted.push(lessonId);
-    saveGameState(state);
+    // Complete via new state system
+    stateCompleteLesson(lessonId);
     
-    // הוספת XP בסיסי
+    // Add XP
     addXP(XP_REWARDS.COMPLETE_LESSON, `השלמת שיעור: ${lessonId}`);
     
     return true;
@@ -194,10 +178,10 @@ export function markLessonComplete(lessonId) {
 
 /**
  * בדיקה אם שיעור הושלם
+ * @deprecated Use stateIsLessonCompleted from ../state/index.js
  */
 export function isLessonComplete(lessonId) {
-    const state = loadGameState();
-    return state.lessonsCompleted.includes(lessonId);
+    return stateIsLessonCompleted(lessonId);
 }
 
 /**
@@ -209,52 +193,57 @@ export function getAllAchievements() {
 
 /**
  * קבלת הישגים שנפתחו
+ * @deprecated Use stateGetUnlockedAchievements from ../state/index.js
  */
 export function getUnlockedAchievements() {
-    const state = loadGameState();
-    return ACHIEVEMENTS.filter(a => state.achievements.includes(a.id));
+    const unlockedIds = stateGetUnlockedAchievements();
+    return ACHIEVEMENTS.filter(a => unlockedIds.includes(a.id));
 }
 
 /**
  * קבלת הישגים נעולים
  */
 export function getLockedAchievements() {
-    const state = loadGameState();
-    return ACHIEVEMENTS.filter(a => !state.achievements.includes(a.id));
+    const unlockedIds = stateGetUnlockedAchievements();
+    return ACHIEVEMENTS.filter(a => !unlockedIds.includes(a.id));
 }
 
 /**
  * איפוס מצב המשחק
+ * @deprecated Use store.reset() from ../state/index.js
  */
 export function resetGameState() {
-    gameState = initGameState();
-    saveGameState(gameState);
-    return gameState;
+    // Reset via new system
+    store.reset();
+    return loadGameState(); // Return in old format
 }
 
 // ===== פעולות מנטור =====
 
 /**
  * בדיקה אם פעולה מהמנטור בוצעה
+ * @deprecated Use isActionCompleted from ../state/index.js
  */
 export function mentorActionDone(actionId) {
-    const state = loadGameState();
-    return state.actionsCompleted.includes(actionId);
+    const state = getState();
+    return state.user.actionsCompleted.includes(actionId);
 }
 
 /**
  * סימון פעולת מנטור כבוצעה
+ * @deprecated Use addCompletedAction from ../state/index.js
  */
 export function markMentorActionDone(actionId, xp = XP_REWARDS.COMPLETE_LESSON) {
-    const state = loadGameState();
+    const state = getState();
     
-    if (state.actionsCompleted.includes(actionId)) {
+    if (state.user.actionsCompleted.includes(actionId)) {
         return false; // כבר בוצעה
     }
     
-    state.actionsCompleted.push(actionId);
-    saveGameState(state);
+    // Add action via new state system
+    addCompletedAction(actionId);
     
+    // Add XP
     addXP(xp, 'ביצוע צעד מהמנטור');
     
     return true;
@@ -318,72 +307,60 @@ export function clearSimulation() {
 
 /**
  * איפוס מלא של כל המשחק - מחזיר למצב התחלתי
+ * @deprecated Use store.reset() from ../state/index.js
  */
 export function fullGameReset() {
     console.log('🔄 Starting full game reset...');
     
-    // איפוס מצב משחק (XP, רמה, הישגים)
-    gameState = initGameState();
-    saveGameState(gameState);
+    // Reset via new state system
+    store.reset();
     
-    // מחיקת סימולציה
+    // Clear additional localStorage items
     clearSimulation();
-    
-    // מחיקת פרופיל משתמש
     saveToStorage(STORAGE_KEYS.USER_PROFILE, null);
-    
-    // מחיקת שיעורים
     localStorage.removeItem('lessons-state');
-    
-    // מחיקת הצלחת סימולציה
     localStorage.removeItem('simulation-completed');
-    
-    // מחיקת טריגר השקעות
     localStorage.removeItem('trigger-shown');
+    
+    const state = getState();
     
     console.log('✅ Full game reset completed!');
     console.log('📊 New state:', {
-        xp: gameState.xp,
-        level: gameState.level,
-        achievements: gameState.achievements.length,
+        xp: state.user.xp,
+        level: state.user.level,
+        achievements: state.user.achievements.length,
         simulationCompleted: localStorage.getItem('simulation-completed'),
         lessonsState: localStorage.getItem('lessons-state')
     });
     
-    return gameState;
+    return loadGameState(); // Return in old format
 }
 
-// ===== אירועי מצב =====
+// ===== אירועי מצב (Legacy) =====
 
+/**
+ * @deprecated Legacy map - use subscribe() from ../state/index.js
+ */
 const stateListeners = new Map();
 
 /**
  * הרשמה לאירועי שינוי מצב
+ * @deprecated Use subscribe() from ../state/index.js
  */
 export function onStateChange(event, callback) {
-    if (!stateListeners.has(event)) {
-        stateListeners.set(event, []);
-    }
-    stateListeners.get(event).push(callback);
-    
-    // החזרת פונקציה להסרת ההרשמה
-    return () => {
-        const listeners = stateListeners.get(event);
-        const index = listeners.indexOf(callback);
-        if (index > MATH_CONSTANTS.ZERO - MATH_CONSTANTS.ONE) { // -1
-            listeners.splice(index, MATH_CONSTANTS.ONE);
-        }
-    };
+    // Use new state system's subscribe
+    return subscribe((newState, oldState) => {
+        callback({ newState, oldState });
+    });
 }
 
 /**
  * פליטת אירוע שינוי מצב
+ * @deprecated State changes are automatically broadcast by new system
  */
 export function emitStateChange(event, data) {
-    const listeners = stateListeners.get(event);
-    if (listeners) {
-        listeners.forEach(callback => callback(data));
-    }
+    // No-op - new system handles this automatically
+    console.warn('emitStateChange is deprecated - state changes broadcast automatically');
 }
 
 // ===== אירועי אפליקציה (תאימות לאחור) =====
@@ -401,6 +378,23 @@ export function emitAppEvent(type, detail = {}) {
 
 // ===== ייצוא המצב הגלובלי (למטרות debug) =====
 
+/**
+ * @deprecated Use getState() from ../state/index.js
+ */
 export function getGameState() {
-    return gameState;
+    return loadGameState(); // Return in old format
 }
+
+// ===== Re-export new state system for convenience =====
+
+/**
+ * Modern state management - use these in new code!
+ */
+export {
+    store,
+    getState,
+    subscribe,
+    // Import more as needed from ../state/index.js
+} from '../state/index.js';
+
+console.log('✅ State Management (Legacy Wrapper) loaded - delegates to new system');
