@@ -95,20 +95,17 @@ class Store {
     setState(updater, options = {}) {
         const oldState = this._deepClone(this._state);
         
-        // Run middleware (can modify or cancel)
+        // Apply update first to get newState
+        const newState = updater(this._deepClone(this._state));
+        
+        // Run middleware with correct signature: (oldState, newState, options)
         for (const middleware of this._middleware) {
-            const result = middleware(oldState, updater);
+            const result = middleware(oldState, newState, options);
             if (result === false) {
                 console.warn('State update cancelled by middleware');
                 return false;
             }
-            if (typeof result === 'function') {
-                updater = result;
-            }
         }
-        
-        // Apply update
-        const newState = updater(this._deepClone(this._state));
         
         // Validate state structure
         if (!this._validateState(newState)) {
