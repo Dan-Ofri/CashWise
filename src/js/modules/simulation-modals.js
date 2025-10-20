@@ -7,6 +7,7 @@
  */
 
 import { formatCurrency } from '../utils/format.js';
+import { MATH_CONSTANTS, FINANCIAL_RULES } from '../config/index.js';
 
 /**
  * פתיחת מודאל יעד - גרסה משודרגת
@@ -78,8 +79,8 @@ function createGoalModalHTML() {
 function updateGoalModalContent() {
     const simCharacter = JSON.parse(localStorage.getItem('simCharacter') || '{}');
     const goalAmount = simCharacter.goalAmount || 50000;
-    const currentSavings = simCharacter.savings || 0;
-    const progressPercent = Math.min(((currentSavings / goalAmount) * 100).toFixed(1), 100);
+    const currentSavings = simCharacter.savings || MATH_CONSTANTS.ZERO;
+    const progressPercent = Math.min(((currentSavings / goalAmount) * MATH_CONSTANTS.PERCENT_TO_DECIMAL).toFixed(MATH_CONSTANTS.ONE), MATH_CONSTANTS.PERCENT_TO_DECIMAL);
     
     document.getElementById('goal-modal-body').innerHTML = `
         <div style="text-align: center; padding: 12px;">
@@ -198,8 +199,8 @@ function createTipsModalHTML() {
  */
 function updateTipsModalContent() {
     const simCharacter = JSON.parse(localStorage.getItem('simCharacter') || '{}');
-    const monthlySavings = (simCharacter.salary || 0) - (simCharacter.expenses || 0);
-    const savingsRate = simCharacter.salary ? ((monthlySavings / simCharacter.salary) * 100).toFixed(1) : '0';
+    const monthlySavings = (simCharacter.salary || MATH_CONSTANTS.ZERO) - (simCharacter.expenses || MATH_CONSTANTS.ZERO);
+    const savingsRate = simCharacter.salary ? ((monthlySavings / simCharacter.salary) * MATH_CONSTANTS.PERCENT_TO_DECIMAL).toFixed(MATH_CONSTANTS.ONE) : '0';
     
     document.getElementById('tips-modal-body').innerHTML = `
         <div style="text-align: center; padding: 12px;">
@@ -219,15 +220,15 @@ function updateTipsModalContent() {
                     </div>
                     <div style="background: white; padding: 10px; border-radius: 8px;">
                         <div style="font-size: 11px; color: #666;">ריבית בבנק</div>
-                        <div style="font-size: 18px; font-weight: bold; color: #FF9800;">${((simCharacter.bankInterest || 0.02) * 100).toFixed(1)}%</div>
+                        <div style="font-size: 18px; font-weight: bold; color: #FF9800;">${((simCharacter.bankInterest || FINANCIAL_RULES.BANK_SAVINGS_RETURN) * MATH_CONSTANTS.PERCENT_TO_DECIMAL).toFixed(MATH_CONSTANTS.ONE)}%</div>
                     </div>
                     <div style="background: white; padding: 10px; border-radius: 8px;">
                         <div style="font-size: 11px; color: #666;">חודשים</div>
-                        <div style="font-size: 18px; font-weight: bold; color: #2196F3;">${simCharacter.monthsSinceStart || 0}</div>
+                        <div style="font-size: 18px; font-weight: bold; color: #2196F3;">${simCharacter.monthsSinceStart || MATH_CONSTANTS.ZERO}</div>
                     </div>
                     <div style="background: white; padding: 10px; border-radius: 8px;">
                         <div style="font-size: 11px; color: #666;">שנים</div>
-                        <div style="font-size: 18px; font-weight: bold; color: #9C27B0;">${((simCharacter.monthsSinceStart || 0) / 12).toFixed(1)}</div>
+                        <div style="font-size: 18px; font-weight: bold; color: #9C27B0;">${((simCharacter.monthsSinceStart || MATH_CONSTANTS.ZERO) / FINANCIAL_RULES.MONTHS_PER_YEAR).toFixed(MATH_CONSTANTS.ONE)}</div>
                     </div>
                 </div>
             </div>

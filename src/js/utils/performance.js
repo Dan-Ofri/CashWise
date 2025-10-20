@@ -5,6 +5,8 @@
  * פונקציות לשיפור ביצועים
  */
 
+import { MATH_CONSTANTS } from '../config/index.js';
+
 /**
  * Debounce - עיכוב ביצוע פונקציה
  * שימושי לאירועי input, scroll, resize
@@ -49,7 +51,7 @@ export function measureTime(func, label = 'Function') {
     const start = performance.now();
     const result = func();
     const end = performance.now();
-    console.log(`⏱️ ${label} took ${(end - start).toFixed(2)}ms`);
+    console.log(`⏱️ ${label} took ${(end - start).toFixed(MATH_CONSTANTS.TWO)}ms`);
     return result;
 }
 

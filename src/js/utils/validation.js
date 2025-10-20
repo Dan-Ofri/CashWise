@@ -6,6 +6,7 @@
  */
 
 import { showError } from './notifications.js';
+import { UI_TIMING } from '../config/index.js';
 
 /**
  * אימות קלט עם feedback ויזואלי
@@ -22,7 +23,7 @@ export function validateInput(input, validationFn, errorMessage) {
         input.style.borderColor = '#EF4444';
         input.style.boxShadow = '0 0 0 4px rgba(239, 68, 68, 0.1)';
         input.classList.add('shake');
-        setTimeout(() => input.classList.remove('shake'), 500);
+        setTimeout(() => input.classList.remove('shake'), UI_TIMING.SHAKE_ANIMATION_DURATION);
         
         showError(errorMessage);
         return false;

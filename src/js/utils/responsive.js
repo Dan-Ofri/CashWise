@@ -8,6 +8,8 @@
  * Created: October 19, 2025
  */
 
+import { BREAKPOINTS, UI_TIMING, MATH_CONSTANTS } from '../config/index.js';
+
 /**
  * Device detection and classification
  */
@@ -22,14 +24,14 @@ export function detectDevice() {
         height,
         
         // Device type
-        isMobile: width < 768,
-        isTablet: width >= 768 && width < 1024,
-        isLaptop: width >= 1024 && width < 1440,
-        isDesktop: width >= 1440,
+        isMobile: width < BREAKPOINTS.TABLET,
+        isTablet: width >= BREAKPOINTS.TABLET && width < BREAKPOINTS.LAPTOP,
+        isLaptop: width >= BREAKPOINTS.LAPTOP && width < BREAKPOINTS.DESKTOP,
+        isDesktop: width >= BREAKPOINTS.DESKTOP,
         
         // Specific breakpoints
-        isMobileSmall: width < 480,
-        isMobileLarge: width >= 480 && width < 768,
+        isMobileSmall: width < BREAKPOINTS.MOBILE_SMALL,
+        isMobileLarge: width >= BREAKPOINTS.MOBILE_SMALL && width < BREAKPOINTS.TABLET,
         
         // Orientation
         isPortrait: height > width,
@@ -48,8 +50,8 @@ export function detectDevice() {
         isFirefox: /firefox/.test(userAgent),
         
         // Pixel ratio (for retina displays)
-        pixelRatio: window.devicePixelRatio || 1,
-        isRetina: window.devicePixelRatio > 1,
+        pixelRatio: window.devicePixelRatio || MATH_CONSTANTS.ONE,
+        isRetina: window.devicePixelRatio > MATH_CONSTANTS.ONE,
         
         // Connection (if supported)
         connection: navigator.connection ? {
@@ -133,7 +135,7 @@ function handleResize() {
         window.dispatchEvent(new CustomEvent('app:resize', {
             detail: detectDevice()
         }));
-    }, 150);
+    }, UI_TIMING.RESIZE_DEBOUNCE_DELAY);
 }
 
 /**

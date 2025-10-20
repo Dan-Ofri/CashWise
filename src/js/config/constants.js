@@ -327,7 +327,61 @@ export const UI_TIMING = {
     ANIMATION_FPS: 16,
     
     /** עיכוב קצר לסימולציה */
-    SIM_SHORT_DELAY: 50
+    SIM_SHORT_DELAY: 50,
+    
+    /** עיכוב למעבר לשאלה הבאה בחידון (2 שניות) */
+    QUIZ_NEXT_QUESTION_DELAY: 2000,
+    
+    /** עיכוב להסתרת תשובה שגויה בחידון (1.5 שניות) */
+    QUIZ_WRONG_ANSWER_HIDE_DELAY: 1500,
+    
+    /** משך fade out (300ms) */
+    FADE_OUT_DURATION: 300,
+    
+    /** עיכוב focus על input (100ms) */
+    INPUT_FOCUS_DELAY: 100,
+    
+    /** עיכוב resize debounce (150ms) */
+    RESIZE_DEBOUNCE_DELAY: 150,
+    
+    /** משך אנימציית progress bar (1 שנייה) */
+    PROGRESS_BAR_ANIMATION_DURATION: 1000,
+    
+    /** משך אנימציית counter (1 שנייה) */
+    COUNTER_ANIMATION_DURATION: 1000,
+    
+    /** משך frame באנימציה (16ms = 60fps) */
+    ANIMATION_FRAME_MS: 16,
+    
+    /** משך ניקוי קונפטי (3 שניות) */
+    CONFETTI_CLEANUP_DURATION: 3000,
+    
+    /** משך אנימציית shake (500ms) */
+    SHAKE_ANIMATION_DURATION: 500,
+    
+    /** עיכוב אנימציית sidebar (10ms) */
+    SIDEBAR_ANIMATION_DELAY: 10,
+    
+    /** עיכוב תגובה אוטומטית (1 שנייה) */
+    AUTO_RESPONSE_DELAY: 1000,
+    
+    /** עיכוב טעינת שלב (500ms) */
+    SECTION_LOAD_DELAY: 500,
+    
+    /** משך הודעת שגיאה (4 שניות) */
+    ERROR_NOTIFICATION_DURATION: 4000,
+    
+    /** משך הודעת אזהרה (3.5 שניות) */
+    WARNING_NOTIFICATION_DURATION: 3500,
+    
+    /** עיכוב טעינת דף (1.5 שניות) */
+    PAGE_RELOAD_DELAY: 1500,
+    
+    /** משך הודעת ברוכים הבאים (5 שניות) */
+    WELCOME_MESSAGE_DURATION: 5000,
+    
+    /** עיכוב הודעת ברוכים הבאים (1 שנייה) */
+    WELCOME_MESSAGE_DELAY: 1000
 };
 
 // ===== אנימציות וקונפטי =====
@@ -337,13 +391,22 @@ export const UI_TIMING = {
  */
 export const VISUAL_EFFECTS = {
     /** מספר חלקיקי קונפטי */
+    CONFETTI_COUNT: 50,
     CONFETTI_PARTICLE_COUNT: 50,
     
     /** עיכוב מקסימלי בין קונפטי (שניות) */
+    CONFETTI_DELAY_MAX: 0.3,
     CONFETTI_MAX_DELAY: 0.3,
     
     /** זמן אנימציה מינימלי לקונפטי (שניות) */
+    CONFETTI_DURATION_MIN: 2,
     CONFETTI_MIN_DURATION: 2,
+    
+    /** טווח זמן לאנימציית קונפטי (שניות) */
+    CONFETTI_DURATION_RANGE: 2,
+    
+    /** עיכוב stagger בין קונפטי (ms) */
+    CONFETTI_STAGGER_DELAY: 30,
     
     /** זמן אנימציה מקסימלי לקונפטי (שניות) */
     CONFETTI_MAX_DURATION: 4,

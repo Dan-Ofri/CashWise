@@ -13,6 +13,7 @@
  */
 
 import { completeLesson, getLessonState } from './lessons.js';
+import { MATH_CONSTANTS, UI_TIMING } from '../config/index.js';
 import { showSection } from '../core/router.js';
 import { addXP } from '../core/state.js';
 import { showSuccess, showNotification } from '../utils/notifications.js';
@@ -67,7 +68,7 @@ function renderCurrentStep() {
     
     const step = currentLesson.steps[currentStepIndex];
     const totalSteps = currentLesson.steps.length;
-    const progress = Math.round(((currentStepIndex + 1) / totalSteps) * 100);
+    const progress = Math.round(((currentStepIndex + MATH_CONSTANTS.ONE) / totalSteps) * MATH_CONSTANTS.PERCENT_TO_DECIMAL);
     
     container.innerHTML = `
         <div class="lesson-player">
@@ -374,7 +375,7 @@ export function selectQuizAnswer(optionIndex) {
         // המתנה קצרה ומעבר לשאלה הבאה
         setTimeout(() => {
             renderCurrentStep();
-        }, 2000);
+        }, UI_TIMING.QUIZ_NEXT_QUESTION_DELAY);
         
     } else {
         feedback.innerHTML = `
@@ -388,7 +389,7 @@ export function selectQuizAnswer(optionIndex) {
         // הסתרה אחרי שנייה
         setTimeout(() => {
             feedback.style.display = 'none';
-        }, 1500);
+        }, UI_TIMING.QUIZ_WRONG_ANSWER_HIDE_DELAY);
     }
 }
 
@@ -466,17 +467,17 @@ function getLessonData(lessonId) {
  */
 export function calculatePractice() {
     const amount = parseFloat(document.getElementById('practice-amount').value);
-    const rate = parseFloat(document.getElementById('practice-rate').value) / 100;
+    const rate = parseFloat(document.getElementById('practice-rate').value) / MATH_CONSTANTS.PERCENT_TO_DECIMAL;
     const years = parseInt(document.getElementById('practice-years').value);
     
-    const result = amount * Math.pow(1 + rate, years);
+    const result = amount * Math.pow(MATH_CONSTANTS.ONE + rate, years);
     const profit = result - amount;
     
     const resultBox = document.getElementById('practice-result');
     resultBox.innerHTML = `
         <h4>תוצאה:</h4>
-        <p>אחרי ${years} שנים עם ${(rate * 100).toFixed(1)}% תשואה:</p>
-        <p class="result-amount">₪${result.toLocaleString('he-IL', {maximumFractionDigits: 0})}</p>
+        <p>אחרי ${years} שנים עם ${(rate * MATH_CONSTANTS.PERCENT_TO_DECIMAL).toFixed(MATH_CONSTANTS.ONE)}% תשואה:</p>
+        <p class="result-amount">₪${result.toLocaleString('he-IL', {maximumFractionDigits: MATH_CONSTANTS.ZERO})}</p>
         <p class="result-profit">רווח: ₪${profit.toLocaleString('he-IL', {maximumFractionDigits: 0})}</p>
     `;
     resultBox.style.display = 'block';

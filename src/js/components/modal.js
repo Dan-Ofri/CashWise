@@ -5,6 +5,8 @@
  * מערכת Modal מרכזית ומתקדמת
  */
 
+import { Z_INDEX, UI_TIMING } from '../config/index.js';
+
 /**
  * יצירת modal כללי
  * @param {Object} options - אפשרויות המודל
@@ -61,7 +63,7 @@ export function createModal(options = {}) {
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: ${Z_INDEX.MODAL};
             animation: fadeIn 0.3s ease;
         ">
             <div class="modal-content" onclick="event.stopPropagation()" style="
@@ -173,7 +175,7 @@ export function closeModal(id) {
     const modal = document.getElementById(id);
     if (modal) {
         modal.style.opacity = '0';
-        setTimeout(() => modal.remove(), 300);
+        setTimeout(() => modal.remove(), UI_TIMING.FADE_OUT_DURATION);
     }
 }
 
@@ -296,7 +298,7 @@ export function prompt(message, title = 'הזן ערך', defaultValue = '') {
                 input.focus();
                 input.select();
             }
-        }, 100);
+        }, UI_TIMING.INPUT_FOCUS_DELAY);
     });
 }
 

@@ -5,6 +5,8 @@
  * פונקציות עזר לפורמט מספרים וחישובים
  */
 
+import { MATH_CONSTANTS, FINANCIAL_RULES } from '../config/index.js';
+
 /**
  * פורמט מספר למטבע ישראלי
  * @param {number} amount - סכום
@@ -23,15 +25,15 @@ export function formatCurrency(amount, withSymbol = true) {
  * @returns {string}
  */
 export function formatPercent(value, isDecimal = false) {
-    const percent = isDecimal ? value * 100 : value;
-    return `${Math.round(percent * 10) / 10}%`;
+    const percent = isDecimal ? value * MATH_CONSTANTS.PERCENT_TO_DECIMAL : value;
+    return `${Math.round(percent * MATH_CONSTANTS.TEN) / MATH_CONSTANTS.TEN}%`;
 }
 
 /**
  * עיגול למספר עשרוני
  */
-export function roundTo(value, decimals = 2) {
-    const multiplier = Math.pow(10, decimals);
+export function roundTo(value, decimals = MATH_CONSTANTS.TWO) {
+    const multiplier = Math.pow(MATH_CONSTANTS.TEN, decimals);
     return Math.round(value * multiplier) / multiplier;
 }
 
@@ -39,8 +41,8 @@ export function roundTo(value, decimals = 2) {
  * חישוב אחוז מתוך סכום
  */
 export function calculatePercent(part, total) {
-    if (total === 0) return 0;
-    return (part / total) * 100;
+    if (total === MATH_CONSTANTS.ZERO) return MATH_CONSTANTS.ZERO;
+    return (part / total) * MATH_CONSTANTS.PERCENT_TO_DECIMAL;
 }
 
 /**
@@ -51,8 +53,8 @@ export function calculatePercent(part, total) {
  * @param {number} compoundsPerYear - תדירות הצטברות (12 = חודשי)
  * @returns {number}
  */
-export function calculateCompoundInterest(principal, rate, years, compoundsPerYear = 12) {
-    return principal * Math.pow((1 + rate / compoundsPerYear), compoundsPerYear * years);
+export function calculateCompoundInterest(principal, rate, years, compoundsPerYear = FINANCIAL_RULES.MONTHS_PER_YEAR) {
+    return principal * Math.pow((MATH_CONSTANTS.ONE + rate / compoundsPerYear), compoundsPerYear * years);
 }
 
 /**
@@ -63,19 +65,19 @@ export function calculateCompoundInterest(principal, rate, years, compoundsPerYe
  * @returns {number}
  */
 export function calculateMonthlyPayment(principal, annualRate, months) {
-    if (annualRate === 0) return principal / months;
+    if (annualRate === MATH_CONSTANTS.ZERO) return principal / months;
     
-    const monthlyRate = annualRate / 12;
-    return (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / 
-           (Math.pow(1 + monthlyRate, months) - 1);
+    const monthlyRate = annualRate / FINANCIAL_RULES.MONTHS_PER_YEAR;
+    return (principal * monthlyRate * Math.pow(MATH_CONSTANTS.ONE + monthlyRate, months)) / 
+           (Math.pow(MATH_CONSTANTS.ONE + monthlyRate, months) - MATH_CONSTANTS.ONE);
 }
 
 /**
  * חישוב ROI (תשואה על השקעה)
  */
 export function calculateROI(initialInvestment, finalValue) {
-    if (initialInvestment === 0) return 0;
-    return ((finalValue - initialInvestment) / initialInvestment) * 100;
+    if (initialInvestment === MATH_CONSTANTS.ZERO) return MATH_CONSTANTS.ZERO;
+    return ((finalValue - initialInvestment) / initialInvestment) * MATH_CONSTANTS.PERCENT_TO_DECIMAL;
 }
 
 /**
@@ -91,11 +93,11 @@ export function randomBetween(min, max) {
  * @param {number} std - סטיית תקן
  * @returns {number}
  */
-export function randomNormal(mean = 0, std = 1) {
-    let u = 0, v = 0;
-    while (u === 0) u = Math.random();
-    while (v === 0) v = Math.random();
-    const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+export function randomNormal(mean = MATH_CONSTANTS.ZERO, std = MATH_CONSTANTS.ONE) {
+    let u = MATH_CONSTANTS.ZERO, v = MATH_CONSTANTS.ZERO;
+    while (u === MATH_CONSTANTS.ZERO) u = Math.random();
+    while (v === MATH_CONSTANTS.ZERO) v = Math.random();
+    const z = Math.sqrt(MATH_CONSTANTS.NEGATIVE_TWO * Math.log(u)) * Math.cos(MATH_CONSTANTS.TWO * Math.PI * v);
     return mean + std * z;
 }
 
@@ -110,5 +112,5 @@ export function clamp(value, min, max) {
  * Linear interpolation
  */
 export function lerp(start, end, t) {
-    return start + (end - start) * clamp(t, 0, 1);
+    return start + (end - start) * clamp(t, MATH_CONSTANTS.ZERO, MATH_CONSTANTS.ONE);
 }

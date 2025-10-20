@@ -5,6 +5,8 @@
  * אפקטים ויזואליים ואנימציות למשתמש
  */
 
+import { UI_TIMING, VISUAL_EFFECTS, MATH_CONSTANTS } from '../config/index.js';
+
 /**
  * הוספת אפקט Ripple לכפתור
  */
@@ -40,7 +42,7 @@ export function addRippleEffect(event) {
         if (ripple.parentNode) {
             ripple.parentNode.removeChild(ripple);
         }
-    }, 600);
+    }, UI_TIMING.RIPPLE_DURATION);
 }
 
 /**
@@ -104,47 +106,47 @@ export function celebrateAchievement() {
     
     // יצירת 50 קונפטי
     const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'];
-    for (let i = 0; i < 50; i++) {
+    for (let i = MATH_CONSTANTS.ZERO; i < VISUAL_EFFECTS.CONFETTI_COUNT; i++) {
         setTimeout(() => {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.left = Math.random() * MATH_CONSTANTS.PERCENT_TO_DECIMAL + '%';
             confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.animationDelay = Math.random() * 0.3 + 's';
-            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            confetti.style.animationDelay = Math.random() * VISUAL_EFFECTS.CONFETTI_DELAY_MAX + 's';
+            confetti.style.animationDuration = (Math.random() * VISUAL_EFFECTS.CONFETTI_DURATION_RANGE + VISUAL_EFFECTS.CONFETTI_DURATION_MIN) + 's';
             document.body.appendChild(confetti);
             
             setTimeout(() => {
                 if (confetti.parentNode) {
                     confetti.parentNode.removeChild(confetti);
                 }
-            }, 3000);
-        }, i * 30);
+            }, UI_TIMING.CONFETTI_CLEANUP_DURATION);
+        }, i * VISUAL_EFFECTS.CONFETTI_STAGGER_DELAY);
     }
 }
 
 /**
  * אנימציית Progress Bar
  */
-export function animateProgressBar(element, targetWidth, duration = 1000) {
+export function animateProgressBar(element, targetWidth, duration = UI_TIMING.PROGRESS_BAR_ANIMATION_DURATION) {
     if (!element) return;
     
-    const start = parseFloat(element.style.width) || 0;
-    const end = Math.min(100, Math.max(0, targetWidth));
+    const start = parseFloat(element.style.width) || MATH_CONSTANTS.ZERO;
+    const end = Math.min(MATH_CONSTANTS.PERCENT_TO_DECIMAL, Math.max(MATH_CONSTANTS.ZERO, targetWidth));
     const range = end - start;
     const startTime = performance.now();
     
     function update(currentTime) {
         const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
+        const progress = Math.min(elapsed / duration, MATH_CONSTANTS.ONE);
         
         // Easing function (ease-out)
-        const eased = 1 - Math.pow(1 - progress, 3);
+        const eased = MATH_CONSTANTS.ONE - Math.pow(MATH_CONSTANTS.ONE - progress, MATH_CONSTANTS.THREE);
         const currentWidth = start + (range * eased);
         
         element.style.width = currentWidth + '%';
         
-        if (progress < 1) {
+        if (progress < MATH_CONSTANTS.ONE) {
             requestAnimationFrame(update);
         }
     }
@@ -155,23 +157,23 @@ export function animateProgressBar(element, targetWidth, duration = 1000) {
 /**
  * אנימציית מספרים (Counter)
  */
-export function animateNumber(element, targetNumber, duration = 1000) {
+export function animateNumber(element, targetNumber, duration = UI_TIMING.COUNTER_ANIMATION_DURATION) {
     if (!element) return;
     
-    const startNumber = parseFloat(element.textContent.replace(/[^0-9.-]/g, '')) || 0;
-    const increment = (targetNumber - startNumber) / (duration / 16);
+    const startNumber = parseFloat(element.textContent.replace(/[^0-9.-]/g, '')) || MATH_CONSTANTS.ZERO;
+    const increment = (targetNumber - startNumber) / (duration / UI_TIMING.ANIMATION_FRAME_MS);
     let current = startNumber;
     
     const timer = setInterval(() => {
         current += increment;
         
-        if ((increment > 0 && current >= targetNumber) || (increment < 0 && current <= targetNumber)) {
+        if ((increment > MATH_CONSTANTS.ZERO && current >= targetNumber) || (increment < MATH_CONSTANTS.ZERO && current <= targetNumber)) {
             current = targetNumber;
             clearInterval(timer);
         }
         
         element.textContent = Math.round(current).toLocaleString() + '₪';
-    }, 16);
+    }, UI_TIMING.ANIMATION_FRAME_MS);
 }
 
 /**

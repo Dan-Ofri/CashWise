@@ -6,13 +6,14 @@
  */
 
 import { formatCurrency } from '../utils/format.js';
+import { MATH_CONSTANTS, FINANCIAL_RULES } from '../config/index.js';
 
 /**
  * רינדור UI פיננסי מחודש - Stage D - קומפקטי ללא גלילה
  */
 export function renderFinancialUI(simCharacter) {
     const monthlySavings = simCharacter.salary - simCharacter.expenses;
-    const goalProgress = Math.min((simCharacter.savings / simCharacter.goalAmount) * 100, 100).toFixed(1);
+    const goalProgress = Math.min((simCharacter.savings / simCharacter.goalAmount) * MATH_CONSTANTS.PERCENT_TO_DECIMAL, MATH_CONSTANTS.PERCENT_TO_DECIMAL).toFixed(MATH_CONSTANTS.ONE);
     
     return `
         <!-- כרטיס סטטוס קומפקטי -->
@@ -26,7 +27,7 @@ export function renderFinancialUI(simCharacter) {
                 <div class="sim-info-divider">|</div>
                 <div class="sim-info-item">
                     <span class="sim-info-icon"><i class="fas fa-calendar-alt"></i></span>
-                    <span class="sim-info-text">חודש ${simCharacter.month + 1}/12</span>
+                    <span class="sim-info-text">חודש ${simCharacter.month + MATH_CONSTANTS.ONE}/${FINANCIAL_RULES.MONTHS_PER_YEAR}</span>
                 </div>
             </div>
             

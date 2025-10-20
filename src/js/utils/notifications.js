@@ -5,13 +5,15 @@
  * מערכת הודעות ו-toast מרכזית
  */
 
+import { UI_TIMING, VISUAL_EFFECTS } from '../config/index.js';
+
 /**
  * הצגת הודעת Toast למשתמש
  * @param {string} message - תוכן ההודעה
  * @param {string} type - סוג: 'success' | 'error' | 'warning' | 'info'
- * @param {number} duration - משך זמן בms (ברירת מחדל: 3000)
+ * @param {number} duration - משך זמן בms (ברירת מחדל: UI_TIMING.NOTIFICATION_DURATION)
  */
-export function showNotification(message, type = 'info', duration = 3000) {
+export function showNotification(message, type = 'info', duration = UI_TIMING.NOTIFICATION_DURATION) {
     // יצירת אלמנט Toast
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
@@ -34,12 +36,12 @@ export function showNotification(message, type = 'info', duration = 3000) {
     
     // הסרה אוטומטית
     setTimeout(() => {
-        toast.style.animation = 'fadeOut 0.3s ease-out';
+        toast.style.animation = `fadeOut ${UI_TIMING.FADE_OUT_DURATION}ms ease-out`;
         setTimeout(() => {
             if (toast.parentNode) {
                 toast.parentNode.removeChild(toast);
             }
-        }, 300);
+        }, UI_TIMING.FADE_OUT_DURATION);
     }, duration);
     
     return toast;
@@ -49,28 +51,28 @@ export function showNotification(message, type = 'info', duration = 3000) {
  * הודעת הצלחה מהירה
  */
 export function showSuccess(message) {
-    return showNotification(message, 'success', 3000);
+    return showNotification(message, 'success', UI_TIMING.NOTIFICATION_DURATION);
 }
 
 /**
  * הודעת שגיאה
  */
 export function showError(message) {
-    return showNotification(message, 'error', 4000);
+    return showNotification(message, 'error', UI_TIMING.ERROR_NOTIFICATION_DURATION);
 }
 
 /**
  * הודעת אזהרה
  */
 export function showWarning(message) {
-    return showNotification(message, 'warning', 3500);
+    return showNotification(message, 'warning', UI_TIMING.WARNING_NOTIFICATION_DURATION);
 }
 
 /**
  * הודעת מידע
  */
 export function showInfo(message) {
-    return showNotification(message, 'info', 3000);
+    return showNotification(message, 'info', UI_TIMING.NOTIFICATION_DURATION);
 }
 
 // ===== הזרקת Styles למסך Toast =====

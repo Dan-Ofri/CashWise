@@ -5,6 +5,8 @@
  * פונקציות עזר לתאריכים ושעות
  */
 
+import { TIME_CALCULATIONS, MATH_CONSTANTS } from '../config/index.js';
+
 /**
  * פורמט תאריך לעברית
  */
@@ -37,8 +39,7 @@ export function formatDateTime(date = new Date()) {
  * חישוב הפרש זמן בימים
  */
 export function daysBetween(date1, date2) {
-    const oneDay = 24 * 60 * 60 * 1000;
-    return Math.round(Math.abs((date1 - date2) / oneDay));
+    return Math.round(Math.abs((date1 - date2) / TIME_CALCULATIONS.MILLISECONDS_PER_DAY));
 }
 
 /**
@@ -77,12 +78,12 @@ export function addMonths(date, months) {
  * קבלת תחילת החודש
  */
 export function getMonthStart(date = new Date()) {
-    return new Date(date.getFullYear(), date.getMonth(), 1);
+    return new Date(date.getFullYear(), date.getMonth(), MATH_CONSTANTS.ONE);
 }
 
 /**
  * קבלת סוף החודש
  */
 export function getMonthEnd(date = new Date()) {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    return new Date(date.getFullYear(), date.getMonth() + MATH_CONSTANTS.ONE, MATH_CONSTANTS.ZERO);
 }
