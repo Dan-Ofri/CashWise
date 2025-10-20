@@ -116,6 +116,7 @@ export function importAllData(data) {
 // ===== Keys מיוחדים למערכת =====
 
 export const STORAGE_KEYS = {
+    APP_STATE: 'cashwise-app-state',        // New state system (Phase 2)
     USER_PROFILE: 'user-profile',
     USER_LEVEL: 'user-level',
     USER_XP: 'user-xp',

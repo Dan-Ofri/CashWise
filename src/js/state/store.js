@@ -289,7 +289,8 @@ class Store {
                 const newValue = this._getByPath(newState, path);
                 
                 if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
-                    listener(newValue, oldValue);
+                    // Send full states, not just values
+                    listener(newState, oldState);
                 }
             }
         });
