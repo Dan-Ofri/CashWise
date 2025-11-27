@@ -44,6 +44,43 @@ yarn-error.log*
 .temp/
 tmp/
 
+# ===== Debug & Test Files =====
+*debug*.js
+*debug*.html
+test*.js
+test*.html
+quick-test*.js
+reset-*.html
+
+# ===== Development Reports =====
+*_REPORT*.md
+*_DEBUG*.md
+*_FIX*.md
+*_FIXES*.md
+*_COMPLETE*.md
+*_SUMMARY*.md
+*_PROGRESS*.md
+*_GUIDE*.md
+*_RESULTS*.md
+
+# ===== Scripts & Temp Tools =====
+replace-*.ps1
+replace-*.py
+*-replacements.js
+highlight-*.js
+gradient-*.js
+
+# ===== Office & Design Files =====
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.pptx
+*.png
+*.jpg
+*.jpeg
+Designer.*
+
 # ===== OS Generated Files =====
 Thumbs.db
 desktop.ini
