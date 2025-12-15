@@ -1,0 +1,542 @@
+/**
+ * CashWise - Lesson Content Styles
+ * Styles for lesson pages (quotes, analogies, tables, etc.)
+ * 
+ * @version 1.0.0
+ * @date 2025-10-20
+ */
+
+/* ============================================
+   Lesson Layout
+   ============================================ */
+
+.lesson-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.module-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid #e5e7eb;
+}
+
+.module-header h1 {
+    font-size: 2.5rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.module-meta {
+    font-size: 1.125rem;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.lesson-section {
+    margin-bottom: 4rem;
+}
+
+.lesson-section h2 {
+    font-size: 2rem;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+.section-intro {
+    font-size: 1.25rem;
+    color: #374151;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+/* ============================================
+   Quote Box
+   ============================================ */
+
+.quote-box {
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border-right: 6px solid #667eea;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.quote-box blockquote {
+    margin: 0;
+    font-size: 1.375rem;
+    line-height: 1.8;
+    color: #1f2937;
+    font-style: italic;
+}
+
+.quote-box blockquote p {
+    margin: 0.5rem 0;
+}
+
+.quote-box cite {
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    color: #667eea;
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* ============================================
+   Analogy Box
+   ============================================ */
+
+.analogy-box {
+    background: #ffffff;
+    border: 3px solid #667eea;
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+}
+
+.analogy-box h3 {
+    font-size: 1.75rem;
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.analogy-box p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #374151;
+    margin: 1rem 0;
+}
+
+.analogy-box strong {
+    color: #1f2937;
+    font-weight: 700;
+}
+
+/* Salary Progression */
+.salary-progression {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f9fafb;
+    border-radius: 12px;
+}
+
+.salary-year {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: #ffffff;
+    border-radius: 8px;
+    border-right: 4px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.salary-year:hover {
+    border-right-color: #667eea;
+    transform: translateX(-4px);
+}
+
+.salary-year.highlight {
+    background: #dbeafe;
+    border-right-color: #3b82f6;
+}
+
+.salary-year .year {
+    font-weight: 600;
+    color: #374151;
+}
+
+.salary-year .amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.salary-year .raise {
+    color: #6b7280;
+}
+
+/* Analogy Insight */
+.analogy-insight {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.analogy-insight p {
+    color: #ffffff;
+    margin: 0.75rem 0;
+}
+
+.analogy-insight strong {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.analogy-insight .cta {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   Definition Box
+   ============================================ */
+
+.definition-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 3px solid #f59e0b;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.definition {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #92400e;
+    margin: 0;
+}
+
+/* ============================================
+   Process Steps
+   ============================================ */
+
+.process-steps {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.process-steps h3 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.steps-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: step-counter;
+}
+
+.steps-list li {
+    font-size: 1.25rem;
+    color: #374151;
+    padding: 0.75rem 0;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.steps-list li:last-child {
+    border-bottom: none;
+}
+
+.key-insight {
+    background: #d1fae5;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border-right: 4px solid #10b981;
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+}
+
+/* ============================================
+   Contrast Box
+   ============================================ */
+
+.contrast-box {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border: 3px solid #10b981;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.contrast-box h3 {
+    font-size: 1.5rem;
+    color: #065f46;
+    margin-bottom: 1rem;
+}
+
+.contrast-box p {
+    font-size: 1.125rem;
+    color: #047857;
+    margin: 0.75rem 0;
+}
+
+.tree-evolution {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+/* ============================================
+   Data Table
+   ============================================ */
+
+.data-table-container {
+    margin: 2rem 0;
+}
+
+.data-table-container h3 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.compound-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.compound-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+}
+
+.compound-table th {
+    padding: 1rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.compound-table td {
+    padding: 0.875rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1.0625rem;
+}
+
+.compound-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.compound-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+.compound-table .highlight-row {
+    background: #dbeafe;
+}
+
+.compound-table .success-row {
+    background: #d1fae5;
+    font-weight: 700;
+}
+
+.table-note {
+    background: #fef3c7;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 1.0625rem;
+    color: #92400e;
+    text-align: center;
+}
+
+/* ============================================
+   Time Comparison
+   ============================================ */
+
+.time-comparison h3 {
+    font-size: 1.75rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.scenario-intro {
+    font-size: 1.25rem;
+    color: #6b7280;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.person-card {
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 3px solid;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.person-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.person-card.danny {
+    border-color: #10b981;
+    background: linear-gradient(135deg, #d1fae5 0%, #ffffff 100%);
+}
+
+.person-card.sara {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #dbeafe 0%, #ffffff 100%);
+}
+
+.person-card.michael {
+    border-color: #f59e0b;
+    background: linear-gradient(135deg, #fef3c7 0%, #ffffff 100%);
+}
+
+.person-card h4 {
+    font-size: 1.375rem;
+    margin-bottom: 1rem;
+}
+
+.person-card p {
+    font-size: 1.0625rem;
+    margin: 0.5rem 0;
+}
+
+.person-card .time-period {
+    color: #6b7280;
+}
+
+.person-card .result {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.person-card .profit {
+    font-weight: 700;
+    color: #10b981;
+}
+
+/* Shocking Insight */
+.shocking-insight {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    border: 3px solid #dc2626;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.shocking-insight h4 {
+    font-size: 1.5rem;
+    color: #991b1b;
+    margin-bottom: 1rem;
+}
+
+.shocking-insight ul {
+    list-style: none;
+    padding: 0;
+}
+
+.shocking-insight li {
+    font-size: 1.125rem;
+    color: #7f1d1d;
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+}
+
+.moral {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+.moral p {
+    font-size: 1.125rem;
+    color: #991b1b;
+    margin: 0.5rem 0;
+}
+
+/* ============================================
+   Breadcrumb
+   ============================================ */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+.breadcrumb a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+    color: #5568d3;
+}
+
+.breadcrumb span {
+    color: #9ca3af;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    .lesson-content {
+        padding: 1rem;
+    }
+    
+    .module-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .lesson-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .quote-box blockquote {
+        font-size: 1.125rem;
+    }
+    
+    .salary-year {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .compound-table {
+        font-size: 0.875rem;
+    }
+    
+    .compound-table th,
+    .compound-table td {
+        padding: 0.5rem;
+    }
+}

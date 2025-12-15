@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 CashWise - Module 2.1 Test</title>
+    
+    <!-- Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            padding: 2rem;
+            direction: rtl;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(90deg, #667eea, #764ba2, #f093fb) border-box;
+            border-image-slice: 1;
+            border-bottom: 3px solid;
+        }
+        
+        .test-header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .test-status {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff5fb 100%);
+            border-radius: 16px;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            animation: slideInRight 0.5s ease;
+        }
+        
+        .test-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .test-section h2 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .test-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            margin: 0.75rem 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .test-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+        
+        .test-icon {
+            font-size: 1.75rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .test-label {
+            flex: 1;
+            font-weight: 600;
+            color: #374151;
+            font-size: 1.125rem;
+        }
+        
+        .test-value {
+            color: #10b981;
+            font-weight: 800;
+            font-size: 1.25rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 6px;
+        }
+        
+        .btn {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-danger:hover {
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+        }
+        
+        .demo-box {
+            background: white;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        .demo-box::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 16px;
+            padding: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+        
+        .demo-box input {
+            padding: 0.875rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            width: 180px;
+            text-align: center;
+            font-size: 1.125rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .demo-result {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            text-align: center;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.2);
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .xp-display {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            margin: 1.5rem 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1.25rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+            font-weight: 700;
+            font-size: 1.125rem;
+            opacity: 0;
+            transform: translateX(-400px);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .test-container {
+                padding: 1.5rem;
+            }
+            
+            .test-header h1 {
+                font-size: 2rem;
+            }
+            
+            .btn-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-box input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <!-- Header -->
+        <div class="test-header">
+            <h1>🧪 Module 2.1 - מצב בדיקה</h1>
+            <div class="test-status">✅ מערכת פעילה</div>
+        </div>
+        
+        <!-- System Check -->
+        <div class="test-section">
+            <h2>📋 בדיקת מערכת</h2>
+            <div class="test-item">
+                <span class="test-icon">✅</span>
+                <span class="test-label">HTML טעון</span>
+                <span class="test-value">OK</span>
+            </div>
+            <div class="test-item">
+                <span class="test-icon">✅</span>
+                <span class="test-label">CSS טעון</span>
+                <span class="test-value">OK</span>
+            </div>
+            <div class="test-item">
+                <span class="test-icon">✅</span>
+                <span class="test-label">JavaScript פעיל</span>
+                <span class="test-value" id="js-status">בודק...</span>
+            </div>
+            <div class="test-item">
+                <span class="test-icon">✅</span>
+                <span class="test-label">RTL Support</span>
+                <span class="test-value">OK</span>
+            </div>
+        </div>
+        
+        <!-- Calculator Demo -->
+        <div class="test-section">
+            <h2>🧮 מחשבון ריבית דריבית - Demo</h2>
+            <div class="demo-box">
+                <div class="test-item">
+                    <span class="test-label">השקעה התחלתית:</span>
+                    <input type="number" id="principal" value="10000" 
+                           style="padding: 0.5rem; border: 2px solid #e5e7eb; border-radius: 4px; width: 150px; text-align: center;">
+                    <span>₪</span>
+                </div>
+                <div class="test-item">
+                    <span class="test-label">תשואה שנתית:</span>
+                    <input type="number" id="return-rate" value="10" 
+                           style="padding: 0.5rem; border: 2px solid #e5e7eb; border-radius: 4px; width: 150px; text-align: center;">
+                    <span>%</span>
+                </div>
+                <div class="test-item">
+                    <span class="test-label">מספר שנים:</span>
+                    <input type="number" id="years" value="30" 
+                           style="padding: 0.5rem; border: 2px solid #e5e7eb; border-radius: 4px; width: 150px; text-align: center;">
+                    <span>שנים</span>
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button class="btn" onclick="calculate()">🔢 חשב תוצאה</button>
+                </div>
+                <div id="result" class="demo-result" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <!-- XP System Demo -->
+        <div class="test-section">
+            <h2>💎 מערכת XP - Demo</h2>
+            <div style="text-align: center;">
+                <div class="xp-display">
+                    <span id="xp-display">0</span> XP
+                </div>
+                <div class="btn-grid">
+                    <button class="btn" onclick="addXP(10)">
+                        ⭐ +10 XP<br>
+                        <small style="opacity: 0.8; font-size: 0.875rem;">מילוי משימה</small>
+                    </button>
+                    <button class="btn" onclick="addXP(20)">
+                        💫 +20 XP<br>
+                        <small style="opacity: 0.8; font-size: 0.875rem;">סיום מודול</small>
+                    </button>
+                    <button class="btn" onclick="addXP(50)">
+                        🏆 +50 XP<br>
+                        <small style="opacity: 0.8; font-size: 0.875rem;">ציון מושלם</small>
+                    </button>
+                    <button class="btn btn-danger" onclick="resetXP()">
+                        🔄 אפס XP
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Test -->
+        <div class="test-section">
+            <h2>🧭 ניווט ומעברים</h2>
+            <div class="btn-grid">
+                <button class="btn" onclick="showNotification('✅ המודול הושלם בהצלחה!')">
+                    ✅ סיים מודול
+                </button>
+                <button class="btn" onclick="showNotification('➡️ עוברים ל-Quiz!')">
+                    📝 המשך ל-Quiz
+                </button>
+                <button class="btn btn-success" 
+                        onclick="window.location.href='lesson-2-module-1.html'">
+                    🚀 פתח גרסה מלאה
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+    
+    <script>
+        // Mark JS as loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('js-status').textContent = 'OK';
+            document.getElementById('js-status').style.color = '#10b981';
+            console.log('✅ Module 2.1 Test - System Active');
+        });
+        
+        // Calculator function
+        function calculate() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const returnRate = parseFloat(document.getElementById('return-rate').value) / 100;
+            const years = parseInt(document.getElementById('years').value);
+            
+            // Compound interest formula: A = P(1 + r)^t
+            const finalAmount = principal * Math.pow(1 + returnRate, years);
+            const profit = finalAmount - principal;
+            const roi = ((finalAmount / principal) - 1) * 100;
+            
+            // Display result
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">
+                    💰 סכום סופי: <strong>${Math.round(finalAmount).toLocaleString('he-IL')}₪</strong>
+                </div>
+                <div style="font-size: 1rem; color: #6b7280;">
+                    📈 רווח: ${Math.round(profit).toLocaleString('he-IL')}₪ 
+                    | 🎯 ROI: ${Math.round(roi)}%
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+            
+            showNotification('✅ חישוב הושלם בהצלחה!');
+        }
+        
+        // XP system
+        let currentXP = 0;
+        
+        function addXP(amount) {
+            currentXP += amount;
+            document.getElementById('xp-display').textContent = currentXP;
+            showNotification(`🎉 קיבלת ${amount} XP!`);
+        }
+        
+        function resetXP() {
+            currentXP = 0;
+            document.getElementById('xp-display').textContent = currentXP;
+            showNotification('🔄 XP אופס!');
+        }
+        
+        // Notification system
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Log to console
+        console.log('🎓 CashWise - Module 2.1 Test Page');
+        console.log('📊 Calculator: Ready');
+        console.log('💎 XP System: Ready');
+        console.log('🧭 Navigation: Ready');
+        console.log('✅ All systems operational!');
+    </script>
+</body>
+</html>

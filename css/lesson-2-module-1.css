@@ -1,0 +1,938 @@
+/**
+ * CashWise - Lesson 2 Module 2.1 Styles
+ * "ריבית דריבית - הכוח של הזמן"
+ * 
+ * Styles for:
+ * - Compound Interest Calculator (dual-tab)
+ * - Interactive charts
+ * - Quiz system
+ * - Gamification elements
+ * 
+ * @version 1.0.0
+ * @date 2025-10-20
+ */
+
+/* ============================================
+   Calculator Container
+   ============================================ */
+
+.compound-calculator {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin: 2rem 0;
+    direction: rtl;
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.calculator-header h3 {
+    font-size: 2rem;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.calculator-subtitle {
+    color: #6b7280;
+    font-size: 1.125rem;
+}
+
+/* ============================================
+   Tabs
+   ============================================ */
+
+.calculator-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #6b7280;
+}
+
+.tab-button:hover {
+    background: #f9fafb;
+    color: #374151;
+}
+
+.tab-button.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+    background: #f9fafb;
+}
+
+/* ============================================
+   Tab Content
+   ============================================ */
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Inputs
+   ============================================ */
+
+.calculator-inputs {
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.75rem;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.slider-container input[type="range"] {
+    flex: 1;
+    height: 8px;
+    border-radius: 5px;
+    background: #e5e7eb;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    transition: all 0.2s ease;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.number-input {
+    width: 120px;
+    padding: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+    transition: all 0.2s ease;
+}
+
+.number-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: #ffffff;
+}
+
+.currency {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #6b7280;
+    min-width: 40px;
+}
+
+/* ============================================
+   Results
+   ============================================ */
+
+.calculator-results {
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.calculator-results h4 {
+    font-size: 1.25rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.result-item:hover {
+    background: #f3f4f6;
+}
+
+.result-item.highlight {
+    background: #dbeafe;
+    border-right: 4px solid #3b82f6;
+}
+
+.result-item.success {
+    background: #d1fae5;
+    border-right: 4px solid #10b981;
+}
+
+.result-item.time {
+    background: #fef3c7;
+    border-right: 4px solid #f59e0b;
+}
+
+.result-label {
+    font-size: 1rem;
+    color: #6b7280;
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* ============================================
+   Insight Box
+   ============================================ */
+
+.insight-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.insight-text {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.insight-text strong {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* ============================================
+   Personal Mission
+   ============================================ */
+
+.personal-mission {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.personal-mission h4 {
+    font-size: 1.25rem;
+    color: #92400e;
+    margin-bottom: 0.5rem;
+}
+
+.personal-mission p {
+    color: #78350f;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mission-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    background: #f59e0b;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mission-button:hover {
+    background: #d97706;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.mission-button:disabled,
+.mission-button.completed {
+    background: #10b981;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   Chart
+   ============================================ */
+
+.chart-container {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f9fafb;
+    border-radius: 12px;
+}
+
+.chart-container h4 {
+    font-size: 1.25rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.chart-note {
+    text-align: center;
+    color: #6b7280;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+/* ============================================
+   Key Insights
+   ============================================ */
+
+.key-insights {
+    margin: 2rem 0;
+}
+
+.key-insights h4 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+.insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.insight-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.1);
+    transform: translateY(-4px);
+}
+
+.insight-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.insight-content strong {
+    display: block;
+    font-size: 1.125rem;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.insight-content p {
+    color: #6b7280;
+    font-size: 0.975rem;
+    margin: 0;
+}
+
+/* ============================================
+   Action Buttons
+   ============================================ */
+
+.calculator-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e5e7eb;
+}
+
+.btn-secondary,
+.btn-primary {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.btn-secondary:hover {
+    background: #e5e7eb;
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: #667eea;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* ============================================
+   XP Notification
+   ============================================ */
+
+.xp-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    font-weight: 600;
+    font-size: 1.125rem;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+.xp-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ============================================
+   Quiz Styles
+   ============================================ */
+
+.quiz-container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.quiz-header {
+    margin-bottom: 2rem;
+}
+
+.quiz-header h3 {
+    font-size: 1.75rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.quiz-progress {
+    margin-top: 1rem;
+}
+
+.quiz-progress span {
+    display: block;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+}
+
+.quiz-question h4 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: right;
+}
+
+.quiz-option:hover {
+    border-color: #667eea;
+    background: #ffffff;
+    transform: translateX(-4px);
+}
+
+.option-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #667eea;
+    color: #ffffff;
+    border-radius: 50%;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.option-text {
+    flex: 1;
+    font-size: 1.125rem;
+    color: #374151;
+}
+
+.quiz-feedback {
+    margin-top: 1.5rem;
+    display: none;
+}
+
+.feedback-success,
+.feedback-error {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    animation: slideIn 0.3s ease;
+}
+
+.feedback-success {
+    background: #d1fae5;
+    border-right: 4px solid #10b981;
+}
+
+.feedback-error {
+    background: #fee2e2;
+    border-right: 4px solid #ef4444;
+}
+
+.feedback-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.feedback-content strong {
+    display: block;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.feedback-content p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Quiz Results
+   ============================================ */
+
+.quiz-results {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.results-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.results-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.results-icon.success {
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.results-header h3 {
+    font-size: 2rem;
+    color: #1f2937;
+}
+
+.results-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: #f9fafb;
+    border-radius: 12px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    display: block;
+}
+
+.stat-item.success .stat-value {
+    color: #10b981;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+.achievement-unlocked {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.achievement-icon {
+    font-size: 3rem;
+}
+
+.achievement-content strong {
+    display: block;
+    font-size: 1.25rem;
+    color: #92400e;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-content p {
+    font-size: 1.125rem;
+    color: #78350f;
+    margin: 0.5rem 0;
+}
+
+.achievement-content small {
+    color: #a16207;
+}
+
+/* ============================================
+   Results Review
+   ============================================ */
+
+.results-review {
+    margin: 2rem 0;
+}
+
+.results-review h4 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.review-item {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    border-right: 4px solid;
+}
+
+.review-item.correct {
+    background: #d1fae5;
+    border-color: #10b981;
+}
+
+.review-item.incorrect {
+    background: #fee2e2;
+    border-color: #ef4444;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.review-icon {
+    font-size: 1.5rem;
+}
+
+.review-question {
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.review-text {
+    font-size: 1.125rem;
+    color: #1f2937;
+    margin: 0.5rem 0;
+}
+
+.review-answer,
+.review-correct,
+.review-explanation {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.results-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* ============================================
+   Module Completion
+   ============================================ */
+
+.module-completion {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.completion-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.completion-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: bounce 0.6s ease;
+}
+
+.completion-header h2 {
+    font-size: 2rem;
+    color: #1f2937;
+}
+
+.completion-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.completion-list li {
+    padding: 0.75rem;
+    font-size: 1.125rem;
+    color: #374151;
+}
+
+.completion-quote {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-right: 4px solid #3b82f6;
+    margin: 2rem 0;
+}
+
+.completion-quote p {
+    margin: 0.5rem 0;
+    font-size: 1.125rem;
+}
+
+.achievement-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+}
+
+.badge-icon {
+    font-size: 3rem;
+}
+
+.badge-text strong {
+    display: block;
+    font-size: 1.25rem;
+    color: #92400e;
+}
+
+.badge-text p {
+    color: #78350f;
+    margin: 0.5rem 0 0 0;
+}
+
+.completion-xp ul {
+    list-style: none;
+    padding: 0;
+}
+
+.completion-xp li {
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #6b7280;
+}
+
+.xp-total {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #d1fae5;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.xp-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #10b981;
+    margin-right: 0.5rem;
+}
+
+.completion-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    .compound-calculator,
+    .quiz-container,
+    .quiz-results,
+    .module-completion {
+        padding: 1.5rem;
+    }
+    
+    .calculator-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .insight-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .calculator-actions,
+    .results-actions,
+    .completion-actions {
+        flex-direction: column;
+    }
+    
+    .btn-secondary,
+    .btn-primary {
+        width: 100%;
+    }
+}

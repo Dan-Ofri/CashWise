@@ -1,0 +1,752 @@
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CashWise - שיעור 2: ריבית דריבית - הכוח של הזמן</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Lesson Page CSS - Clean & Simple -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            direction: rtl;
+            line-height: 1.6;
+        }
+        
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .app-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-content h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .header-nav a:hover,
+        .header-nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-user {
+            display: flex;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+        
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .app-footer {
+            background: #1e293b;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+    </style>
+    
+    <!-- No redundant lesson CSS: all styles from main app's design system and lesson-player.css -->
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1>💰 CashWise</h1>
+                <nav class="header-nav">
+                    <a href="index.html">🏠 בית</a>
+                    <a href="#academy" class="active">🎓 אקדמיה</a>
+                    <a href="#simulation">🎮 סימולטור</a>
+                    <a href="#profile">👤 פרופיל</a>
+                </nav>
+                <div class="header-user">
+                    <span class="user-xp">💎 <span id="user-xp-display">0</span> XP</span>
+                    <span class="user-level">⭐ רמה <span id="user-level-display">1</span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="#academy">🎓 אקדמיה</a>
+                <span>›</span>
+                <a href="#lesson-2">📚 שיעור 2: צמח את הכסף</a>
+                <span>›</span>
+                <span>🧩 Module 2.1: ריבית דריבית</span>
+            </div>
+
+            <!-- Lesson Content -->
+            <article class="lesson-content">
+                <!-- Module Header -->
+                <header class="module-header">
+                    <h1>🧩 Module 2.1: ריבית דריבית - הכוח של הזמן</h1>
+                    <p class="module-meta">⏱️ 15 דקות | 💎 20-50 XP | 🎯 4 חלקים</p>
+                </header>
+
+                <!-- Part 1: Opening Quote -->
+                <section class="lesson-section">
+                    <h2>🎬 הפלא השמיני בתבל</h2>
+                    <div class="quote-box">
+                        <blockquote>
+                            <p>"ריבית דריבית היא הפלא השמיני בתבל.</p>
+                            <p>מי שמבין אותה - מרויח ממנה.</p>
+                            <p>מי שלא מבין אותה - משלם אותה."</p>
+                        </blockquote>
+                        <cite>- אלברט איינשטיין 🧠</cite>
+                    </div>
+                    <p class="section-intro">💡 אז מה זה ממש? בואו נגלה...</p>
+                </section>
+
+                <!-- Part 2: Salary Analogy -->
+                <section class="lesson-section">
+                    <h2>💼 דמיינו את עצמכם...</h2>
+                    <div class="analogy-box">
+                        <h3>שכר מעבידים - איך זה עובד?</h3>
+                        <p>דמיינו שאתם מתחילים לעבוד בחברה היי-טק מדהימה.</p>
+                        <p>המעסיק מבטיח: <strong>'כל שנה תקבלו 10% העלאה - לא רק על השכר הבסיסי, אלא על כל מה שיש!'</strong></p>
+                        
+                        <div class="salary-progression">
+                            <div class="salary-year">
+                                <span class="year">💰 שנה 1 (גיל 25):</span>
+                                <span class="amount">10,000₪/חודש</span>
+                                <span class="raise">העלאה: 1,000₪</span>
+                            </div>
+                            <div class="salary-year">
+                                <span class="year">📈 שנה 2 (גיל 26):</span>
+                                <span class="amount">11,000₪/חודש</span>
+                                <span class="raise">העלאה: 1,100₪ ⬆️</span>
+                            </div>
+                            <div class="salary-year">
+                                <span class="year">📈 שנה 3 (גיל 27):</span>
+                                <span class="amount">12,100₪/חודש</span>
+                                <span class="raise">העלאה: 1,210₪ ⬆️⬆️</span>
+                            </div>
+                            <div class="salary-year highlight">
+                                <span class="year">🚀 שנה 10 (גיל 35):</span>
+                                <span class="amount">25,937₪/חודש</span>
+                                <span class="raise">העלאה: 2,594₪</span>
+                            </div>
+                            <div class="salary-year highlight">
+                                <span class="year">💎 שנה 30 (גיל 55):</span>
+                                <span class="amount">174,494₪/חודש</span>
+                                <span class="raise">העלאה: 17,449₪!</span>
+                            </div>
+                        </div>
+                        
+                        <div class="analogy-insight">
+                            <p>🤯 מה קרה פה? בהתחלה קיבלתם העלאה של 1,000₪. אבל בשנה 30? ההעלאה השנתית היא 17,449₪!</p>
+                            <p><strong>💡 זה בדיוק הכוח של ריבית דריבית</strong> - ההעלאה גדלה כל פעם, כי היא מחושבת על סכום שגדל!</p>
+                            <p class="cta">🎯 עכשיו תחשבו: אם השכר שלכם יכול לגדול ככה, למה הכסף שלכם לא יגדל ככה? <strong>הוא יכול!</strong> זה בדיוק מה שקורה כשאתם משקיעים נכון! 🚀</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Part 3: Definition & Process -->
+                <section class="lesson-section">
+                    <h2>📚 מה זה ריבית דריבית?</h2>
+                    <div class="definition-box">
+                        <p class="definition">"ריבית דריבית = כסף שמרויח כסף על הכסף שהרויח"</p>
+                    </div>
+                    
+                    <div class="process-steps">
+                        <h3>🔄 התהליך:</h3>
+                        <ol class="steps-list">
+                            <li>1️⃣ השקעת כסף</li>
+                            <li>2️⃣ הכסף מרויח ריבית</li>
+                            <li>3️⃣ הריבית מצטרפת לכסף המקורי</li>
+                            <li>4️⃣ עכשיו הכסף הגדול יותר מרויח ריבית</li>
+                            <li>5️⃣ חוזר חלילה → צמיחה מתגברת! 🚀</li>
+                        </ol>
+                        <p class="key-insight">💡 <strong>הסוד:</strong> ככל שעובר יותר זמן, התהליך מתחזק!</p>
+                    </div>
+                    
+                    <div class="contrast-box">
+                        <h3>🌳 קונטרסט: השכר vs. העץ</h3>
+                        <p>"אם השכר הוא כמו עץ שמניב פירות כל שנה (העלאות), אז השקעות הן כמו יער שלם שצומח מהזרעים של העץ הראשון!"</p>
+                        <p class="tree-evolution">🌱 עץ אחד → 🌳 10 עצים → 🌲🌲 100 עצים → 🏞️ יער שלם!</p>
+                        <p><strong>זה ההבדל בין ריבית פשוטה (עץ אחד) לריבית דריבית (יער שמתרבה!).</strong></p>
+                    </div>
+                    
+                    <!-- Detailed Table -->
+                    <div class="data-table-container">
+                        <h3>📊 הטבלה המפורטת:</h3>
+                        <table class="compound-table">
+                            <thead>
+                                <tr>
+                                    <th>שנה</th>
+                                    <th>קרן</th>
+                                    <th>ריבית 10%</th>
+                                    <th>סה"כ סוף שנה</th>
+                                    <th>רווח מצטבר</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>1,000₪</td>
+                                    <td>-</td>
+                                    <td>1,000₪</td>
+                                    <td>0₪</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1,000₪</td>
+                                    <td>+100₪</td>
+                                    <td>1,100₪</td>
+                                    <td>+100₪</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>1,100₪</td>
+                                    <td>+110₪</td>
+                                    <td>1,210₪</td>
+                                    <td>+210₪</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>1,210₪</td>
+                                    <td>+121₪</td>
+                                    <td>1,331₪</td>
+                                    <td>+331₪</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>5</td>
+                                    <td>1,464₪</td>
+                                    <td>+146₪</td>
+                                    <td>1,611₪</td>
+                                    <td>+611₪</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>10</td>
+                                    <td>2,358₪</td>
+                                    <td>+236₪</td>
+                                    <td>2,594₪</td>
+                                    <td>+1,594₪</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>15</td>
+                                    <td>3,797₪</td>
+                                    <td>+380₪</td>
+                                    <td>4,177₪</td>
+                                    <td>+3,177₪</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>20</td>
+                                    <td>6,116₪</td>
+                                    <td>+612₪</td>
+                                    <td>6,727₪</td>
+                                    <td>+5,727₪</td>
+                                </tr>
+                                <tr class="success-row">
+                                    <td>30</td>
+                                    <td>15,863₪</td>
+                                    <td>+1,586₪</td>
+                                    <td>17,449₪</td>
+                                    <td>+16,449₪ 🚀</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="table-note">⚡ שים לב: בשנה 1 הרווחת 100₪ | בשנה 30 הרווחת 1,586₪ באותה שנה! זה פי 15 יותר - רק בגלל הזמן! ⏰</p>
+                    </div>
+                </section>
+
+                <!-- Part 4: Time = Power -->
+                <section class="lesson-section">
+                    <h2>⏰ הזמן = הכוח שלך!</h2>
+                    <div class="time-comparison">
+                        <h3>למה צעירים הם המנצחים הגדולים?</h3>
+                        <p class="scenario-intro">📊 דוגמה: 3 אנשים מתחילים להשקיע 1,000₪ בחודש ב-10%</p>
+                        
+                        <div class="comparison-grid">
+                            <div class="person-card danny">
+                                <h4>👤 דני - בן 25</h4>
+                                <p class="time-period">40 שנות השקעה</p>
+                                <p class="invested">💰 השקעה: 480,000₪</p>
+                                <p class="result">📈 תוצאה: 6,323,000₪ 🚀</p>
+                                <p class="profit">🎯 רווח: 5,843,000₪</p>
+                            </div>
+                            <div class="person-card sara">
+                                <h4>👤 שרה - בת 35</h4>
+                                <p class="time-period">30 שנות השקעה</p>
+                                <p class="invested">💰 השקעה: 360,000₪</p>
+                                <p class="result">📈 תוצאה: 2,260,000₪</p>
+                                <p class="profit">🎯 רווח: 1,900,000₪</p>
+                            </div>
+                            <div class="person-card michael">
+                                <h4>👤 מיכאל - בן 45</h4>
+                                <p class="time-period">20 שנות השקעה</p>
+                                <p class="invested">💰 השקעה: 240,000₪</p>
+                                <p class="result">📈 תוצאה: 763,000₪</p>
+                                <p class="profit">🎯 רווח: 523,000₪</p>
+                            </div>
+                        </div>
+                        
+                        <div class="shocking-insight">
+                            <h4>🤯 התובנה המטורפת:</h4>
+                            <ul>
+                                <li>• דני השקיע 120,000₪ יותר ממיכאל (480K vs 360K)</li>
+                                <li>• אבל הרווח שלו גדול <strong>פי 11!</strong> (5.8M vs 523K)</li>
+                                <li>• זה לא בגלל שהשקיע יותר - <strong>זה בגלל הזמן!</strong> ⏰</li>
+                            </ul>
+                            <div class="moral">
+                                <p>💡 <strong>מוסר השכל:</strong></p>
+                                <p>"כל שנה שאתה דוחה = עשרות אלפי שקלים שאתה מפסיד!"</p>
+                                <p><strong>"אם אתה צעיר - יש לך את הנכס הכי חשוב: זמן!"</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Part 5: Interactive Calculator -->
+                <section class="lesson-section">
+                    <h2>🖥️ נסה בעצמך - ראה את הקסם!</h2>
+                    <div id="compound-calculator"></div>
+                </section>
+
+                <!-- Part 6: Quiz -->
+                <section class="lesson-section">
+                    <h2>🧪 בדיקת הבנה</h2>
+                    <div id="module-2-1-quiz"></div>
+                </section>
+            </article>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2025 CashWise. כל הזכויות שמורות.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        console.log('🚀 Starting Module 2.1 initialization...');
+        
+        import store from './js/state/store.js';
+        import { CompoundInterestCalculator } from './js/modules/lesson-2-compound-interest.js';
+        import { CompoundInterestQuiz } from './js/modules/lesson-2-quiz.js';
+        
+        console.log('✅ All modules imported successfully');
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('📄 DOM loaded, initializing components...');
+            
+            // Initialize calculator
+            console.log('🧮 Initializing calculator...');
+            const calculator = new CompoundInterestCalculator('compound-calculator');
+            console.log('✅ Calculator initialized:', calculator);
+            
+            // Initialize quiz
+            console.log('📝 Initializing quiz...');
+            const quiz = new CompoundInterestQuiz('module-2-1-quiz');
+            console.log('✅ Quiz initialized:', quiz);
+            
+            // Subscribe to state changes for XP display
+            store.subscribe((newState) => {
+                const xpDisplay = document.getElementById('user-xp-display');
+                if (xpDisplay) {
+                    xpDisplay.textContent = newState.user?.xp || 0;
+                }
+            });
+            
+            // Initial XP display
+            const currentState = store.getState();
+            const xpDisplay = document.getElementById('user-xp-display');
+            if (xpDisplay) {
+                xpDisplay.textContent = currentState.user?.xp || 0;
+            }
+            
+            console.log('🎉 Module 2.1 fully initialized!');
+            console.log('💎 Current XP:', currentState.user?.xp || 0);
+        });
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="description" content="CashWise - למידה פיננסית חכמה. פלטפורמה אינטראקטיבית ללמידת ניהול כספים אישיים.">
+    <meta name="theme-color" content="#1e293b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#667eea" media="(prefers-color-scheme: light)">
+    <title>CashWise - שיעור 2: ריבית דריבית - הכוח של הזמן</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- 💎 CashWise v7.0 - Organized CSS -->
+    <link rel="stylesheet" href="src/css/main.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/themes.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/components.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/utilities.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/floating-academy.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/minimal-ui.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/simulation-compact.css?v=2025-10-19-CRITICAL">
+    <link rel="stylesheet" href="src/css/modals-sidebars.css?v=2025-10-19">
+    <link rel="stylesheet" href="src/css/stage-d-financial.css?v=2025-10-18">
+    <link rel="stylesheet" href="src/css/lesson-player.css?v=2025-10-18">
+    <link rel="stylesheet" href="src/css/fullscreen-layout.css?v=2025-10-19-FINAL">
+    <link rel="stylesheet" href="src/css/responsive.css?v=2025-10-19-RESPONSIVE">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+<!-- Header מינימליסטי -->
+<header class="minimal-header">
+    <a href="#" class="logo-minimal" onclick="showSection('simulation'); return false;">
+        CashWise
+    </a>
+    <div class="xp-bar-minimal">
+        <span id="user-level">רמה 1</span>
+        <div class="xp-bar-small">
+            <div id="xp-fill" class="xp-fill"></div>
+        </div>
+        <span id="xp-text">0/100 XP</span>
+    </div>
+</header>
+<div class="floating-buttons">
+    <button class="fab" onclick="openProfileModal()" title="פרופיל פיננסי">
+        <i class="fas fa-chart-line"></i>
+    </button>
+    <button class="fab" onclick="openMentorSidebar()" title="מנטור פיננסי">
+        <i class="fas fa-robot"></i>
+    </button>
+</div>
+<!-- Main Lesson Content -->
+<section id="academy-content">
+    <div class="lesson-player">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="#academy">🎓 אקדמיה</a>
+            <span>›</span>
+            <a href="#lesson-2">📚 שיעור 2: צמח את הכסף</a>
+            <span>›</span>
+            <span>🧩 Module 2.1: ריבית דריבית</span>
+        </div>
+        <!-- Lesson Content -->
+        <article class="lesson-content">
+            <!-- Module Header -->
+            <header class="module-header">
+                <h1>🧩 Module 2.1: ריבית דריבית - הכוח של הזמן</h1>
+                <p class="module-meta">⏱️ 15 דקות | 💎 20-50 XP | 🎯 4 חלקים</p>
+            </header>
+            <!-- Part 1: Opening Quote -->
+            <section class="lesson-section">
+                <h2>🎬 הפלא השמיני בתבל</h2>
+                <div class="quote-box">
+                    <blockquote>
+                        <p>"ריבית דריבית היא הפלא השמיני בתבל.</p>
+                        <p>מי שמבין אותה - מרויח ממנה.</p>
+                        <p>מי שלא מבין אותה - משלם אותה."</p>
+                    </blockquote>
+                    <cite>- אלברט איינשטיין 🧠</cite>
+                </div>
+                <p class="section-intro">💡 אז מה זה ממש? בואו נגלה...</p>
+            </section>
+            <!-- Part 2: Salary Analogy -->
+            <section class="lesson-section">
+                <h2>💼 דמיינו את עצמכם...</h2>
+                <div class="analogy-box">
+                    <h3>שכר מעבידים - איך זה עובד?</h3>
+                    <p>דמיינו שאתם מתחילים לעבוד בחברה היי-טק מדהימה.</p>
+                    <p>המעסיק מבטיח: <strong>'כל שנה תקבלו 10% העלאה - לא רק על השכר הבסיסי, אלא על כל מה שיש!'</strong></p>
+                    <div class="salary-progression">
+                        <div class="salary-year">
+                            <span class="year">💰 שנה 1 (גיל 25):</span>
+                            <span class="amount">10,000₪/חודש</span>
+                            <span class="raise">העלאה: 1,000₪</span>
+                        </div>
+                        <div class="salary-year">
+                            <span class="year">📈 שנה 2 (גיל 26):</span>
+                            <span class="amount">11,000₪/חודש</span>
+                            <span class="raise">העלאה: 1,100₪ ⬆️</span>
+                        </div>
+                        <div class="salary-year">
+                            <span class="year">📈 שנה 3 (גיל 27):</span>
+                            <span class="amount">12,100₪/חודש</span>
+                            <span class="raise">העלאה: 1,210₪ ⬆️⬆️</span>
+                        </div>
+                        <div class="salary-year highlight">
+                            <span class="year">🚀 שנה 10 (גיל 35):</span>
+                            <span class="amount">25,937₪/חודש</span>
+                            <span class="raise">העלאה: 2,594₪</span>
+                        </div>
+                        <div class="salary-year highlight">
+                            <span class="year">💎 שנה 30 (גיל 55):</span>
+                            <span class="amount">174,494₪/חודש</span>
+                            <span class="raise">העלאה: 17,449₪!</span>
+                        </div>
+                    </div>
+                    <div class="analogy-insight">
+                        <p>🤯 מה קרה פה? בהתחלה קיבלתם העלאה של 1,000₪. אבל בשנה 30? ההעלאה השנתית היא 17,449₪!</p>
+                        <p><strong>💡 זה בדיוק הכוח של ריבית דריבית</strong> - ההעלאה גדלה כל פעם, כי היא מחושבת על סכום שגדל!</p>
+                        <p class="cta">🎯 עכשיו תחשבו: אם השכר שלכם יכול לגדול ככה, למה הכסף שלכם לא יגדל ככה? <strong>הוא יכול!</strong> זה בדיוק מה שקורה כשאתם משקיעים נכון! 🚀</p>
+                    </div>
+                </div>
+            </section>
+            <!-- Part 3: Definition & Process -->
+            <section class="lesson-section">
+                <h2>📚 מה זה ריבית דריבית?</h2>
+                <div class="definition-box">
+                    <p class="definition">"ריבית דריבית = כסף שמרויח כסף על הכסף שהרויח"</p>
+                </div>
+                <div class="process-steps">
+                    <h3>🔄 התהליך:</h3>
+                    <ol class="steps-list">
+                        <li>1️⃣ השקעת כסף</li>
+                        <li>2️⃣ הכסף מרויח ריבית</li>
+                        <li>3️⃣ הריבית מצטרפת לכסף המקורי</li>
+                        <li>4️⃣ עכשיו הכסף הגדול יותר מרויח ריבית</li>
+                        <li>5️⃣ חוזר חלילה → צמיחה מתגברת! 🚀</li>
+                    </ol>
+                    <p class="key-insight">💡 <strong>הסוד:</strong> ככל שעובר יותר זמן, התהליך מתחזק!</p>
+                </div>
+                <div class="contrast-box">
+                    <h3>🌳 קונטרסט: השכר vs. העץ</h3>
+                    <p>"אם השכר הוא כמו עץ שמניב פירות כל שנה (העלאות), אז השקעות הן כמו יער שלם שצומח מהזרעים של העץ הראשון!"</p>
+                    <p class="tree-evolution">🌱 עץ אחד → 🌳 10 עצים → 🌲🌲 100 עצים → 🏞️ יער שלם!</p>
+                    <p><strong>זה ההבדל בין ריבית פשוטה (עץ אחד) לריבית דריבית (יער שמתרבה!).</strong></p>
+                </div>
+                <div class="data-table-container">
+                    <h3>📊 הטבלה המפורטת:</h3>
+                    <table class="compound-table">
+                        <thead>
+                            <tr>
+                                <th>שנה</th>
+                                <th>קרן</th>
+                                <th>ריבית 10%</th>
+                                <th>סה"כ סוף שנה</th>
+                                <th>רווח מצטבר</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>1,000₪</td>
+                                <td>-</td>
+                                <td>1,000₪</td>
+                                <td>0₪</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>1,000₪</td>
+                                <td>+100₪</td>
+                                <td>1,100₪</td>
+                                <td>+100₪</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>1,100₪</td>
+                                <td>+110₪</td>
+                                <td>1,210₪</td>
+                                <td>+210₪</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>1,210₪</td>
+                                <td>+121₪</td>
+                                <td>1,331₪</td>
+                                <td>+331₪</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td>5</td>
+                                <td>1,464₪</td>
+                                <td>+146₪</td>
+                                <td>1,611₪</td>
+                                <td>+611₪</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td>10</td>
+                                <td>2,358₪</td>
+                                <td>+236₪</td>
+                                <td>2,594₪</td>
+                                <td>+1,594₪</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td>15</td>
+                                <td>3,797₪</td>
+                                <td>+380₪</td>
+                                <td>4,177₪</td>
+                                <td>+3,177₪</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td>20</td>
+                                <td>6,116₪</td>
+                                <td>+612₪</td>
+                                <td>6,727₪</td>
+                                <td>+5,727₪</td>
+                            </tr>
+                            <tr class="success-row">
+                                <td>30</td>
+                                <td>15,863₪</td>
+                                <td>+1,586₪</td>
+                                <td>17,449₪</td>
+                                <td>+16,449₪ 🚀</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="table-note">⚡ שים לב: בשנה 1 הרווחת 100₪ | בשנה 30 הרווחת 1,586₪ באותה שנה! זה פי 15 יותר - רק בגלל הזמן! ⏰</p>
+                </div>
+            </section>
+            <!-- Part 4: Time = Power -->
+            <section class="lesson-section">
+                <h2>⏰ הזמן = הכוח שלך!</h2>
+                <div class="time-comparison">
+                    <h3>למה צעירים הם המנצחים הגדולים?</h3>
+                    <p class="scenario-intro">📊 דוגמה: 3 אנשים מתחילים להשקיע 1,000₪ בחודש ב-10%</p>
+                    <div class="comparison-grid">
+                        <div class="person-card danny">
+                            <h4>👤 דני - בן 25</h4>
+                            <p class="time-period">40 שנות השקעה</p>
+                            <p class="invested">💰 השקעה: 480,000₪</p>
+                            <p class="result">📈 תוצאה: 6,323,000₪ 🚀</p>
+                            <p class="profit">🎯 רווח: 5,843,000₪</p>
+                        </div>
+                        <div class="person-card sara">
+                            <h4>👤 שרה - בת 35</h4>
+                            <p class="time-period">30 שנות השקעה</p>
+                            <p class="invested">💰 השקעה: 360,000₪</p>
+                            <p class="result">📈 תוצאה: 2,260,000₪</p>
+                            <p class="profit">🎯 רווח: 1,900,000₪</p>
+                        </div>
+                        <div class="person-card michael">
+                            <h4>👤 מיכאל - בן 45</h4>
+                            <p class="time-period">20 שנות השקעה</p>
+                            <p class="invested">💰 השקעה: 240,000₪</p>
+                            <p class="result">📈 תוצאה: 763,000₪</p>
+                            <p class="profit">🎯 רווח: 523,000₪</p>
+                        </div>
+                    </div>
+                    <div class="shocking-insight">
+                        <h4>🤯 התובנה המטורפת:</h4>
+                        <ul>
+                            <li>• דני השקיע 120,000₪ יותר ממיכאל (480K vs 360K)</li>
+                            <li>• אבל הרווח שלו גדול <strong>פי 11!</strong> (5.8M vs 523K)</li>
+                            <li>• זה לא בגלל שהשקיע יותר - <strong>זה בגלל הזמן!</strong> ⏰</li>
+                        </ul>
+                        <div class="moral">
+                            <p>💡 <strong>מוסר השכל:</strong></p>
+                            <p>"כל שנה שאתה דוחה = עשרות אלפי שקלים שאתה מפסיד!"</p>
+                            <p><strong>"אם אתה צעיר - יש לך את הנכס הכי חשוב: זמן!"</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Part 5: Interactive Calculator -->
+            <section class="lesson-section">
+                <h2>🖥️ נסה בעצמך - ראה את הקסם!</h2>
+                <div id="compound-calculator"></div>
+            </section>
+            <!-- Part 6: Quiz -->
+            <section class="lesson-section">
+                <h2>🧪 בדיקת הבנה</h2>
+                <div id="module-2-1-quiz"></div>
+            </section>
+        </article>
+    </div>
+</section>
+<!-- Floating Academy Button -->
+<div id="floating-academy-btn" class="floating-academy-button" onclick="showSection('academy')" title="למד באקדמיית הכסף">
+    <i class="fas fa-graduation-cap"></i>
+</div>
+<!-- Scripts -->
+<script type="module" src="src/js/core/app.js"></script>
+<script type="module">
+// דינמיקה: טעינת מודול השיעור רק בדף זה
+import { CompoundInterestCalculator } from '../js/modules/lesson-2-compound-interest.js';
+import { CompoundInterestQuiz } from '../js/modules/lesson-2-quiz.js';
+import store from '../js/state/store.js';
+document.addEventListener('DOMContentLoaded', () => {
+    // הפעלת מחשבון ריבית דריבית
+    new CompoundInterestCalculator('compound-calculator');
+    // הפעלת חידון
+    new CompoundInterestQuiz('module-2-1-quiz');
+    // סנכרון XP
+    store.subscribe((newState) => {
+        const xpDisplay = document.getElementById('user-xp-display');
+        if (xpDisplay) {
+            xpDisplay.textContent = newState.user?.xp || 0;
+        }
+    });
+    // הצגה ראשונית
+    const currentState = store.getState();
+    const xpDisplay = document.getElementById('user-xp-display');
+    if (xpDisplay) {
+        xpDisplay.textContent = currentState.user?.xp || 0;
+    }
+});
+</script>
+</body>
+</html>
